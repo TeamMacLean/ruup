@@ -1,0 +1,50 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Lato:900);
+
+body {
+    margin-top: 80px;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #ECF0F1;
+    -webkit-font-smoothing: antialiased !important;
+    /*text-shadow: 1px 1px 1px rgba(0,0,0,0.004);*/
+}
+
+h1.header {
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+}
+
+.navbar-inverse {
+    background-color: #34495E;
+    border: none;
+    font-weight: 600;
+}
+
+.container > .navbar-header, .container-fluid > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-collapse {
+    border: none;
+}
+
+#navbar > ul > li:hover > a {
+    /*background-color: #9B59B6;*/
+    color: #9B59B6;
+}
+
+.navbar-inverse .navbar-toggle .icon-bar {
+    background-color: #9B59B6;
+}
+
+#navbar > ul > li > a {
+    color: #ECF0F1;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+img.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1.center, h2.center, h3.center, h4.center, h5.center, h6.center {
+    text-align: center;
+}

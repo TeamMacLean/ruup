@@ -1,4 +1,31 @@
 <% include ../head %>
 
+<div class="block">
+    <div class="container">
+        <% if(monitors && monitors.length > 0){ %>
+        <div class="row">
+            <% monitors.forEach(function(monitor) { %>
+            <div class="col-md-3">
+                <div class="well centered">
+                    <h2><a href="/monitors/<%- monitor._id %>"><%- monitor.name %></a></h2>
+                    <h4><%- monitor.url %></h4>
+
+                    <h4><%- monitor.rate %></h4>
+
+                    <div class="ct-chart"></div>
+                </div>
+            </div>
+            <% }); %>
+        </div>
+        <% } else { %>
+        <h2>Nothing here yet?</h2>
+        <% } %>
+
+    </div>
+</div>
+<div class="container">
+    <a href="/monitors/add" class="btn btn-info">Add a monitor</a>
+</div>
+
 
 <% include ../foot %>

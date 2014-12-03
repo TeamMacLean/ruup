@@ -1,0 +1,27 @@
+<% include ../head %>
+<div class="block">
+    <div class="container">
+
+
+        <form role="form" action="/monitors/add" method="post">
+            <div class="form-group">
+                <label for="nameInput">Name</label>
+                <input type="text" class="form-control" id="nameInput" name="nameInput" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <label for="urlInput">URL</label>
+                <input type="text" class="form-control" id="urlInput" name="urlInput" placeholder="URL">
+            </div>
+            <div class="form-group">
+                <label for="rateInput">Rate input</label>
+                <input type="number" min="5" max="60" class="form-control" id="rateInput" name="rateInput" placeholder="Check Rate">
+
+                <p class="help-block">How often to check the status of the site.</p>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+
+    </div>
+</div>
+
+<% include ../foot %>

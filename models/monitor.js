@@ -14,21 +14,26 @@ monitorScheme.methods.curl = function () {
     var id = this._id;
     var then = new Date().getTime();
     request(this.url, function (err, response) {
+
         var now = new Date().getTime();
         var time = now - then;
-        console.log(time+'ms');
-        makeResponse(err, response.statusCode, time, id)
+
+        var status = 'error';
+        if (err) {
+            time = 0;
+        } else {
+            status = response.statusCode
+        }
+
+        makeResponse(err, status, time, id)
     });
 };
 
 var makeResponse = function (err, code, time, monitor) {
-    var responseTime = time;
-    if (err) {
-        responseTime = 0;
-    }
+    console.log(time + 'ms');
     var response = new Response({
         code: code,
-        time: responseTime,
+        time: time,
         monitor: monitor
     });
     response.save(function (err) {
@@ -39,9 +44,10 @@ var makeResponse = function (err, code, time, monitor) {
 };
 
 monitorScheme.methods.start = function () {
+    var monitor = this;
     var the_interval = this.rate * 60 * 1000;
     setInterval(function () {
-        this.Monitor.curl();
+        monitor.curl();
     }, the_interval);
 };
 

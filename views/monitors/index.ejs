@@ -5,14 +5,14 @@
         <% if(monitors && monitors.length > 0){ %>
         <div class="row">
             <% monitors.forEach(function(monitor) { %>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="well centered">
                     <h2><a href="/monitors/<%- monitor._id %>"><%- monitor.name %></a></h2>
                     <h4><%- monitor.url %></h4>
 
-                    <h4><%- monitor.rate %></h4>
+                    <h4>every <%- monitor.rate %> mins</h4>
 
-                    <div class="ct-chart"></div>
+                    <div class="ct-chart" monitor="<%- monitor._id %>"></div>
                 </div>
             </div>
             <% }); %>
@@ -23,8 +23,10 @@
 
     </div>
 </div>
-<div class="container">
-    <a href="/monitors/add" class="btn btn-info">Add a monitor</a>
+<div class="block">
+    <div class="container">
+        <a href="/monitors/add" class="btn btn-info">Add a monitor</a>
+    </div>
 </div>
 
 

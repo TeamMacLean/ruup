@@ -5,9 +5,9 @@ module.exports.controller = function (app) {
     app.get('/monitors', function (req, res) {
         Monitor.find({}, function (err, monitors) {
             if (err) {
-                res.send(err);
+                return res.send(err);
             }
-            res.render('monitors/index', {monitors: monitors});
+            return res.render('monitors/index', {monitors: monitors});
         });
     });
 
@@ -28,22 +28,44 @@ module.exports.controller = function (app) {
                 });
                 monitor.save(function (err, gen) {
                     if (err) {
-                        res.send(err);
+                        return res.send(err);
                     } else {
-                        res.redirect('/monitors');
+                        return res.redirect('/monitors');
                     }
                 });
             } else {
-                res.send('bad input');
+                return res.send('bad input');
             }
         });
 
     app.get('/monitors/:id', function (req, res) {
         Monitor.findOne({_id: req.param('id')}, function (err, monitor) {
             if (err) {
-                res.send(err);
+                return res.send(err);
             }
             res.render('monitors/show', {monitor: monitor})
+        });
+    });
+
+    app.get('/monitors/:id/status/:count', function (req, res) {
+        Monitor.findOne({_id: req.param('id')}, function (err, monitor) {
+            if (err) {
+                return res.send(err);
+            }
+            monitor.getResponses(function (err, responses) {
+                if (err) {
+                    return res.send(err);
+                }
+
+                var count = req.param('count');
+                var out = responses;
+
+                if (responses.length >= count) {
+                    out = responses.slice(0, count);
+                }
+                return res.send(out);
+            });
+
         });
     });
 

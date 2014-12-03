@@ -62,12 +62,6 @@ a:hover {
     color: #9B59B6;
 }
 
-img.center, svg.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .centered {
     text-align: center;
 }

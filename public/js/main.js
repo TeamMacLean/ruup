@@ -1,21 +1,34 @@
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+var updateCharts = function () {
 
-$('.ct-chart').each(function () {
-    var series = [];
-    var labels = [];
+    $('.ct-chart').each(function () {
 
-    for (var i = 1; i < 9; i++) {
-        series.push(getRandomInt(3, 5));
-        labels.push(i);
-    }
+        var el = this;
 
-    new Chartist.Line(this, {
-        labels: labels,
-        series: [series]
-    }, {
-        low: 0,
-        showArea: true
+        var id = $(el).attr('monitor');
+        if (id) {
+            $.getJSON('/monitors/' + id + '/status/' + 10, function (data) {
+                $(el).empty();
+                console.log(data);
+
+                if (data && data.length > 0) {
+                    var series = [];
+                    var labels = [];
+                    data.forEach(function (res) {
+                        var fancyTime = moment(res.created_at).fromNow();
+                        labels.push(fancyTime);
+                        series.push(res.time);
+                    });
+                    new Chartist.Line(el, {
+                        labels: labels,
+                        series: [series]
+                    }, {showArea: true});
+                } else {
+                    $(el).append('<h3>No data yet</h3>');
+                }
+
+            });
+        }
     });
-});
+};
+updateCharts();
+setTimeout(updateCharts, 60 * 1000);

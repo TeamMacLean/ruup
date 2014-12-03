@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var responseSchema = mongoose.Schema({
     monitor: {type: String, required: true},
-    code: {type: Number, required: true},
+    code: {type: String, required: true},
     time: {type: Number, required: true},
     created_at: Date
 

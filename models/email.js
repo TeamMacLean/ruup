@@ -20,12 +20,13 @@ function notifyDown(monitor) {
         var monitorURL = monitor.url;
         var downReason = 'TODO';
 
+        var message = "Hi,\n\nThe monitor " + monitorName + " (" + monitorURL + ") is currently DOWN (" + downReason + ").\n\nRUUP will alert you when it is back up.\n\nCheers,\n\nRUUP\nhttp://www.example.org\nhttp://example.org";
+
         var mailOptions = {
             from: 'RUUP <alert@ruup.com>',
             to: to,
             subject: 'Monitor is DOWN:' + monitorName,
-            text: "Hi,\n\nThe monitor " + monitorName + " (" + monitorURL + ") is currently DOWN (" + downReason + ").\n\nRUUP will alert you when it is back up.\n\nCheers,\n\nRUUP\nhttp://www.example.org\nhttp://example.org",
-            html: '<p>' + this.text + '</p>'
+            text: message
         };
         send(mailOptions);
     });
@@ -44,12 +45,13 @@ function notifyUp(monitor) {
         var upResponse = 'TODO';
         var downTime = 'TODO';
 
+        var message = "Hi,\n\nThe monitor " + monitorName + " (" + monitorURL + ") is back UP (" + upResponse + ") (It was down for " + downTime + ").\n\nCheers,\n\nRUUP\nhttp://www.example.org\nhttp://example.org";
+
         var mailOptions = {
             from: 'RUUP <alert@ruup.com>',
             to: to,
             subject: 'Monitor is UP: ' + monitorName,
-            text: "Hi,\n\nThe monitor " + monitorName + " (" + monitorURL + ") is back UP (" + upResponse + ") (It was down for " + downTime + ").\n\nCheers,\n\nRUUP\nhttp://www.example.org\nhttp://example.org",
-            html: '<p>' + this.text + '</p>'
+            text: message
         };
         send(mailOptions);
     });

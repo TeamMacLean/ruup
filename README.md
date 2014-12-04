@@ -7,9 +7,9 @@
 <img align="right" src="https://raw.githubusercontent.com/wookoouk/ruup/master/public/img/logo.png">
 
 RUUP (R U UP) is a site for monitoring the request response times of sites and getting notifications of their ups and downs.    
-    
-        
-            
+-    
+-    
+-    
 
 ## TODO
 * Admin permissions (who can delete monitors).

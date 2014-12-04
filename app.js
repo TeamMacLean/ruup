@@ -1,8 +1,10 @@
 var fs = require('fs');
 var express = require('express');
+var session = require('express-session');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Monitor = require('./models/monitor');
+var passport = require('passport');
 var app = express();
 
 app.use(bodyParser.json());
@@ -15,6 +17,44 @@ var routes = function () {
             route = require('./controllers/' + file);
             route.controller(app);
         }
+    });
+};
+
+var genSecret = function () {
+    var secret = "", rand;
+    for (var i = 0; i < 36; i++) {
+        rand = Math.floor(Math.random() * 15);
+        if (rand < 10) {
+            // for 0-9
+            secret += String.fromCharCode(48 + rand);
+        } else {
+            // for a-f
+            secret += String.fromCharCode(97 + (rand - 10));
+        }
+    }
+    return secret;
+};
+
+var middleware = function () {
+    app.use(session({
+        secret: genSecret(),
+        cookie: {
+            expires: false
+        },
+        //avoid nagging (these are the new values of express-session)
+        resave: false,
+        saveUninitialized: false
+    }));
+
+    app.use(passport.initialize());
+    app.use(passport.session());
+
+    app.use(function (req, res, next) {
+//        does nothing right now
+        if (req.user != null && req.user.email != null) {
+            res.locals.email = req.user.email;
+        }
+        next(null, req, res);
     });
 };
 
@@ -31,6 +71,7 @@ var mongo = function () {
     });
     mongoose.connect(dbURI, {server: {auto_reconnect: true}});
 };
+
 var views = function () {
     app.set('view engine', 'ejs');
     app.set('views', __dirname + '/views');
@@ -43,8 +84,6 @@ var start = function () {
 };
 
 var initMonitors = function () {
-    console.log('starting monitors');
-
     Monitor.find({}, function (err, monitors) {
         if (err) {
             console.log(err);
@@ -56,9 +95,9 @@ var initMonitors = function () {
     })
 };
 
-
-routes();
+middleware();
 mongo();
+routes();
 views();
 start();
 initMonitors();

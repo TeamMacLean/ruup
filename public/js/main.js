@@ -1,15 +1,11 @@
 var updateCharts = function () {
-
     $('.ct-chart').each(function () {
-
         var el = this;
-
-        var id = $(el).attr('monitor');
+        var id = $(el).attr('data-monitor');
+        var count = $(el).attr('data-count') || 8;
         if (id) {
-            $.getJSON('/monitors/' + id + '/status/' + 10, function (data) {
+            $.getJSON('/monitors/' + id + '/status/' + count, function (data) {
                 $(el).empty();
-                console.log(data);
-
                 if (data && data.length > 0) {
                     var series = [];
                     var labels = [];
@@ -23,12 +19,11 @@ var updateCharts = function () {
                         series: [series]
                     }, {showArea: true});
                 } else {
-                    $(el).append('<h3>No data yet</h3>');
+                    $(el).append('<h3>No data yet...</h3>');
                 }
-
             });
         }
     });
 };
 updateCharts();
-setTimeout(updateCharts, 60 * 1000);
+setInterval(updateCharts, 6000);

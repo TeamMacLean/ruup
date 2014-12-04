@@ -17,7 +17,6 @@
     "respond": "~1.4.2",
     "html5shiv": "~3.7.2",
     "bootstrap": "~3.3.1",
-    "fontawesome": "~4.2.0",
     "chartist": "~0.4.3",
     "moment": "~2.8.4"
   }

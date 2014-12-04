@@ -6,13 +6,13 @@
         <div class="row">
             <% monitors.forEach(function(monitor) { %>
             <div class="col-md-6">
-                <div class="well centered">
+                <div class="well centered hideOverflow">
                     <h2><a href="/monitors/<%- monitor._id %>"><%- monitor.name %></a></h2>
                     <h4><%- monitor.url %></h4>
 
                     <h4>every <%- monitor.rate %> mins</h4>
 
-                    <div class="ct-chart" monitor="<%- monitor._id %>"></div>
+                    <div class="ct-chart" data-monitor="<%- monitor._id %>" data-mcount="5"></div>
                 </div>
             </div>
             <% }); %>

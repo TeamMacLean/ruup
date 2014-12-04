@@ -2,7 +2,7 @@ var Monitor = require('../models/monitor');
 
 module.exports.controller = function (app) {
 
-    app.get('/monitors', function (req, res) {
+    app.get('/monitors', isAuthenticated, function (req, res) {
         Monitor.find({}, function (err, monitors) {
             if (err) {
                 return res.send(err);
@@ -12,24 +12,29 @@ module.exports.controller = function (app) {
     });
 
     app.route('/monitors/add')
-        .get(function (req, res) {
-            res.render('monitors/add');
+        .get(isAuthenticated, function (req, res) {
+            return res.render('monitors/add');
         })
-        .post(function (req, res) {
+        .post(isAuthenticated, function (req, res) {
             var nameInput = req.body.nameInput;
             var urlInput = req.body.urlInput;
             var rateInput = req.body.rateInput;
 
-            if (nameInput && urlInput && rateInput) {
+            var currentUser = req.user;
+
+            if (nameInput && urlInput && rateInput && currentUser) {
+                var userID = currentUser._id;
                 var monitor = new Monitor({
                     name: nameInput,
                     url: urlInput,
-                    rate: rateInput
+                    rate: rateInput,
+                    owner: userID
                 });
                 monitor.save(function (err, gen) {
                     if (err) {
                         return res.send(err);
                     } else {
+                        gen.start();
                         return res.redirect('/monitors');
                     }
                 });
@@ -38,16 +43,16 @@ module.exports.controller = function (app) {
             }
         });
 
-    app.get('/monitors/:id', function (req, res) {
+    app.get('/monitors/:id', isAuthenticated, function (req, res) {
         Monitor.findOne({_id: req.param('id')}, function (err, monitor) {
             if (err) {
                 return res.send(err);
             }
-            res.render('monitors/show', {monitor: monitor})
+            return res.render('monitors/show', {monitor: monitor})
         });
     });
 
-    app.get('/monitors/:id/status/:count', function (req, res) {
+    app.get('/monitors/:id/status/:count', isAuthenticated, function (req, res) {
         Monitor.findOne({_id: req.param('id')}, function (err, monitor) {
             if (err) {
                 return res.send(err);
@@ -69,5 +74,39 @@ module.exports.controller = function (app) {
         });
     });
 
-
+    app.route('/monitors/:id/delete')
+        .get(isAuthenticated, function (req, res) {
+            var id = req.param('id');
+            Monitor.findOne({_id: id}).exec(function (err, doc) {
+                if (err) {
+                    return res.send(err);
+                }
+                res.render('monitors/confirmDelete', {monitor: doc});
+            });
+        })
+        .post(isAuthenticated, function (req, res) {
+            var id = req.param('id');
+            Monitor.findOne({_id: id}).exec(function (err, doc) {
+                if (err) {
+                    return res.send(err);
+                }
+                doc.removeResponses(function (err) {
+                    if (err) {
+                        return res.send(err);
+                    }
+                    doc.remove(function (err) {
+                        if (err) {
+                            return res.send(err);
+                        }
+                        return res.redirect('/monitors');
+                    })
+                })
+            });
+        });
+    function isAuthenticated(req, res, next) {
+        if (req.isUnauthenticated()) {
+            return res.redirect('/');
+        }
+        return next();
+    }
 };

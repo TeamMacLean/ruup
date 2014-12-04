@@ -4,8 +4,9 @@ module.exports.controller = function (app) {
     });
     app.route('/signin')
         .get(function (req, res) {
-        res.render('signin');
+            return res.render('signin');
         })
         .post(function (req, res) {
+            return res.send('not implemented yet');
         });
 };

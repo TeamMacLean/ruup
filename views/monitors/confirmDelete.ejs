@@ -1,0 +1,11 @@
+<% include ../head %>
+<div class="block centered">
+    <div class="container">
+        <form role="form" action="/monitors/<%- monitor._id %>/delete" method="post">
+            <h2>Delete monitor and all history?</h2>
+            <button type="submit" class="btn btn-danger center-block">Delete</button>
+        </form>
+    </div>
+</div>
+
+<% include ../foot %>

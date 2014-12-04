@@ -6,6 +6,8 @@
 
 > Are you up?
 
+RUUP (R U UP) is a site for monitoring the response time of sites and getting notifications of their ups and downs.
+
 ## TODO
 * Admin permissions (who can delete monitors).
 * HTML emails.

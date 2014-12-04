@@ -5,6 +5,8 @@
 * HTML emails.
 * Password reset.
 * Better job loop system.
+* Tests
+* Code Coverage
 
 ## Depends on
 * NodeJS

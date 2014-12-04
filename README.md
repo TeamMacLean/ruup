@@ -1,5 +1,11 @@
 [![Build Status](https://travis-ci.org/wookoouk/ruup.svg?branch=master)](https://travis-ci.org/wookoouk/ruup)
 
+## TODO
+* Admin permissions (who can delete monitors).
+* HTML emails.
+* Password reset.
+* Better job loop system.
+
 ## Depends on
 * NodeJS
 * NPM

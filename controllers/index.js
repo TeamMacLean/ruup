@@ -9,4 +9,8 @@ module.exports.controller = function (app) {
         .post(function (req, res) {
             return res.send('not implemented yet');
         });
+
+    app.get('/error', function (req, res) {
+        res.render('error');
+    })
 };

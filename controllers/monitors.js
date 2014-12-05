@@ -1,11 +1,12 @@
 var Monitor = require('../models/monitor');
+var util = require('../lib/util');
 
 module.exports.controller = function (app) {
 
     app.get('/monitors', isAuthenticated, function (req, res) {
         Monitor.find({}, function (err, monitors) {
             if (err) {
-                return res.send(err);
+                return util.renderError(err, res);
             }
             return res.render('monitors/index', {monitors: monitors});
         });
@@ -32,21 +33,21 @@ module.exports.controller = function (app) {
                 });
                 monitor.save(function (err, gen) {
                     if (err) {
-                        return res.send(err);
+                        return util.renderError(err, res);
                     } else {
                         gen.start();
                         return res.redirect('/monitors');
                     }
                 });
             } else {
-                return res.send('bad input');
+                return util.renderError('bad input', res);
             }
         });
 
     app.get('/monitors/:id', isAuthenticated, function (req, res) {
         Monitor.findOne({_id: req.param('id')}, function (err, monitor) {
             if (err) {
-                return res.send(err);
+                return util.renderError(err, res);
             }
             return res.render('monitors/show', {monitor: monitor})
         });
@@ -55,11 +56,11 @@ module.exports.controller = function (app) {
     app.get('/monitors/:id/status/:count', isAuthenticated, function (req, res) {
         Monitor.findOne({_id: req.param('id')}, function (err, monitor) {
             if (err) {
-                return res.send(err);
+                return util.renderError(err, res);
             }
             monitor.getResponses(function (err, responses) {
                 if (err) {
-                    return res.send(err);
+                    return util.renderError(err, res);
                 }
 
                 var count = req.param('count');
@@ -75,28 +76,28 @@ module.exports.controller = function (app) {
     });
 
     app.route('/monitors/:id/delete')
-        .get(isAuthenticated, function (req, res) {
+        .get([isAuthenticated, isOwner], function (req, res) {
             var id = req.param('id');
             Monitor.findOne({_id: id}).exec(function (err, doc) {
                 if (err) {
-                    return res.send(err);
+                    return util.renderError(err, res);
                 }
-                res.render('monitors/confirmDelete', {monitor: doc});
+                return res.render('monitors/confirmDelete', {monitor: doc});
             });
         })
-        .post(isAuthenticated, function (req, res) {
+        .post([isAuthenticated, isOwner], function (req, res) {
             var id = req.param('id');
             Monitor.findOne({_id: id}).exec(function (err, doc) {
                 if (err) {
-                    return res.send(err);
+                    return util.renderError(err, res);
                 }
                 doc.removeResponses(function (err) {
                     if (err) {
-                        return res.send(err);
+                        return util.renderError(err, res);
                     }
                     doc.remove(function (err) {
                         if (err) {
-                            return res.send(err);
+                            return util.renderError(err, res);
                         }
                         return res.redirect('/monitors');
                     })
@@ -109,4 +110,23 @@ module.exports.controller = function (app) {
         }
         return next();
     }
+
+    function isOwner(req, res, next) {
+        var id = req.param('id');
+        if (id) {
+            Monitor.findOne({_id: id}, function (err, doc) {
+                if (err) {
+                    return util.renderError(err, res);
+                }
+                if (req.isAuthenticated() && req.user._id == doc.owner) {
+                    return next();
+                } else {
+                    return util.renderError('you do not own that monitor', res);
+                }
+            });
+        } else {
+            return res.redirect('/monitors');
+        }
+    }
+
 };

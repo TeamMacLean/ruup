@@ -1,5 +1,6 @@
 var User = require('../models/user');
 var passport = require('passport');
+var util = require('../lib/util');
 var LocalStrategy = require('passport-local').Strategy;
 
 module.exports.controller = function (app) {
@@ -50,10 +51,10 @@ module.exports.controller = function (app) {
                 if (password == passwordConfirm) {
                     User.find({email: email}).exec(function (err, existingUser) {
                         if (err) {
-                            return res.send(err);
+                            return util.renderError(err, res);
                         }
                         if (existingUser && existingUser.length > 0) {
-                            return res.send('user exists with that email address');
+                            return util.renderError('user exists with that email address', res);
                         }
                         var user = new User({
                             email: email,
@@ -61,17 +62,17 @@ module.exports.controller = function (app) {
                         });
                         user.save(function (err) {
                             if (err) {
-                                res.send(err);
+                                return util.renderError(err, res);
                             } else {
                                 res.redirect('/');
                             }
                         });
                     });
                 } else {
-                    return res.send('password != passwordConfirm');
+                    return util.renderError('password != passwordConfirm', res);
                 }
             } else {
-                return res.send('all fields required');
+                return util.renderError('all fields required', res);
             }
         });
 

@@ -1,10 +1,11 @@
 var nodemailer = require('nodemailer');
+var util = require('../lib/util');
 var User = require('./user');
 var transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
         user: 'wookoouk@gmail.com',
-        pass: '12Mejit21'
+        pass: ''
     }
 });
 
@@ -18,7 +19,7 @@ function notifyDown(monitor) {
         var to = doc.email;
         var monitorName = monitor.name;
         var monitorURL = monitor.url;
-        var downReason = 'TODO';
+        var downReason = 'unknown';
 
         var message = "Hi,\n\nThe monitor " + monitorName + " (" + monitorURL + ") is currently DOWN (" + downReason + ").\n\nRUUP will alert you when it is back up.\n\nCheers,\n\nRUUP\nhttp://www.example.org\nhttp://example.org";
 
@@ -42,8 +43,8 @@ function notifyUp(monitor) {
         var to = doc.email;
         var monitorName = monitor.name;
         var monitorURL = monitor.url;
-        var upResponse = 'TODO';
-        var downTime = 'TODO';
+        var upResponse = 'unknown';
+        var downTime = 'unknown';
 
         var message = "Hi,\n\nThe monitor " + monitorName + " (" + monitorURL + ") is back UP (" + upResponse + ") (It was down for " + downTime + ").\n\nCheers,\n\nRUUP\nhttp://www.example.org\nhttp://example.org";
 

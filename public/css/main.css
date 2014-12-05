@@ -28,6 +28,13 @@
     background-color: #ECF0F1;
 }
 
+.navbar-brand {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0 0 0 15px;
+    height: 30px;
+}
+
 #navbar > ul > li > a {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -36,6 +43,10 @@
 .navbar-inverse .navbar-toggle {
     margin-top: 20px;
     margin-bottom: 20px;
+    background-color: #2C3E50;
+}
+
+.navbar-inverse .navbar-toggle:hover {
 }
 
 /**/

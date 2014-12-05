@@ -19,7 +19,7 @@ var updateCharts = function () {
                         series: [series]
                     }, {showArea: true});
                     chart.on('created', function () {
-                        setUpChartInteraction();
+                        setUpChartInteraction($(el));
                     });
 
 
@@ -30,63 +30,66 @@ var updateCharts = function () {
         }
     });
 };
-function setUpChartInteraction() {
+function setUpChartInteraction($chart) {
 
 
     var easeOutQuad = function (x, t, b, c, d) {
         return -c * (t /= d) * (t - 2) + b;
     };
 
-    var $charts = $('.ct-chart');
+//    var $charts = $('.ct-chart');
+//
+//    $charts.each(function () {
+//
+//        var $chart = $(this);
 
-    $charts.each(function () {
+    //TODO point color by value
+    //    var points = $chart.find('.ct-series').find('line');
+    //    points.each(function () {
+    //        var $point = $(this);
+    //        var value = $point.attr('ct:value');
+    //        console.log(value);
+    //
+    //        if (value == 0) {
+    //            $point.css({'stroke': '#E74C3C'});
+    //        } else if (value > 0 && value <= 320) {
+    //            $point.css({'stroke': '#2ECC71'});
+    //        } else {
+    //            $point.css({'stroke': '#E67E22'});
+    //        }
+    //    });
 
-        var $chart = $(this);
+    $chart
+        .append('<div class="chartTooltip"></div>');
 
-        //TODO point color by value
-        //    var points = $chart.find('.ct-series').find('line');
-        //    points.each(function () {
-        //        var $point = $(this);
-        //        var value = $point.attr('ct:value');
-        //        console.log(value);
-        //
-        //        if (value == 0) {
-        //            $point.css({'stroke': '#E74C3C'});
-        //        } else if (value > 0 && value <= 320) {
-        //            $point.css({'stroke': '#2ECC71'});
-        //        } else {
-        //            $point.css({'stroke': '#E67E22'});
-        //        }
-        //    });
+    var $toolTip = $chart.find('.chartTooltip')
+        .hide();
 
-        var $toolTip = $chart
-            .append('<div class="chartTooltip"></div>')
-            .find('.chartTooltip')
-            .hide();
+    console.log($toolTip);
 
 
-        $chart.find('.ct-point').mouseenter(function () {
-            var $point = $(this);
-            var value = $point.attr('ct:value');
+    $chart.find('.ct-point').mouseenter(function () {
+        var $point = $(this);
+        var value = $point.attr('ct:value');
 
-            $point.animate({'stroke-width': '30px'}, 300, easeOutQuad);
-            $toolTip.html(value + 'ms').show();
-        });
+        $point.animate({'stroke-width': '30px'}, 300, easeOutQuad);
+        $toolTip.html(value + 'ms').show();
+    });
 
-        $chart.find('.ct-point').mouseleave(function () {
-            var $point = $(this);
+    $chart.find('.ct-point').mouseleave(function () {
+        var $point = $(this);
 
-            $point.animate({'stroke-width': '10px'}, 300, easeOutQuad);
-            $toolTip.hide();
-        });
+        $point.animate({'stroke-width': '10px'}, 300, easeOutQuad);
+        $toolTip.hide();
+    });
 
-        $chart.find('.ct-point').mousemove(function (event) {
-            $toolTip.css({
-                left: (event.originalEvent.layerX) - $toolTip.width() / 2,
-                top: (event.originalEvent.layerY) - $toolTip.height() - 40
-            });
+    $chart.find('.ct-point').mousemove(function (event) {
+        $toolTip.css({
+            left: (event.originalEvent.layerX) - $toolTip.width() / 2,
+            top: (event.originalEvent.layerY) - $toolTip.height() - 40
         });
     });
+//    });
 }
 
 updateCharts();

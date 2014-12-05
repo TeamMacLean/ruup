@@ -112,3 +112,16 @@ i.red {
 .hideOverflow {
     overflow: hidden;
 }
+
+.chartTooltip {
+    position: absolute;
+    display: inline-block;
+    min-width: 5em;
+    padding: .5em;
+    /*background: #ECF0F1;*/
+    color: #34495E;
+    font-weight: 700;
+    text-align: center;
+    pointer-events: none;
+    z-index: 1;
+}

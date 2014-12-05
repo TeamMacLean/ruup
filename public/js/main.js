@@ -14,10 +14,15 @@ var updateCharts = function () {
                         labels.push(fancyTime);
                         series.push(res.time);
                     });
-                    new Chartist.Line(el, {
+                    var chart = new Chartist.Line(el, {
                         labels: labels,
                         series: [series]
                     }, {showArea: true});
+                    chart.on('created', function () {
+                        setUpChartInteraction();
+                    });
+
+
                 } else {
                     $(el).append('<h3>No data yet...</h3>');
                 }
@@ -25,5 +30,57 @@ var updateCharts = function () {
         }
     });
 };
+function setUpChartInteraction() {
+    var easeOutQuad = function (x, t, b, c, d) {
+        return -c * (t /= d) * (t - 2) + b;
+    };
+
+    var $chart = $('.ct-chart');
+
+//TODO point color by value
+//    var points = $chart.find('.ct-series').find('line');
+//    points.each(function () {
+//        var $point = $(this);
+//        var value = $point.attr('ct:value');
+//        console.log(value);
+//
+//        if (value == 0) {
+//            $point.css({'stroke': '#E74C3C'});
+//        } else if (value > 0 && value <= 320) {
+//            $point.css({'stroke': '#2ECC71'});
+//        } else {
+//            $point.css({'stroke': '#E67E22'});
+//        }
+//    });
+
+    var $toolTip = $chart
+        .append('<div class="chartTooltip"></div>')
+        .find('.chartTooltip')
+        .hide();
+
+
+    $chart.on('mouseenter', '.ct-point', function () {
+        var $point = $(this);
+        var value = $point.attr('ct:value');
+
+        $point.animate({'stroke-width': '30px'}, 300, easeOutQuad);
+        $toolTip.html(value + 'ms').show();
+    });
+
+    $chart.on('mouseleave', '.ct-point', function () {
+        var $point = $(this);
+
+        $point.animate({'stroke-width': '10px'}, 300, easeOutQuad);
+        $toolTip.hide();
+    });
+
+    $chart.on('mousemove', function (event) {
+        $toolTip.css({
+            left: (event.originalEvent.layerX) - $toolTip.width() / 2,
+            top: (event.originalEvent.layerY) - $toolTip.height() - 40
+        });
+    });
+}
+
 updateCharts();
-setInterval(updateCharts, 6000);
+//setInterval(updateCharts, 6000);

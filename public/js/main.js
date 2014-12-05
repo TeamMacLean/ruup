@@ -35,7 +35,12 @@ function setUpChartInteraction() {
         return -c * (t /= d) * (t - 2) + b;
     };
 
-    var $chart = $('.ct-chart');
+    var $charts = $('.ct-chart');
+
+    $charts.each(function () {
+
+        var $chart = $(this);
+
 
 //TODO point color by value
 //    var points = $chart.find('.ct-series').find('line');
@@ -53,30 +58,31 @@ function setUpChartInteraction() {
 //        }
 //    });
 
-    $chart.append('<div class="chartTooltip"></div>')
+        $chart.append('<div class="chartTooltip"></div>');
 
-    var $toolTip = $chart.find('.chartTooltip').hide();
+        var $toolTip = $chart.find('.chartTooltip').hide();
 
 
-    $chart.on('mouseenter', '.ct-point', function () {
-        var $point = $(this);
-        var value = $point.attr('ct:value');
+        $chart.on('mouseenter', '.ct-point', function () {
+            var $point = $(this);
+            var value = $point.attr('ct:value');
 
-        $point.animate({'stroke-width': '30px'}, 300, easeOutQuad);
-        $toolTip.html(value + 'ms').show();
-    });
+            $point.animate({'stroke-width': '30px'}, 300, easeOutQuad);
+            $toolTip.html(value + 'ms').show();
+        });
 
-    $chart.on('mouseleave', '.ct-point', function () {
-        var $point = $(this);
+        $chart.on('mouseleave', '.ct-point', function () {
+            var $point = $(this);
 
-        $point.animate({'stroke-width': '10px'}, 300, easeOutQuad);
-        $toolTip.hide();
-    });
+            $point.animate({'stroke-width': '10px'}, 300, easeOutQuad);
+            $toolTip.hide();
+        });
 
-    $chart.on('mousemove', function (event) {
-        $toolTip.css({
-            left: (event.originalEvent.layerX) - $toolTip.width() / 2,
-            top: (event.originalEvent.layerY) - $toolTip.height() - 40
+        $chart.on('mousemove', function (event) {
+            $toolTip.css({
+                left: (event.originalEvent.layerX) - $toolTip.width() / 2,
+                top: (event.originalEvent.layerY) - $toolTip.height() - 40
+            });
         });
     });
 }

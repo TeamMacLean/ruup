@@ -37,12 +37,6 @@ function setUpChartInteraction($chart) {
         return -c * (t /= d) * (t - 2) + b;
     };
 
-//    var $charts = $('.ct-chart');
-//
-//    $charts.each(function () {
-//
-//        var $chart = $(this);
-
     //TODO point color by value
     //    var points = $chart.find('.ct-series').find('line');
     //    points.each(function () {
@@ -89,7 +83,6 @@ function setUpChartInteraction($chart) {
             top: (event.originalEvent.layerY) - $toolTip.height() - 40
         });
     });
-//    });
 }
 
 updateCharts();

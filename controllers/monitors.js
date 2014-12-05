@@ -1,5 +1,5 @@
 var Monitor = require('../models/monitor');
-var util = require('../lib/util');
+
 
 module.exports.controller = function (app) {
 

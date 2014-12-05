@@ -109,4 +109,12 @@ module.exports.controller = function (app) {
         }
         return next();
     }
+
+    app.route('/reset/:uid')
+        .get(function (req, res) {
+//            reset form
+        })
+        .post(function (req, res) {
+//            reset password
+        });
 };

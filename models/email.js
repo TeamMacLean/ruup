@@ -4,7 +4,7 @@ var User = require('./user');
 var transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-        user: 'wookoouk@gmail.com',
+        user: '',
         pass: ''
     }
 });
@@ -63,8 +63,7 @@ function send(mailOptions) {
         if (error) {
             console.log(error);
         } else {
-            console.log('Message sent: ' + info.response);
-            console.log(mailOptions);
+            util.logInfo('Message sent: ' + info.response)
         }
     });
 }

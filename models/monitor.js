@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var request = require('request');
 var response = require('./response');
+var util = require('../lib/util');
 var email = require('./email');
 
 var monitorScheme = mongoose.Schema({
@@ -15,7 +16,7 @@ var monitorScheme = mongoose.Schema({
 
 function saveChanges(model) {
     model.save(model, function (err) {
-        console.log('error saving model', err);
+        util.logInfo('error saving model', err);
     })
 }
 
@@ -80,7 +81,7 @@ monitorScheme.methods.curl = function () {
 };
 
 var makeResponse = function (err, code, time, monitor) {
-    console.log(time + 'ms');
+    util.logInfo(time + 'ms');
     var responseBack = new response({
         code: code,
         time: time,
@@ -88,14 +89,14 @@ var makeResponse = function (err, code, time, monitor) {
     });
     responseBack.save(function (err) {
         if (err) {
-            console.log('ERROR', err);
+            util.logError('ERROR', err);
         }
     });
 };
 
 monitorScheme.methods.start = function () {
     var monitor = this;
-    console.log('started monitoring ' + monitor.name);
+    util.logInfo('started monitoring', monitor.name);
     setInterval(function () {
         monitor.curl();
     }, this.rate * 60 * 1000);

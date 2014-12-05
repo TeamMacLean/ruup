@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Monitor = require('./models/monitor');
 var passport = require('passport');
+var util = require('./lib/util');
 var app = express();
 
 app.use(bodyParser.json());
@@ -63,7 +64,7 @@ var mongo = function () {
     var db = mongoose.connection;
     var dbURI = 'mongodb://localhost/ruup';
     db.on('error', function (error) {
-        console.log('mongoose error', error);
+        util.logError('mongoose error', error);
         mongoose.disconnect();
     });
     db.on('disconnected', function () {
@@ -80,7 +81,7 @@ var views = function () {
 var start = function () {
     var PORT = process.env.PORT || 8080;
     app.listen(PORT);
-    console.log('started server on port', PORT);
+    util.logInfo('started server on port', PORT);
 };
 
 var initMonitors = function () {

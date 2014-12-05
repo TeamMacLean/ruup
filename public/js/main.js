@@ -31,6 +31,8 @@ var updateCharts = function () {
     });
 };
 function setUpChartInteraction() {
+
+
     var easeOutQuad = function (x, t, b, c, d) {
         return -c * (t /= d) * (t - 2) + b;
     };
@@ -63,7 +65,7 @@ function setUpChartInteraction() {
         var $toolTip = $chart.find('.chartTooltip').hide();
 
 
-        $chart.on('mouseenter', '.ct-point', function () {
+        $chart.find('.ct-point').mouseenter(function () {
             var $point = $(this);
             var value = $point.attr('ct:value');
 
@@ -71,14 +73,15 @@ function setUpChartInteraction() {
             $toolTip.html(value + 'ms').show();
         });
 
-        $chart.on('mouseleave', '.ct-point', function () {
+        $chart.find('.ct-point').mouseleave(function () {
+            console.log('mouse leave');
             var $point = $(this);
 
             $point.animate({'stroke-width': '10px'}, 300, easeOutQuad);
             $toolTip.hide();
         });
 
-        $chart.on('mousemove', function (event) {
+        $chart.find('.ct-point').mousemove(function (event) {
             $toolTip.css({
                 left: (event.originalEvent.layerX) - $toolTip.width() / 2,
                 top: (event.originalEvent.layerY) - $toolTip.height() - 40

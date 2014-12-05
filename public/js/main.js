@@ -53,10 +53,9 @@ function setUpChartInteraction() {
 //        }
 //    });
 
-    var $toolTip = $chart
-        .append('<div class="chartTooltip"></div>')
-        .find('.chartTooltip')
-        .hide();
+    $chart.append('<div class="chartTooltip"></div>')
+
+    var $toolTip = $chart.find('.chartTooltip').hide();
 
 
     $chart.on('mouseenter', '.ct-point', function () {

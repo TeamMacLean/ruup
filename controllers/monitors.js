@@ -3,7 +3,7 @@ var Monitor = require('../models/monitor');
 
 module.exports.controller = function (app) {
 
-    app.get('/monitors', isAuthenticated, function (req, res) {
+    app.get('/monitors', function (req, res) {
         Monitor.find({}, function (err, monitors) {
             if (err) {
                 return util.renderError(err, res);
@@ -44,7 +44,7 @@ module.exports.controller = function (app) {
             }
         });
 
-    app.get('/monitors/:id', isAuthenticated, function (req, res) {
+    app.get('/monitors/:id', function (req, res) {
         Monitor.findOne({_id: req.param('id')}, function (err, monitor) {
             if (err) {
                 return util.renderError(err, res);
@@ -53,7 +53,7 @@ module.exports.controller = function (app) {
         });
     });
 
-    app.get('/monitors/:id/status/:count', isAuthenticated, function (req, res) {
+    app.get('/monitors/:id/status/:count', function (req, res) {
         Monitor.findOne({_id: req.param('id')}, function (err, monitor) {
             if (err) {
                 return util.renderError(err, res);

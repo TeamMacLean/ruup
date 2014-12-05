@@ -38,6 +38,7 @@
 #navbar > ul > li > a {
     padding-top: 20px;
     padding-bottom: 20px;
+    line-height: 30px;
 }
 
 .navbar-inverse .navbar-toggle {

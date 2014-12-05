@@ -1,6 +1,7 @@
 var User = require('../models/user');
 var passport = require('passport');
 var util = require('../lib/util');
+var emailer = require('../models/email');
 var LocalStrategy = require('passport-local').Strategy;
 
 module.exports.controller = function (app) {
@@ -64,6 +65,7 @@ module.exports.controller = function (app) {
                             if (err) {
                                 return util.renderError(err, res);
                             } else {
+                                emailer.newUser(email);
                                 res.redirect('/');
                             }
                         });

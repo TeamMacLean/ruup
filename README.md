@@ -23,6 +23,7 @@ RUUP (R U UP) is a site for monitoring the request response times of sites and g
 * Bower (`npm install -g bower`)
 
 ## Install
+copy config-example.json to config.json and edit it    
 ```
 npm install
 bower install

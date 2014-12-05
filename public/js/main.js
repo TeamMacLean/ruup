@@ -43,26 +43,26 @@ function setUpChartInteraction() {
 
         var $chart = $(this);
 
+        //TODO point color by value
+        //    var points = $chart.find('.ct-series').find('line');
+        //    points.each(function () {
+        //        var $point = $(this);
+        //        var value = $point.attr('ct:value');
+        //        console.log(value);
+        //
+        //        if (value == 0) {
+        //            $point.css({'stroke': '#E74C3C'});
+        //        } else if (value > 0 && value <= 320) {
+        //            $point.css({'stroke': '#2ECC71'});
+        //        } else {
+        //            $point.css({'stroke': '#E67E22'});
+        //        }
+        //    });
 
-//TODO point color by value
-//    var points = $chart.find('.ct-series').find('line');
-//    points.each(function () {
-//        var $point = $(this);
-//        var value = $point.attr('ct:value');
-//        console.log(value);
-//
-//        if (value == 0) {
-//            $point.css({'stroke': '#E74C3C'});
-//        } else if (value > 0 && value <= 320) {
-//            $point.css({'stroke': '#2ECC71'});
-//        } else {
-//            $point.css({'stroke': '#E67E22'});
-//        }
-//    });
-
-        $chart.append('<div class="chartTooltip"></div>');
-
-        var $toolTip = $chart.find('.chartTooltip').hide();
+        var $toolTip = $chart
+            .append('<div class="chartTooltip"></div>')
+            .find('.chartTooltip')
+            .hide();
 
 
         $chart.find('.ct-point').mouseenter(function () {
@@ -74,7 +74,6 @@ function setUpChartInteraction() {
         });
 
         $chart.find('.ct-point').mouseleave(function () {
-            console.log('mouse leave');
             var $point = $(this);
 
             $point.animate({'stroke-width': '10px'}, 300, easeOutQuad);

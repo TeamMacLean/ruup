@@ -106,7 +106,7 @@ module.exports.controller = function (app) {
         });
     function isAuthenticated(req, res, next) {
         if (req.isUnauthenticated()) {
-            return res.redirect('/');
+            return res.redirect('/signin');
         }
         return next();
     }

@@ -12,6 +12,12 @@
     border: none;
 }
 
+.navbar-inverse .navbar-toggle {
+    margin-top: 18px;
+    margin-bottom: 18px;
+    background-color: #2C3E50;
+}
+
 .navbar-inverse .navbar-toggle .icon-bar {
     background-color: #9B59B6;
 }
@@ -39,15 +45,6 @@
     padding-top: 20px;
     padding-bottom: 20px;
     line-height: 30px;
-}
-
-.navbar-inverse .navbar-toggle {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    background-color: #2C3E50;
-}
-
-.navbar-inverse .navbar-toggle:hover {
 }
 
 /**/

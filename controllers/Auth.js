@@ -3,6 +3,9 @@ var passport = require('passport');
 var util = require('../lib/util');
 var emailer = require('../models/email');
 var LocalStrategy = require('passport-local').Strategy;
+var passwordReset = require('../models/passwordReset');
+
+var passwordResetValidLength = 86400000;
 
 module.exports.controller = function (app) {
 
@@ -41,10 +44,10 @@ module.exports.controller = function (app) {
     ));
 
     app.route('/signup')
-        .get(isAuthenticated, function (req, res) {
-            return res.render('auth/signup')
+        .get(isUnauthenticated, function (req, res) {
+            return res.render('auth/signup');
         })
-        .post(isAuthenticated, function (req, res) {
+        .post(isUnauthenticated, function (req, res) {
             var email = req.body.emailInput;
             var password = req.body.passwordInput;
             var passwordConfirm = req.body.confirmPasswordInput;
@@ -79,10 +82,10 @@ module.exports.controller = function (app) {
         });
 
     app.route('/signin')
-        .get(isAuthenticated, function (req, res) {
+        .get(isUnauthenticated, function (req, res) {
             return res.render('auth/signin');
         })
-        .post(isAuthenticated, function (req, res, next) {
+        .post(isUnauthenticated, function (req, res, next) {
             passport.authenticate('local', function (err, user, info) {
                 if (err) {
                     return next(err);
@@ -105,18 +108,164 @@ module.exports.controller = function (app) {
         req.logout();
         return res.redirect('/');
     });
-    function isAuthenticated(req, res, next) {
-        if (req.isAuthenticated()) {
-            res.redirect('/');
+
+
+    app.get('/account', isAuthenticated, function (req, res) {
+        res.render('auth/account');
+    });
+
+    app.route('/account/reset')
+        .get(isAuthenticated, function (req, res) {
+            res.render('auth/newPassword');
+        })
+        .post(isAuthenticated, function (req, res) {
+            var newPassword = req.body.newPasswordInput;
+            var confirmNewPassword = req.body.confirmNewPasswordInput;
+            if (newPassword && confirmNewPassword) {
+                if (newPassword == confirmNewPassword) {
+                    User.findOne({_id: req.user._id}, function (err, user) {
+                        if (err) {
+                            return util.renderError(err, res);
+                        }
+                        if (!user) {
+                            return util.renderError('user not found', res);
+                        }
+                        user.password = newPassword;
+                        user.save(function (err) {
+                            if (err) {
+                                return util.renderError(err, res);
+                            }
+                            req.logout();
+                            res.redirect('/signin');
+                        });
+                    });
+                } else {
+                    return util.renderError('passwords do not match', res);
+                }
+            } else {
+                return util.renderError('please enter new password twice', res);
+            }
+
+//            sign them out
+        });
+
+    app.route('/account/lost')
+        .get(isUnauthenticated, function (req, res) {
+            res.render('auth/lost');
+        })
+        .post(isUnauthenticated, function (req, res) {
+            var emailInput = req.body.emailInput;
+            if (emailInput) {
+                User.findOne({email: emailInput}, function (err, user) {
+                    if (!user) {
+                        return util.renderError('no users found with the email address: ' + emailInput, res);
+                    }
+                    if (err) {
+                        return util.renderError(err, res);
+                    }
+                    var reset = new passwordReset({
+                        user: user._id
+                    });
+                    reset.save(function (err, out) {
+                        if (err) {
+                            return util.renderError(err, res);
+                        } else {
+                            var resultURL = req.protocol + '://' + req.get('host') + '/account/lost/' + out.uid;
+                            emailer.resetPassword(user.email, resultURL);
+                            return res.redirect('/');
+                        }
+                    });
+                });
+            } else {
+                return util.renderError('no email address entered', res);
+            }
+        });
+
+    app.route('/account/lost/:uid')
+        .get(isUnauthenticated, function (req, res) {
+            var resetID = req.param('uid');
+            passwordReset.findOne({uid: resetID}, function (err, resetRequest) {
+                if (err) {
+                    return util.renderError(err, res);
+                }
+                if (!resetRequest) {
+                    return util.renderError('reset request not found', res);
+                }
+                var dateNow = Date.now();
+                console.log(dateNow);
+                if (resetRequest.createdDate + passwordResetValidLength > dateNow) {
+                    User.findOne({_id: resetRequest.user}, function (err, user) {
+                        if (err) {
+                            return util.renderError(err, res);
+                        }
+                        if (!user) {
+                            return util.renderError('user not found', res);
+                        }
+                        res.render('auth/lostNewPassword', {uid: resetID, email: user.email});
+                    });
+                } else {
+                    return util.renderError('this link has expired.', res);
+                }
+            })
+        })
+        .post(isUnauthenticated, function (req, res) {
+            var newPassword = req.body.newPasswordInput;
+            var confirmNewPassword = req.body.confirmNewPasswordInput;
+            var resetID = req.param('uid');
+            if (newPassword && confirmNewPassword) {
+                if (newPassword == confirmNewPassword) {
+                    passwordReset.findOne({uid: resetID}, function (err, reset) {
+                        if (err) {
+                            return util.renderError(err, res);
+                        }
+                        if (!reset) {
+                            return util.renderError('reset request not found', res);
+                        }
+                        reset.used = true;
+                        reset.save(function (err) {
+                            if (err) {
+                                return util.renderError(err, res);
+                            }
+                            User.findOne({_id: reset.user}, function (err, user) {
+                                if (err) {
+                                    return util.renderError(err, res);
+                                }
+                                if (!reset) {
+                                    return util.renderError('user not found', res);
+                                }
+                                user.password = newPassword;
+                                user.save(function (err, out) {
+                                    if (err) {
+                                        return util.renderError(err, res);
+                                    }
+                                    res.redirect('/signin');
+                                });
+                            })
+                        });
+                    });
+                } else {
+                    return util.renderError('passwords do not match', res);
+                }
+            } else {
+                return util.renderError('please enter new password twice', res);
+            }
+        });
+
+
+//    if not authenticated make them signin
+    function isUnauthenticated(req, res, next) {
+        if (req.isUnauthenticated()) {
+            return next();
         }
-        return next();
+        return res.redirect('/');
     }
 
-    app.route('/reset/:uid')
-        .get(function (req, res) {
-//            reset form
-        })
-        .post(function (req, res) {
-//            reset password
-        });
+//    is already authenticated send them home
+    function isAuthenticated(req, res, next) {
+        if (req.isAuthenticated()) {
+            return next();
+        }
+        return res.redirect('/signup');
+    }
 };
+

@@ -10,8 +10,9 @@ var transporter = nodemailer.createTransport({
     }
 });
 
+var email = this;
 
-function notifyDown(monitor) {
+email.notifyDown = function (monitor) {
     User.findOne({_id: monitor.owner}, function (err, doc) {
 
         if (err) {
@@ -22,7 +23,17 @@ function notifyDown(monitor) {
         var monitorURL = monitor.url;
         var downReason = 'unknown';
 
-        var message = "Hi,\n\nThe monitor " + monitorName + " (" + monitorURL + ") is currently DOWN (" + downReason + ").\n\nRUUP will alert you when it is back up.\n\nCheers,\n\nRUUP\nhttp://www.example.org\nhttp://example.org";
+        var message = "Hi,\n" +
+            "\n" +
+            "The monitor " + monitorName + " (" + monitorURL + ") is currently DOWN (" + downReason + ").\n" +
+            "\n" +
+            "RUUP will alert you when it is back up.\n" +
+            "\n" +
+            "Cheers,\n" +
+            "\n" +
+            "RUUP\n" +
+            "http://www.example.org\n" +
+            "http://example.org";
 
         var mailOptions = {
             from: 'RUUP <alert@ruup.com>',
@@ -32,9 +43,9 @@ function notifyDown(monitor) {
         };
         send(mailOptions);
     });
-}
+};
 
-function notifyUp(monitor) {
+email.notifyUp = function (monitor) {
 
     User.findOne({_id: monitor.owner}, function (err, doc) {
 
@@ -47,7 +58,13 @@ function notifyUp(monitor) {
         var upResponse = 'unknown';
         var downTime = 'unknown';
 
-        var message = "Hi,\n\nThe monitor " + monitorName + " (" + monitorURL + ") is back UP (" + upResponse + ") (It was down for " + downTime + ").\n\nCheers,\n\nRUUP\nhttp://www.example.org\nhttp://example.org";
+        var message = "Hi,\n" +
+            "\n" +
+            "The monitor " + monitorName + " (" + monitorURL + ") is back UP (" + upResponse + ") (It was down for " + downTime + ").\n" +
+            "\n" +
+            "Cheers,\n" +
+            "\n" +
+            "RUUP";
 
         var mailOptions = {
             from: 'RUUP <alert@ruup.xyz>',
@@ -57,17 +74,44 @@ function notifyUp(monitor) {
         };
         send(mailOptions);
     });
-}
+};
 
-function newUser(email) {
+email.newUser = function (email) {
+
+    var message = "Hi,\n" +
+        "\n" +
+        "Welcome to Are You Up (RUUP).\n" +
+        "\n" +
+        "Let us know if there is anything we can do to help you with the service.\n" +
+        "\n" +
+        "RUUP Team";
+
     var mailOptions = {
         from: 'RUUP <info@ruup.xyz>',
         to: email,
         subject: 'Welcome to Are You Up',
-        text: "Hi,\n\nWelcome to Are You Up (RUUP).\n\nLet us know if there is anything we can do to help you with the service.\n\nRUUP Team"
+        text: message
     };
     send(mailOptions);
-}
+};
+
+email.resetPassword = function (email, url) {
+    var message = "Forgot your password?\n" +
+        "\n" +
+        "Click here " + url + " to reset it\n" +
+        "\n" +
+        "If you didn’t ask to reset your password, please ignore this email.\n" +
+        "\n" +
+        "RUUP Team";
+    
+    var mailOptions = {
+        from: 'RUUP <info@ruup.xyz>',
+        to: email,
+        subject: 'Reset Your Password',
+        text: message
+    };
+    send(mailOptions);
+};
 
 function send(mailOptions) {
     transporter.sendMail(mailOptions, function (error, info) {
@@ -79,8 +123,4 @@ function send(mailOptions) {
     });
 }
 
-module.exports = {
-    notifyDown: notifyDown,
-    notifyUp: notifyUp,
-    newUser: newUser
-};
+module.exports = email;

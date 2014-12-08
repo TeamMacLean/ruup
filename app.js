@@ -51,7 +51,6 @@ var middleware = function () {
     app.use(passport.session());
 
     app.use(function (req, res, next) {
-//        does nothing right now
         if (req.user != null && req.user.email != null) {
             res.locals.email = req.user.email;
         }

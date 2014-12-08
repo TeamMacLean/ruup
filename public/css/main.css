@@ -1,7 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:300);
-@import url(http://fonts.googleapis.com/css?family=Raleway:300);
+@import url(http://fonts.googleapis.com/css?family=Raleway:300,700);
 
-/*Bootstrap Nav changes*/
 .navbar-inverse {
     background-color: #34495E;
     border: none;
@@ -13,15 +12,15 @@
 }
 
 .navbar-inverse .navbar-toggle {
-    /*margin-top: 18px;*/
+    /*margin-top: 18px;*//*FAT NAV*/
     /*margin-bottom: 18px;*/
     background-color: #34495E;
     border-color: #1ABC9C;
 }
 
 .navbar-inverse .navbar-toggle {
-    /*margin-top: 18px;*/
-    /*margin-bottom: 18px;*/
+    /*margin-top: 18px;*//*FAT NAV*/
+    /*margin-bottom: 18px;*//*FAT NAV*/
     background-color: #34495E;
     border-color: #1ABC9C;
 }
@@ -47,10 +46,10 @@
 }
 
 .navbar-brand {
-    /*margin-top: 20px;*/
-    /*margin-bottom: 20px;*/
-    /*padding: 0 0 0 15px;*/
-    /*height: 30px;*/
+    /*margin-top: 20px;*//*FAT NAV*/
+    /*margin-bottom: 20px;*//*FAT NAV*/
+    /*padding: 0 0 0 15px;*//*FAT NAV*/
+    /*height: 30px;*//*FAT NAV*/
 }
 
 .navbar-brand img {
@@ -58,12 +57,10 @@
 }
 
 #navbar > ul > li > a {
-    /*padding-top: 20px;*/
-    /*padding-bottom: 20px;*/
-    /*line-height: 30px;*/
+    /*padding-top: 20px;*//*FAT NAV*/
+    /*padding-bottom: 20px;*//*FAT NAV*/
+    /*line-height: 30px;*//*FAT NAV*/
 }
-
-/**/
 
 body {
     margin-top: 50px;

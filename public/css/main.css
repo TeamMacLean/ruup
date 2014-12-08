@@ -13,13 +13,25 @@
 }
 
 .navbar-inverse .navbar-toggle {
-    margin-top: 18px;
-    margin-bottom: 18px;
+    /*margin-top: 18px;*/
+    /*margin-bottom: 18px;*/
+    background-color: #34495E;
+    border-color: #1ABC9C;
+}
+
+.navbar-inverse .navbar-toggle {
+    /*margin-top: 18px;*/
+    /*margin-bottom: 18px;*/
+    background-color: #34495E;
+    border-color: #1ABC9C;
+}
+
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
     background-color: #2C3E50;
 }
 
 .navbar-inverse .navbar-toggle .icon-bar {
-    background-color: #9B59B6;
+    background-color: #1ABC9C;
 }
 
 .navbar-inverse .navbar-nav > li > a {
@@ -35,22 +47,26 @@
 }
 
 .navbar-brand {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 0 0 0 15px;
-    height: 30px;
+    /*margin-top: 20px;*/
+    /*margin-bottom: 20px;*/
+    /*padding: 0 0 0 15px;*/
+    /*height: 30px;*/
+}
+
+.navbar-brand img {
+    height: 100%;
 }
 
 #navbar > ul > li > a {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    line-height: 30px;
+    /*padding-top: 20px;*/
+    /*padding-bottom: 20px;*/
+    /*line-height: 30px;*/
 }
 
 /**/
 
 body {
-    margin-top: 60px;
+    margin-top: 50px;
     font-family: "Lato", sans-serif;
     font-weight: 300;
     font-size: 16px;

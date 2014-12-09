@@ -63,7 +63,7 @@ module.exports.controller = function (app) {
                 if (err) {
                     return util.renderError(err, res);
                 }
-                return res.send(responses);
+                return res.send(responses.reverse());
             });
 
         });

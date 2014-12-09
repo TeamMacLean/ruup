@@ -85,5 +85,8 @@ function setUpChartInteraction($chart) {
     });
 }
 
-updateCharts();
+//$(function () {
+$(window).bind("load", function () {
+    updateCharts();
+});
 //setInterval(updateCharts, 6000);

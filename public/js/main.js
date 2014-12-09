@@ -5,7 +5,6 @@ var updateCharts = function () {
         var count = $(el).attr('data-count') || 8;
         if (id) {
             $.getJSON('/monitors/' + id + '/status/' + count, function (data) {
-                $(el).hide();
                 $(el).empty();
                 if (data && data.length > 0) {
                     var series = [];
@@ -27,7 +26,6 @@ var updateCharts = function () {
                 } else {
                     $(el).append('<h3>No data yet...</h3>');
                 }
-                $(el).show();
             });
         }
     });

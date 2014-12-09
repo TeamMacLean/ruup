@@ -2,6 +2,12 @@
 
 <div class="block">
     <div class="container">
+        <a href="/monitors/add" class="btn btn-info">Add a monitor</a>
+    </div>
+</div>
+
+<div class="block">
+    <div class="container">
         <% if(monitors && monitors.length > 0){ %>
         <div class="row">
             <% monitors.forEach(function(monitor) { %>
@@ -23,11 +29,7 @@
 
     </div>
 </div>
-<div class="block">
-    <div class="container">
-        <a href="/monitors/add" class="btn btn-info">Add a monitor</a>
-    </div>
-</div>
+
 
 
 <% include ../foot %>

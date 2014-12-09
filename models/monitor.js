@@ -104,7 +104,7 @@ monitorScheme.methods.start = function () {
 
 monitorScheme.methods.getResponses = function (count, cb) {
     var monitor = this;
-    response.find({monitor: monitor._id}).sort({createdAt: 'asc'}).limit(count).exec(cb);
+    response.find({monitor: monitor._id}).sort({createdAt: 'desc'}).limit(count).exec(cb);
 };
 
 monitorScheme.methods.removeResponses = function (cb) {

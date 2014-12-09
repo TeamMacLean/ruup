@@ -102,9 +102,9 @@ monitorScheme.methods.start = function () {
     }, this.rate * 60 * 1000);
 };
 
-monitorScheme.methods.getResponses = function (cb) {
+monitorScheme.methods.getResponses = function (count, cb) {
     var monitor = this;
-    response.find({monitor: monitor._id}).sort({date: 'desc'}).exec(cb);
+    response.find({monitor: monitor._id}).sort({createdAt: 'asc'}).limit(count).exec(cb);
 };
 
 monitorScheme.methods.removeResponses = function (cb) {

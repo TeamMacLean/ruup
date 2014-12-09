@@ -58,18 +58,12 @@ module.exports.controller = function (app) {
             if (err) {
                 return util.renderError(err, res);
             }
-            monitor.getResponses(function (err, responses) {
+            var count = req.param('count');
+            monitor.getResponses(count, function (err, responses) {
                 if (err) {
                     return util.renderError(err, res);
                 }
-
-                var count = req.param('count');
-                var out = responses;
-
-                if (responses.length >= count) {
-                    out = responses.slice(0, count);
-                }
-                return res.send(out);
+                return res.send(responses);
             });
 
         });

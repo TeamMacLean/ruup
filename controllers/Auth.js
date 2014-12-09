@@ -193,7 +193,7 @@ module.exports.controller = function (app) {
                 }
                 var dateNow = Date.now();
                 console.log(dateNow);
-                if (resetRequest.createdDate + passwordResetValidLength > dateNow) {
+                if (resetRequest.createdAt + passwordResetValidLength > dateNow) {
                     User.findOne({_id: resetRequest.user}, function (err, user) {
                         if (err) {
                             return util.renderError(err, res);

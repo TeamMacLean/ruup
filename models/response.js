@@ -4,12 +4,12 @@ var responseSchema = mongoose.Schema({
     monitor: {type: String, required: true},
     code: {type: String, required: true},
     time: {type: Number, required: true},
-    created_at: Date
+    createdAt: Date
 
 });
 
 responseSchema.pre('save', function (next) {
-    this.created_at = new Date();
+    this.createdAt = Date.now();
     next();
 });
 

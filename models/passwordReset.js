@@ -4,13 +4,13 @@ var passwordResetSchema = mongoose.Schema({
     user: {type: String, required: true},
     uid: String,
     used: {type: Boolean, default: false},
-    createdDate: Number
+    createdAt: Number
 });
 
 passwordResetSchema.pre('save', function (next) {
     var reset = this;
     reset.uid = guid();
-    reset.createdDate = Date.now();
+    reset.createdAt = Date.now();
     console.log(reset);
 
     next();

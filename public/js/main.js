@@ -10,7 +10,7 @@ var updateCharts = function () {
                     var series = [];
                     var labels = [];
                     data.forEach(function (res) {
-                        var fancyTime = moment(res.created_at).fromNow();
+                        var fancyTime = moment(res.createdAt).fromNow();
                         labels.push(fancyTime);
                         series.push(res.time);
                     });

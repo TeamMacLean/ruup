@@ -2,7 +2,7 @@ var updateCharts = function () {
     $('.ct-chart').each(function () {
         var el = this;
         var id = $(el).attr('data-monitor');
-        var count = $(el).attr('data-count') || 8;
+        var count = $(el).attr('data-mcount') || 8;
         if (id) {
             $.getJSON('/monitors/' + id + '/status/' + count, function (data) {
                 $(el).empty();
@@ -10,7 +10,31 @@ var updateCharts = function () {
                     var series = [];
                     var labels = [];
                     data.forEach(function (res) {
-                        var fancyTime = moment(res.createdAt).fromNow();
+
+                        var time = moment(res.createdAt);
+                        var now = moment();
+
+                        var fancyTime = 'unknown';
+
+                        if (now.year(time)) {
+                            fancyTime = time.format("DD/MM");
+                            if (now.month(time)) {
+                                fancyTime = time.format("ddd Do");
+                                if (now.week(time)) {
+                                    fancyTime = time.format("ddd");
+                                    if (now.day(time)) {
+                                        fancyTime = time.format("hh:mm");
+                                        if (now.hour(time)) {
+                                            fancyTime = time.fromNow();
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            fancyTime = time.format("DD/MM/YY");
+                        }
+
+
                         labels.push(fancyTime);
                         series.push(res.time);
                     });

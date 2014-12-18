@@ -2,7 +2,9 @@ var mongoose = require('mongoose');
 var request = require('request');
 var response = require('./response');
 var util = require('../lib/util');
+var notifier = require('node-notifier');
 var email = require('./email');
+var path = require('path');
 
 var monitorScheme = mongoose.Schema({
     name: {type: String, required: true},
@@ -65,8 +67,18 @@ monitorScheme.methods.curl = function () {
 
         if (isDown(err, response)) {
             processDown(monitor);
+            notifier.notify({
+                'title': monitor.name + ' is DOWN',
+                icon: path.join(__dirname, '../public/img/logo-30x30.png'),
+                'message': monitor.url
+            });
         } else {
             processUp(monitor);
+            notifier.notify({
+                'title': monitor.name + ' is UP',
+                icon: path.join(__dirname, '../public/img/logo-30x30.png'),
+                'message': monitor.url
+            });
         }
 
         var code = 'error';
@@ -75,6 +87,7 @@ monitorScheme.methods.curl = function () {
         } else {
             code = response.statusCode
         }
+
 
         makeResponse(err, code, time, id)
     });

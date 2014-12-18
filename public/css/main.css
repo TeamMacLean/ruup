@@ -239,3 +239,11 @@ i.red {
     -o-animation-name: slideUp;
     animation-name: slideUp;
 }
+
+.ct-chart .ct-series.ct-series-a .ct-area, .ct-chart .ct-series.ct-series-a .ct-slice:not(.ct-donut) {
+    fill: #1ABC9C;
+}
+
+.ct-chart .ct-series.ct-series-a .ct-bar, .ct-chart .ct-series.ct-series-a .ct-line, .ct-chart .ct-series.ct-series-a .ct-point, .ct-chart .ct-series.ct-series-a .ct-slice.ct-donut {
+    stroke: #1ABC9C;
+}

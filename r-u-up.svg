@@ -29,10 +29,10 @@
      id="namedview3077"
      showgrid="true"
      inkscape:zoom="22.627417"
-     inkscape:cx="24.679213"
-     inkscape:cy="-4.5408185"
-     inkscape:window-x="0"
-     inkscape:window-y="23"
+     inkscape:cx="12.508743"
+     inkscape:cy="7.8335502"
+     inkscape:window-x="513"
+     inkscape:window-y="216"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg2"
      showguides="true"
@@ -67,7 +67,10 @@
   <g
      transform="translate(-231.45,-261.31218)"
      id="layer1"
-     style="fill:none;fill-opacity:1;stroke:#1abc9c;stroke-opacity:1">
+     style="fill:none;fill-opacity:1;stroke:#1abc9c;stroke-opacity:1"
+     inkscape:export-filename="/Users/pagem/Documents/workspace/ruup/public/img/logo.png"
+     inkscape:export-xdpi="1341.3464"
+     inkscape:export-ydpi="1341.3464">
     <path
        d="m 232.5,277.36218 2.5,-5 c 0,0 -2.5,0 -2.5,-2.5 0,-2.5 2.5,-2.5 5,-2.5 l 0,7.5 c 0,2.5 2.5,2.5 2.5,2.5 0,0 2.5,0 2.5,-2.5 l 0,-12.5 5,7.5"
        id="path3823"

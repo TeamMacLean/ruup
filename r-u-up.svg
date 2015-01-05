@@ -30,9 +30,9 @@
      showgrid="true"
      inkscape:zoom="22.627417"
      inkscape:cx="12.508743"
-     inkscape:cy="7.8335502"
+     inkscape:cy="2.5302493"
      inkscape:window-x="513"
-     inkscape:window-y="216"
+     inkscape:window-y="194"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg2"
      showguides="true"
@@ -55,15 +55,6 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <path
-     style="fill:#e74c3c;fill-opacity:1;stroke:none"
-     d="m 18.5,22.1 -1,4 c -0.73389,-4.276219 -2,-9 1,-10.5 3,-1.5 5.20345,-0.843143 6,1 l -7,3 z"
-     id="path3855"
-     inkscape:connector-curvature="0"
-     sodipodi:nodetypes="cczccc"
-     inkscape:export-filename="/Users/pagem/Documents/workspace/ruup/public/img/logo.png"
-     inkscape:export-xdpi="1339.6439"
-     inkscape:export-ydpi="1339.6439" />
   <g
      transform="translate(-231.45,-261.31218)"
      id="layer1"
@@ -77,27 +68,40 @@
        style="fill:none;stroke:#1abc9c;stroke-width:2.09999989999999981;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill-opacity:1" />
   </g>
   <g
-     style="fill:none;stroke:#1abc9c;stroke-opacity:1"
-     id="g3847"
-     transform="translate(-212.4661,-247.61769)"
-     inkscape:export-filename="/Users/pagem/Documents/workspace/ruup/public/img/logo.png"
-     inkscape:export-xdpi="1339.6439"
-     inkscape:export-ydpi="1339.6439">
+     id="g2997"
+     transform="translate(4.5,1.5000004)">
     <path
-       style="fill:none;stroke:#1abc9c;stroke-width:2.0999999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       id="path3849"
-       d="m 232.5,277.36218 2.5,-5 c 0,0 -2.5,0 -2.5,-2.5 0,-2.5 2.5,-2.5 5,-2.5 l 0,7.5 c 0,2.5 2.5,2.5 2.5,2.5 0,0 2.5,0 2.5,-2.5 l 0,-12.5 5,7.5"
-       inkscape:connector-curvature="0" />
+       inkscape:export-ydpi="1339.6439"
+       inkscape:export-xdpi="1339.6439"
+       inkscape:export-filename="/Users/pagem/Documents/workspace/ruup/public/img/logo.png"
+       sodipodi:nodetypes="cczccc"
+       inkscape:connector-curvature="0"
+       id="path3855"
+       d="m 18.5,22.1 -1,4 c -0.73389,-4.276219 -2,-9 1,-10.5 3,-1.5 5.20345,-0.843143 6,1 l -7,3 z"
+       style="fill:#e74c3c;fill-opacity:1;stroke:none" />
+    <g
+       inkscape:export-ydpi="1339.6439"
+       inkscape:export-xdpi="1339.6439"
+       inkscape:export-filename="/Users/pagem/Documents/workspace/ruup/public/img/logo.png"
+       transform="translate(-212.4661,-247.61769)"
+       id="g3847"
+       style="fill:none;stroke:#1abc9c;stroke-opacity:1">
+      <path
+         inkscape:connector-curvature="0"
+         d="m 232.5,277.36218 2.5,-5 c 0,0 -2.5,0 -2.5,-2.5 0,-2.5 2.5,-2.5 5,-2.5 l 0,7.5 c 0,2.5 2.5,2.5 2.5,2.5 0,0 2.5,0 2.5,-2.5 l 0,-12.5 5,7.5"
+         id="path3849"
+         style="fill:none;stroke:#1abc9c;stroke-width:2.0999999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <path
+       inkscape:export-ydpi="1339.6439"
+       inkscape:export-xdpi="1339.6439"
+       inkscape:export-filename="/Users/pagem/Documents/workspace/ruup/public/img/logo.png"
+       sodipodi:nodetypes="zzzzz"
+       inkscape:connector-curvature="0"
+       id="path3853"
+       d="m 18.5,22.1 c 0.274125,0.148437 7.200317,-3.248233 7.294916,-3.550847 C 25.889515,18.246539 24.742599,16.732583 24.5,16.6 c -0.242599,-0.132583 -6.90625,2.678345 -7,3 -0.09375,0.321655 0.725875,2.351563 1,2.5 z"
+       style="fill:#ecf0f1;fill-opacity:1;stroke:none" />
   </g>
-  <path
-     style="fill:#ecf0f1;fill-opacity:1;stroke:none"
-     d="m 18.5,22.1 c 0.274125,0.148437 7.200317,-3.248233 7.294916,-3.550847 C 25.889515,18.246539 24.742599,16.732583 24.5,16.6 c -0.242599,-0.132583 -6.90625,2.678345 -7,3 -0.09375,0.321655 0.725875,2.351563 1,2.5 z"
-     id="path3853"
-     inkscape:connector-curvature="0"
-     sodipodi:nodetypes="zzzzz"
-     inkscape:export-filename="/Users/pagem/Documents/workspace/ruup/public/img/logo.png"
-     inkscape:export-xdpi="1339.6439"
-     inkscape:export-ydpi="1339.6439" />
   <path
      sodipodi:type="arc"
      style="fill:#ecf0f1;fill-opacity:1;stroke:none"

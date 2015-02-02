@@ -1,4 +1,4 @@
-var MAX_RESPONSE_TIME = 3000;
+var MAX_RESPONSE_TIME = 2500;
 
 
 var easeOutQuad = function (x, t, b, c, d) {

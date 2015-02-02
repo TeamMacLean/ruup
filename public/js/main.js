@@ -126,6 +126,7 @@ $(document).ready(function () {
                 var point = $(this);
                 var value = point.attr('ct:value');
                 if (value == 0 || value > MAX_RESPONSE_TIME) {
+                    point.attr('ct:value', 0);
                     point.css('stroke', '#E74C3C');
                 }
             });

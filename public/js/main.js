@@ -45,6 +45,10 @@ $(document).ready(function () {
                             }
 
 
+                            if (res.time > MAX_RESPONSE_TIME) {
+                                res.time = 0;
+                            }
+
                             labels.push(fancyTime);
                             series.push(res.time);
                         });
@@ -125,8 +129,7 @@ $(document).ready(function () {
             points.each(function () {
                 var point = $(this);
                 var value = point.attr('ct:value');
-                if (value == 0 || value > MAX_RESPONSE_TIME) {
-                    point.attr('ct:value', 0);
+                if (value == 0) {
                     point.css('stroke', '#E74C3C');
                 }
             });

@@ -1,3 +1,6 @@
+var MAX_RESPONSE_TIME = 3000;
+
+
 var easeOutQuad = function (x, t, b, c, d) {
     return -c * (t /= d) * (t - 2) + b;
 };
@@ -122,7 +125,7 @@ $(document).ready(function () {
             points.each(function () {
                 var point = $(this);
                 var value = point.attr('ct:value');
-                if (value == 0) {
+                if (value == 0 || value > MAX_RESPONSE_TIME) {
                     point.css('stroke', '#E74C3C');
                 }
             });

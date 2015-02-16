@@ -30,7 +30,8 @@ email.notifyDown = function (monitor) {
 
         var mailOptions = {
             message: {
-                from: 'RUUP <alert@ruup.com>',
+                from_email: 'alert@ruup.xyz',
+                from_name: 'RUUP',
                 to: [
                     {email: doc.email, name: doc.email}
                 ],
@@ -64,7 +65,8 @@ email.notifyUp = function (monitor) {
 
         var mailOptions = {
             message: {
-                from: 'RUUP <alert@ruup.xyz>',
+                from_email: 'alert@ruup.xyz',
+                from_name: 'RUUP',
                 to: [
                     {email: doc.email, name: doc.email}
                 ],
@@ -88,7 +90,8 @@ email.newUser = function (email) {
 
     var mailOptions = {
         message: {
-            from: 'RUUP <info@ruup.xyz>',
+            from_email: 'info@ruup.xyz',
+            from_name: 'RUUP',
             to: [
                 {email: email, name: email}
             ],
@@ -110,7 +113,8 @@ email.resetPassword = function (email, url) {
 
     var mailOptions = {
         message: {
-            from_email: 'RUUP <info@ruup.xyz>',
+            from_email: 'info@ruup.xyz',
+            from_name: 'RUUP',
             to: [
                 {email: email, name: email}
             ],

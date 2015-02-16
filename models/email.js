@@ -4,7 +4,7 @@ var config = require('../config.json');
 
 var mandrill = require('node-mandrill')(config.email.apikey);
 
-var email = this;
+var email = {};
 
 email.notifyDown = function (monitor) {
     User.findOne({_id: monitor.owner}, function (err, doc) {
@@ -122,6 +122,8 @@ email.resetPassword = function (email, url) {
 };
 
 function send(mailOptions) {
+
+    console.log('sending email', mailOptions);
 
     mandrill('/messages/send',
         mailOptions, function (error, response) {

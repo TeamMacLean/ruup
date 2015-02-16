@@ -1,14 +1,8 @@
-var nodemailer = require('nodemailer');
 var util = require('../lib/util');
 var User = require('./user');
 var config = require('../config.json');
-var transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-        user: config.email.username,
-        pass: config.email.password
-    }
-});
+
+var mandrill = require('node-mandrill')(config.email.apikey);
 
 var email = this;
 
@@ -18,7 +12,6 @@ email.notifyDown = function (monitor) {
         if (err) {
             return err;
         }
-        var to = doc.email;
         var monitorName = monitor.name;
         var monitorURL = monitor.url;
         var downReason = 'unknown';
@@ -36,10 +29,14 @@ email.notifyDown = function (monitor) {
             "http://example.org";
 
         var mailOptions = {
-            from: 'RUUP <alert@ruup.com>',
-            to: to,
-            subject: 'Monitor is DOWN:' + monitorName,
-            text: message
+            message: {
+                from: 'RUUP <alert@ruup.com>',
+                to: [
+                    {email: doc.email, name: doc.name}
+                ],
+                subject: 'Monitor is DOWN:' + monitorName,
+                text: message
+            }
         };
         send(mailOptions);
     });
@@ -52,7 +49,6 @@ email.notifyUp = function (monitor) {
         if (err) {
             return err;
         }
-        var to = doc.email;
         var monitorName = monitor.name;
         var monitorURL = monitor.url;
         var upResponse = 'unknown';
@@ -67,10 +63,14 @@ email.notifyUp = function (monitor) {
             "RUUP";
 
         var mailOptions = {
-            from: 'RUUP <alert@ruup.xyz>',
-            to: to,
-            subject: 'Monitor is UP: ' + monitorName,
-            text: message
+            message: {
+                from: 'RUUP <alert@ruup.xyz>',
+                to: [
+                    {email: doc.email, name: doc.name}
+                ],
+                subject: 'Monitor is UP: ' + monitorName,
+                text: message
+            }
         };
         send(mailOptions);
     });
@@ -87,10 +87,14 @@ email.newUser = function (email) {
         "RUUP Team";
 
     var mailOptions = {
-        from: 'RUUP <info@ruup.xyz>',
-        to: email,
-        subject: 'Welcome to Are You Up',
-        text: message
+        message: {
+            from: 'RUUP <info@ruup.xyz>',
+            to: [
+                {email: email, name: email}
+            ],
+            subject: 'Welcome to Are You Up',
+            text: message
+        }
     };
     send(mailOptions);
 };
@@ -103,24 +107,27 @@ email.resetPassword = function (email, url) {
         "If you didn’t ask to reset your password, please ignore this email.\n" +
         "\n" +
         "RUUP Team";
-    
+
     var mailOptions = {
-        from: 'RUUP <info@ruup.xyz>',
-        to: email,
-        subject: 'Reset Your Password',
-        text: message
+        message: {
+            from_email: 'RUUP <info@ruup.xyz>',
+            to: [
+                {email: email, name: email}
+            ],
+            subject: 'Reset Your Password',
+            text: message
+        }
     };
     send(mailOptions);
 };
 
 function send(mailOptions) {
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.log(error);
-        } else {
-            util.logInfo('Message sent: ' + info.response)
-        }
-    });
+
+    mandrill('/messages/send',
+        mailOptions, function (error, response) {
+            if (error) util.logError(JSON.stringify(error));
+            else util.logSuccess(response);
+        });
 }
 
 module.exports = email;

@@ -6,6 +6,9 @@ var mandrill = require('node-mandrill')(config.email.apikey);
 
 var email = {};
 
+var FROM_INFO = 'info@ruup.xyz';
+var FROM_ALERT = 'alert@ruup.xyz';
+
 email.notifyDown = function (monitor) {
     User.findOne({_id: monitor.owner}, function (err, doc) {
 
@@ -30,7 +33,7 @@ email.notifyDown = function (monitor) {
 
         var mailOptions = {
             message: {
-                from_email: 'alert@ruup.xyz',
+                from_email: FROM_ALERT,
                 from_name: 'RUUP',
                 to: [
                     {email: doc.email, name: doc.email}
@@ -65,7 +68,7 @@ email.notifyUp = function (monitor) {
 
         var mailOptions = {
             message: {
-                from_email: 'alert@ruup.xyz',
+                from_email: FROM_ALERT,
                 from_name: 'RUUP',
                 to: [
                     {email: doc.email, name: doc.email}
@@ -90,7 +93,7 @@ email.newUser = function (email) {
 
     var mailOptions = {
         message: {
-            from_email: 'info@ruup.xyz',
+            from_email: FROM_INFO,
             from_name: 'RUUP',
             to: [
                 {email: email, name: email}
@@ -113,7 +116,7 @@ email.resetPassword = function (email, url) {
 
     var mailOptions = {
         message: {
-            from_email: 'info@ruup.xyz',
+            from_email: FROM_INFO,
             from_name: 'RUUP',
             to: [
                 {email: email, name: email}

@@ -127,8 +127,8 @@ function send(mailOptions) {
 
     mandrill('/messages/send',
         mailOptions, function (error, response) {
-            if (error) util.logError(JSON.stringify(error));
-            else util.logSuccess(response);
+            if (error) util.logError('error', JSON.stringify(error));
+            else util.logSuccess('success', response);
         });
 }
 

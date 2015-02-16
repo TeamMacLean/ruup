@@ -32,7 +32,7 @@ email.notifyDown = function (monitor) {
             message: {
                 from: 'RUUP <alert@ruup.com>',
                 to: [
-                    {email: doc.email, name: doc.name}
+                    {email: doc.email, name: doc.email}
                 ],
                 subject: 'Monitor is DOWN:' + monitorName,
                 text: message
@@ -66,7 +66,7 @@ email.notifyUp = function (monitor) {
             message: {
                 from: 'RUUP <alert@ruup.xyz>',
                 to: [
-                    {email: doc.email, name: doc.name}
+                    {email: doc.email, name: doc.email}
                 ],
                 subject: 'Monitor is UP: ' + monitorName,
                 text: message

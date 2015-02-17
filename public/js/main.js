@@ -175,9 +175,9 @@ $(document).ready(function () {
         $('#newMonitorForm').find('#typeSelect').change(function () {
             console.log($(this).val);
             if ($(this).val === 1) {
-                $('#urlInput').clone().attr('type', 'url').insertAfter('#urlInput').prev().remove();
+                $('#urlInput').clone().attr('type', 'url').attr('placeholder', 'http://example.com').insertAfter('#urlInput').prev().remove();
             } else if ($(this).val === 2) {
-                $('#urlInput').clone().attr('type', 'text').insertAfter('#urlInput').prev().remove();
+                $('#urlInput').clone().attr('type', 'text').attr('placeholder', 'example.com').insertAfter('#urlInput').prev().remove();
             }
         })
     }

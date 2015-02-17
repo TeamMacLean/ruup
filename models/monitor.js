@@ -134,6 +134,8 @@ monitorScheme.methods.start = function () {
             monitor.ping();
         } else if (monitor.type === monitor.types.request) {
             monitor.curl();
+        } else {
+            util.logError('no idea what type this monitor is!')
         }
 
     }, this.rate * 60 * 1000);

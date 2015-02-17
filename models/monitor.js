@@ -70,8 +70,10 @@ monitorScheme.methods.ping = function () {
     var monitor = this;
     var id = monitor._id;
     var then = new Date().getTime();
-    ping.sys.probe(this.url, function (isAlive) {
 
+
+    ping.sys.probe(this.url, function (isAlive) {
+        util.logInfo('pinging', this.url, 'alive:', isAlive);
         var now = new Date().getTime();
         var time = now - then;
 

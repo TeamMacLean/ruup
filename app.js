@@ -92,11 +92,11 @@ var initMonitors = function () {
 
 
             //TODO enable if you want to test monitor manually
-//            if (monitor.type == Monitor.types.ping) {
-//                monitor.ping();
-//            } else if (monitor.type == Monitor.types.request) {
-//                monitor.curl();
-//            }
+            if (monitor.type == Monitor.types.ping) {
+                monitor.ping();
+            } else if (monitor.type == Monitor.types.request) {
+                monitor.curl();
+            }
 
             monitor.start();
         });

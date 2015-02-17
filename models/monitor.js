@@ -134,6 +134,7 @@ var makeResponse = function (err, code, time, monitor) {
 monitorScheme.methods.start = function () {
     var monitor = this;
     util.logInfo('started monitoring', monitor.name);
+    console.log('pre 1');
     setInterval(function () {
         if (monitor.type === monitor.types.ping) {
             monitor.ping();

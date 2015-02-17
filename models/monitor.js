@@ -75,9 +75,14 @@ monitorScheme.methods.ping = function () {
         var now = new Date().getTime();
         var time = now - then;
 
+        var code = 200;
+        var err = null;
+
         if (isAlive) {
             processUp(monitor);
         } else {
+            code = 404;
+            err = new Error({'not alive'});
             processDown(monitor);
         }
         makeResponse(err, code, time, id)

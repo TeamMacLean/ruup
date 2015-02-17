@@ -82,7 +82,7 @@ monitorScheme.methods.ping = function () {
             processUp(monitor);
         } else {
             code = 404;
-            err = new Error({'not alive'});
+            err = new Error('not alive');
             processDown(monitor);
         }
         makeResponse(err, code, time, id)

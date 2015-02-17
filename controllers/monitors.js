@@ -25,10 +25,18 @@ module.exports.controller = function (app) {
 
             var currentUser = req.user;
 
-            console.log('type', typeSelect);
+            var goodType = false;
+//            var goodType = Monitor.types.indexOf(typeSelect) > -1;
 
+            for (var prop in Monitor.types) {
+                if (Monitor.types.hasOwnProperty(prop)) {
+                    console.log('DEBUG', Monitor.types[prop]);
+                    if (Monitor.types[prop] === typeSelect) {
+                        goodType = true; //Found myValue!
+                    }
+                }
+            }
 
-            var goodType = Monitor.types.indexOf(typeSelect) > -1;
 
             if (nameInput && urlInput && rateInput && currentUser && goodType) {
                 var userID = currentUser._id;

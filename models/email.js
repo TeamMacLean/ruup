@@ -28,8 +28,7 @@ email.notifyDown = function (monitor) {
             "Cheers,\n" +
             "\n" +
             "RUUP\n" +
-            "http://www.example.org\n" +
-            "http://example.org";
+            "http://www.ruup.xyz";
 
         var mailOptions = {
             message: {
@@ -64,7 +63,8 @@ email.notifyUp = function (monitor) {
             "\n" +
             "Cheers,\n" +
             "\n" +
-            "RUUP";
+            "RUUP\n" +
+            "http://www.ruup.xyz";
 
         var mailOptions = {
             message: {
@@ -89,7 +89,8 @@ email.newUser = function (email) {
         "\n" +
         "Let us know if there is anything we can do to help you with the service.\n" +
         "\n" +
-        "RUUP Team";
+        "RUUP\n" +
+        "http://www.ruup.xyz";
 
     var mailOptions = {
         message: {
@@ -112,7 +113,8 @@ email.resetPassword = function (email, url) {
         "\n" +
         "If you didn’t ask to reset your password, please ignore this email.\n" +
         "\n" +
-        "RUUP Team";
+        "RUUP\n" +
+        "http://www.ruup.xyz";
 
     var mailOptions = {
         message: {

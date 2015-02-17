@@ -155,6 +155,7 @@ monitorScheme.methods.typeAsString = function () {
 
     for (var prop in monitor) {
         if (monitor.hasOwnProperty(prop)) {
+            console.log(this[prop], monitor.type);
             if (this[ prop ] == monitor.type)
                 type = prop;
         }

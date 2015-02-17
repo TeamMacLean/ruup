@@ -140,8 +140,10 @@ monitorScheme.methods.start = function () {
     util.logInfo('started monitoring', monitor.name);
     setInterval(function () {
         if (monitor.type === monitor.types.ping) {
+            util.logInfo('gonna ping');
             monitor.ping();
         } else if (monitor.type === monitor.types.request) {
+            util.logInfo('gonna requiest');
             monitor.curl();
         } else {
             util.logError('no idea what type this monitor is!')

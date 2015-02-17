@@ -152,10 +152,13 @@ monitorScheme.methods.typeAsString = function () {
     var monitor = this;
 
     var type = 'unknown';
+
+    console.log('my type us', monitor.type);
+
     if (monitor.type == 1) {
         type = 'ping'
     }
-    if (monitor.type == 2) {
+    else if (monitor.type == 2) {
         type = 'request';
     }
     return type;

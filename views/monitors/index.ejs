@@ -15,7 +15,7 @@
                 <div class="well centered hideOverflow">
                     <h2><a href="/monitors/<%- monitor._id %>"><%- monitor.name %></a></h2>
                     <h4><%- monitor.url %></h4>
-                    <h4><%- monitor.typeAsString() %></h4>
+                    <h4><%- monitor.typeAsString %></h4>
                     <h4>every <%- monitor.rate %> mins</h4>
 
                     <div class="ct-chart" data-monitor="<%- monitor._id %>" data-mcount="7"></div>

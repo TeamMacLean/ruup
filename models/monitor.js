@@ -75,11 +75,16 @@ monitorScheme.methods.ping = function () {
         var now = new Date().getTime();
         var time = now - then;
 
+        console.log('here 1');
+
         if (isAlive) {
+            console.log('here 2');
             processUp(monitor);
         } else {
+            console.log('here 3');
             processDown(monitor);
         }
+        console.log('here 4');
         makeResponse(err, code, time, id)
     });
 };

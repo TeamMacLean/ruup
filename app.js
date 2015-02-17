@@ -89,7 +89,14 @@ var initMonitors = function () {
             console.log(err);
         }
         monitors.forEach(function (monitor) {
-            monitor.curl();
+
+
+            if (monitor.type == monitor.types.ping) {//TODO DEBUG
+                monitor.ping(); //TODO DEBUG
+            } else if (monitor.type == monitor.types.request) {//TODO DEBUG
+                monitor.curl(); //TODO DEBUG
+            }//TODO DEBUG
+
             monitor.start();
         });
     })

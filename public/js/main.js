@@ -176,8 +176,10 @@ $(document).ready(function () {
             var val = $(this).val();
             console.log(val);
             if (val == 1) {
+                console.log('becoming requirest');
                 $('#urlInput').clone().attr('type', 'url').attr('placeholder', 'http://example.com').insertAfter('#urlInput').prev().remove();
             } else if (val == 2) {
+                console.log('becoming ping');
                 $('#urlInput').clone().attr('type', 'text').attr('placeholder', 'example.com').insertAfter('#urlInput').prev().remove();
             }
         })

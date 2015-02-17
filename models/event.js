@@ -15,7 +15,7 @@ eventSchema.pre('save', function (next) {
     next();
 });
 
-var Event = mongoose.model('Response', eventSchema);
+var Event = mongoose.model('Event', eventSchema);
 
 module.exports = Event;
 

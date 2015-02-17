@@ -30,8 +30,8 @@ module.exports.controller = function (app) {
 
             for (var prop in Monitor.types) {
                 if (Monitor.types.hasOwnProperty(prop)) {
-                    console.log('DEBUG', Monitor.types[prop]);
-                    if (Monitor.types[prop] === typeSelect) {
+                    console.log('DEBUG', Monitor.types[prop], '== ? ', typeSelect);
+                    if (Monitor.types[prop] == typeSelect) {
                         goodType = true; //Found myValue!
                     }
                 }

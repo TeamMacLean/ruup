@@ -172,17 +172,22 @@ $(document).ready(function () {
     }
 
     function newMonitorForm() {
-        $('#newMonitorForm').find('#typeSelect').change(function () {
-            var val = $(this).val();
-            console.log(val);
+
+        function poly() {
+            var val = $('#newMonitorForm').find('#typeSelect').val();
             if (val == 1) {
-                console.log('becoming requirest');
-                $('#urlInput').clone().attr('type', 'url').attr('placeholder', 'http://example.com').insertAfter('#urlInput').prev().remove();
-            } else if (val == 2) {
-                console.log('becoming ping');
                 $('#urlInput').clone().attr('type', 'text').attr('placeholder', 'example.com').insertAfter('#urlInput').prev().remove();
+            } else if (val == 2) {
+                $('#urlInput').clone().attr('type', 'url').attr('placeholder', 'http://example.com').insertAfter('#urlInput').prev().remove();
+
             }
-        })
+        }
+
+        $('#newMonitorForm').find('#typeSelect').change(function () {
+            poly();
+        });
+
+        poly();
     }
 
     $(window).bind("load", function () {

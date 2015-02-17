@@ -18,7 +18,7 @@ var monitorScheme = mongoose.Schema({
 
 });
 
-monitorScheme.statics.types = Object.freeze({"request": 1, "ping": 2});
+monitorScheme.statics.types = Object.freeze({"ping": 1, "request": 2});
 
 function saveChanges(model) {
     model.save(model, function (err) {
@@ -152,15 +152,12 @@ monitorScheme.methods.typeAsString = function () {
     var monitor = this;
 
     var type = 'unknown';
-
-    for (var prop in monitor) {
-        if (monitor.hasOwnProperty(prop)) {
-            console.log(this[prop], monitor.type);
-            if (this[ prop ] == monitor.type)
-                type = prop;
-        }
+    if (monitor.type == 1) {
+        return 'ping';
     }
-    return type;
+    if (monitor.type == 2) {
+        return 'request'
+    }
 };
 
 monitorScheme.methods.getResponses = function (count, cb) {

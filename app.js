@@ -96,6 +96,8 @@ var initMonitors = function () {
                 monitor.ping();
             } else if (monitor.type == Monitor.types.request) {
                 monitor.curl();
+            } else {
+                util.logError('NO IDEA WHAT TYPE', monitor, 'is!');
             }
 
             monitor.start();

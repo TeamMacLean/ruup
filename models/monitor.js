@@ -22,7 +22,7 @@ monitorScheme.statics.types = Object.freeze({"request": 1, "ping": 2});
 
 function saveChanges(model) {
     model.save(model, function (err) {
-        util.logInfo('error saving model', err);
+        util.logInfo('error saving model', model, err);
     })
 }
 
@@ -75,16 +75,11 @@ monitorScheme.methods.ping = function () {
         var now = new Date().getTime();
         var time = now - then;
 
-        console.log('here 1');
-
         if (isAlive) {
-            console.log('here 2');
             processUp(monitor);
         } else {
-            console.log('here 3');
             processDown(monitor);
         }
-        console.log('here 4');
         makeResponse(err, code, time, id)
     });
 };
@@ -134,7 +129,6 @@ var makeResponse = function (err, code, time, monitor) {
 monitorScheme.methods.start = function () {
     var monitor = this;
     util.logInfo('started monitoring', monitor.name);
-    console.log('pre 1');
     setInterval(function () {
         if (monitor.type === monitor.types.ping) {
             monitor.ping();

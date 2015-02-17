@@ -175,9 +175,9 @@ $(document).ready(function () {
         $('#newMonitorForm').find('#typeSelect').change(function () {
             var val = $(this).val();
             console.log(val);
-            if (val === 1) {
+            if (val == 1) {
                 $('#urlInput').clone().attr('type', 'url').attr('placeholder', 'http://example.com').insertAfter('#urlInput').prev().remove();
-            } else if (val === 2) {
+            } else if (val == 2) {
                 $('#urlInput').clone().attr('type', 'text').attr('placeholder', 'example.com').insertAfter('#urlInput').prev().remove();
             }
         })

@@ -171,9 +171,22 @@ $(document).ready(function () {
         });
     }
 
+    function newMonitorForm() {
+        $('#newMonitorForm').find('#typeSelect').change(function () {
+            if ($(this).val === 1) {
+                $('.request-only').show();
+            } else if ($(this).val === 2) {
+                $('.request-only').hide();
+            }
+        })
+    }
+
     $(window).bind("load", function () {
         updateCharts();
         scrollManager();
+
+
+        newMonitorForm();
     });
 
 });

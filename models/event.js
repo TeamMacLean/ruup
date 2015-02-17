@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var types = Object.freeze({"up": 1, "down": 2});
+
 
 var eventSchema = mongoose.Schema({
     monitor: {type: String, required: true},
@@ -9,6 +9,8 @@ var eventSchema = mongoose.Schema({
     createdAt: Date
 
 });
+
+eventSchema.statics.types = Object.freeze({"up": 1, "down": 2});
 
 eventSchema.pre('save', function (next) {
     this.createdAt = Date.now();

@@ -153,11 +153,12 @@ monitorScheme.methods.typeAsString = function () {
 
     var type = 'unknown';
     if (monitor.type == 1) {
-        return 'ping';
+        type = 'ping'
     }
     if (monitor.type == 2) {
-        return 'request'
+        type = 'request';
     }
+    return type;
 };
 
 monitorScheme.methods.getResponses = function (count, cb) {

@@ -21,12 +21,18 @@ module.exports.controller = function (app) {
             var urlInput = req.body.urlInput;
             var rateInput = req.body.rateInput;
 
+            var typeSelect = req.body.typeSelect;
+
             var currentUser = req.user;
 
-            if (nameInput && urlInput && rateInput && currentUser) {
+
+            var goodType = Monitor.types.indexOf(typeSelect) > -1;
+
+            if (nameInput && urlInput && rateInput && currentUser && goodType) {
                 var userID = currentUser._id;
                 var monitor = new Monitor({
                     name: nameInput,
+                    type: typeSelect,
                     url: urlInput,
                     rate: rateInput,
                     owner: userID

@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 var request = require('request');
+var ping = require('ping');
 var response = require('./response');
 var util = require('../lib/util');
-var notifier = require('node-notifier');
 var email = require('./email');
 var path = require('path');
 var event = require('./event');
@@ -11,14 +11,14 @@ var monitorScheme = mongoose.Schema({
     name: {type: String, required: true},
     url: {type: String, required: true},
     rate: {type: Number, required: true, min: 5, max: 1440},
-    type:{type:Number, required:true},
+    type: {type: Number, required: true},
     owner: {type: String, required: true},
     downNoticed: Boolean,
     downNotified: Boolean
 
 });
 
-monitorScheme.statics.type = Object.freeze({"request": 1, "ping": 2});
+monitorScheme.statics.types = Object.freeze({"request": 1, "ping": 2});
 
 function saveChanges(model) {
     model.save(model, function (err) {
@@ -66,6 +66,25 @@ function processUp(monitor) {
     }
 }
 
+monitorScheme.methods.ping = function () {
+    var monitor = this;
+    var id = monitor._id;
+    var then = new Date().getTime();
+    ping.sys.probe(this.url, function (isAlive) {
+
+        var now = new Date().getTime();
+        var time = now - then;
+
+        if (isAlive) {
+            processUp(monitor);
+        } else {
+            processDown(monitor);
+        }
+        makeResponse(err, code, time, id)
+    });
+};
+
+
 monitorScheme.methods.curl = function () {
     var monitor = this;
     var id = monitor._id;
@@ -78,19 +97,8 @@ monitorScheme.methods.curl = function () {
 
         if (isDown(err, response)) {
             processDown(monitor);
-
-            notifier.notify({
-                'title': monitor.name + ' is DOWN',
-                icon: path.join(__dirname, '../public/img/logo-30x30.png'),
-                'message': monitor.url
-            });
         } else {
             processUp(monitor);
-            notifier.notify({
-                'title': monitor.name + ' is UP',
-                icon: path.join(__dirname, '../public/img/logo-30x30.png'),
-                'message': monitor.url
-            });
         }
 
         var code = 'error';
@@ -99,7 +107,6 @@ monitorScheme.methods.curl = function () {
         } else {
             code = response.statusCode
         }
-
 
         makeResponse(err, code, time, id)
     });
@@ -123,7 +130,12 @@ monitorScheme.methods.start = function () {
     var monitor = this;
     util.logInfo('started monitoring', monitor.name);
     setInterval(function () {
-        monitor.curl();
+        if (monitor.type === monitor.types.ping) {
+            monitor.ping();
+        } else if (monitor.type === monitor.types.request) {
+            monitor.curl();
+        }
+
     }, this.rate * 60 * 1000);
 };
 

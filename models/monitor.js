@@ -72,10 +72,7 @@ monitorScheme.methods.ping = function () {
     var then = new Date().getTime();
 
 
-    console.log('PINGING');
-
     ping.sys.probe(this.url, function (isAlive) {
-        util.logInfo('pinging', monitor.url, 'alive:', isAlive);
         var now = new Date().getTime();
         var time = now - then;
 
@@ -140,16 +137,29 @@ monitorScheme.methods.start = function () {
     util.logInfo('started monitoring', monitor.name);
     setInterval(function () {
         if (monitor.type === monitor.types.ping) {
-            util.logInfo('gonna ping');
             monitor.ping();
         } else if (monitor.type === monitor.types.request) {
-            util.logInfo('gonna requiest');
             monitor.curl();
         } else {
             util.logError('no idea what type this monitor is!')
         }
 
     }, this.rate * 60 * 1000);
+};
+
+monitorScheme.methods.typeAsString = function () {
+
+    var monitor = this;
+
+    var type = 'unknown';
+
+    for (var prop in monitor) {
+        if (monitor.hasOwnProperty(prop)) {
+            if (this[ prop ] === monitor.type)
+                type = prop;
+        }
+    }
+    return type;
 };
 
 monitorScheme.methods.getResponses = function (count, cb) {

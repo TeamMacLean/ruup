@@ -5,6 +5,7 @@ var util = require('../lib/util');
 var notifier = require('node-notifier');
 var email = require('./email');
 var path = require('path');
+var event = require('./event');
 
 var monitorScheme = mongoose.Schema({
     name: {type: String, required: true},
@@ -31,27 +32,34 @@ function isDown(err, response) {
 }
 
 function processDown(monitor) {
-    if (monitor.downNoticed) {
-        if (!monitor.downNotified) {
-            monitor.downNotified = true;
-            saveChanges(monitor);
-            email.notifyDown(monitor);
-        }
+
+    if (monitor.downNoticed) { //it was down at last check
+//        if (!monitor.downNotified) {
+//        monitor.downNotified = true;
+//        saveChanges(monitor);
+        var downEvent = new event({monitor: monitor._id, time: Date.now(), type: event.types.down });
+        saveChanges(downEvent);
+        email.notifyDown(monitor);
+//        }
     } else {
-        monitor.downNoticed = true;
+        monitor.downNoticed = true; // next time I will send out an email
         saveChanges(monitor);
     }
 }
 
 function processUp(monitor) {
+
     if (monitor.downNoticed) {
-        monitor.downNoticed = false;
+//        monitor.downNoticed = false;
+//        saveChanges(monitor);
+//        if (monitor.downNotified) {
+        monitor.downNotified = false;
         saveChanges(monitor);
-        if (monitor.downNotified) {
-            monitor.downNotified = false;
-            saveChanges(monitor);
-            email.notifyUp(monitor);
-        }
+
+        var upEvent = new event({monitor: monitor._id, time: Date.now(), type: event.types.up });
+        saveChanges(upEvent);
+        email.notifyUp(monitor);
+//        }
     }
 }
 
@@ -67,6 +75,7 @@ monitorScheme.methods.curl = function () {
 
         if (isDown(err, response)) {
             processDown(monitor);
+
             notifier.notify({
                 'title': monitor.name + ' is DOWN',
                 icon: path.join(__dirname, '../public/img/logo-30x30.png'),

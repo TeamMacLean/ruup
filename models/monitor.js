@@ -11,11 +11,14 @@ var monitorScheme = mongoose.Schema({
     name: {type: String, required: true},
     url: {type: String, required: true},
     rate: {type: Number, required: true, min: 5, max: 1440},
+    type:{type:Number, required:true},
     owner: {type: String, required: true},
     downNoticed: Boolean,
     downNotified: Boolean
 
 });
+
+monitorScheme.statics.type = Object.freeze({"request": 1, "ping": 2});
 
 function saveChanges(model) {
     model.save(model, function (err) {

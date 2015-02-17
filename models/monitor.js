@@ -34,13 +34,13 @@ function isDown(err, response) {
 function processDown(monitor) {
 
     if (monitor.downNoticed) { //it was down at last check
-//        if (!monitor.downNotified) {
-//        monitor.downNotified = true;
-//        saveChanges(monitor);
-        var downEvent = new event({monitor: monitor._id, time: Date.now(), type: event.types.down });
-        saveChanges(downEvent);
-        email.notifyDown(monitor);
-//        }
+        if (!monitor.downNotified) {
+            monitor.downNotified = true;
+            saveChanges(monitor);
+            var downEvent = new event({monitor: monitor._id, time: Date.now(), type: event.types.down });
+            saveChanges(downEvent);
+            email.notifyDown(monitor);
+        }
     } else {
         monitor.downNoticed = true; // next time I will send out an email
         saveChanges(monitor);
@@ -50,16 +50,16 @@ function processDown(monitor) {
 function processUp(monitor) {
 
     if (monitor.downNoticed) {
-//        monitor.downNoticed = false;
-//        saveChanges(monitor);
-//        if (monitor.downNotified) {
-        monitor.downNotified = false;
+        monitor.downNoticed = false;
         saveChanges(monitor);
+        if (monitor.downNotified) {
+            monitor.downNotified = false;
+            saveChanges(monitor);
 
-        var upEvent = new event({monitor: monitor._id, time: Date.now(), type: event.types.up });
-        saveChanges(upEvent);
-        email.notifyUp(monitor);
-//        }
+            var upEvent = new event({monitor: monitor._id, time: Date.now(), type: event.types.up });
+            saveChanges(upEvent);
+            email.notifyUp(monitor);
+        }
     }
 }
 

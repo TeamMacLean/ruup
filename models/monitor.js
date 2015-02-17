@@ -11,7 +11,7 @@ var monitorScheme = mongoose.Schema({
     name: {type: String, required: true},
     url: {type: String, required: true},
     rate: {type: Number, required: true, min: 5, max: 1440},
-    type: {type: Number, required: true},
+    type: {type: Number, required: true, default: 1},//TODO default for schema change, remove soon!
     owner: {type: String, required: true},
     downNoticed: Boolean,
     downNotified: Boolean

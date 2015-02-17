@@ -173,10 +173,11 @@ $(document).ready(function () {
 
     function newMonitorForm() {
         $('#newMonitorForm').find('#typeSelect').change(function () {
+            console.log($(this).val);
             if ($(this).val === 1) {
-                $('.request-only').show();
+                $('#urlInput').clone().attr('type', 'url').insertAfter('#urlInput').prev().remove();
             } else if ($(this).val === 2) {
-                $('.request-only').hide();
+                $('#urlInput').clone().attr('type', 'text').insertAfter('#urlInput').prev().remove();
             }
         })
     }

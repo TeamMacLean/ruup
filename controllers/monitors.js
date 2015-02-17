@@ -25,6 +25,8 @@ module.exports.controller = function (app) {
 
             var currentUser = req.user;
 
+            console.log('type', typeSelect);
+
 
             var goodType = Monitor.types.indexOf(typeSelect) > -1;
 

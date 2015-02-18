@@ -77,6 +77,7 @@ monitorScheme.methods.ping = function () {
 
         var ms = rcvd - sent;
         if (err) {
+            console.log('error pinging', err);
             code = 404;
             processDown(monitor);
         }

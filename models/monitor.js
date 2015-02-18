@@ -6,6 +6,7 @@ var util = require('../lib/util');
 var email = require('./email');
 var path = require('path');
 var event = require('./event');
+var dns = require('dns');
 
 var monitorScheme = mongoose.Schema({
     name: {type: String, required: true},
@@ -70,22 +71,41 @@ monitorScheme.methods.ping = function () {
     var monitor = this;
     var id = monitor._id;
 
-    var session = ping.createSession();
-    session.pingHost(monitor.url, function (err, target, sent, rcvd) {
+    var isIP = false;
 
-        var code = 200;
+    var url = monitor.url;
 
-        var ms = rcvd - sent;
-        if (err) {
-            console.log('error pinging', err);
-            code = 404;
-            processDown(monitor);
-        }
-        else {
-            processUp(monitor);
-        }
-        makeResponse(err, code, ms, id)
-    });
+    if(isIP){
+
+    } else {
+        dns.resolve4(url, function(err, addressses){
+            if(err){
+
+            } else {
+                var session = ping.createSession();
+                session.pingHost(addressses[0], function (err, target, sent, rcvd) {
+
+                    var code = 200;
+
+                    var ms = rcvd - sent;
+                    if (err) {
+                        console.log('error pinging', err);
+                        code = 404;
+                        processDown(monitor);
+                    }
+                    else {
+                        processUp(monitor);
+                    }
+                    makeResponse(err, code, ms, id)
+                });
+            }
+        })
+    }
+
+
+
+
+
 
 
 };

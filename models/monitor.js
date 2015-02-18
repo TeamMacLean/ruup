@@ -89,7 +89,7 @@ monitorScheme.methods.ping = function () {
                 makeResponse(err, 404, 0, id)
             } else {
                 doPing(addressses[0]);
-                
+
             }
         })
     }
@@ -109,6 +109,10 @@ monitorScheme.methods.ping = function () {
             }
             else {
                 processUp(monitor);
+            }
+            if(isNaN(ms)){
+                console.log(ms);
+                ms = 0;
             }
             makeResponse(err, code, ms, id)
         });

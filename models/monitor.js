@@ -68,8 +68,10 @@ function processUp(monitor) {
 }
 
 function ValidateIPaddress(ipaddress) {
-    return !!/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress);
-
+    if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {
+        return (true)
+    }
+    return (false)
 }
 
 monitorScheme.methods.ping = function () {
@@ -79,7 +81,6 @@ monitorScheme.methods.ping = function () {
     var url = monitor.url;
 
     if (ValidateIPaddress(monitor.url)) {
-        console.log('url is an ip');
         doPing(monitor.url);
     } else {
         dns.resolve4(url, function (err, addressses) {
@@ -87,35 +88,30 @@ monitorScheme.methods.ping = function () {
                 processDown(monitor);
                 makeResponse(err, 404, 0, id)
             } else {
-                doPing(addressses[0], function (err, target, sent, rcvd) {
-
-                    var code = 200;
-
-                    var ms = rcvd - sent;
-                    if (err) {
-                        console.log('error pinging', err);
-                        code = 404;
-                        processDown(monitor);
-                    }
-                    else {
-                        processUp(monitor);
-                    }
-
-                    if(isNaN(ms)){
-                        console.log('its not a number');
-                        ms = 0;
-                    }
-
-                    makeResponse(err, code, ms, id)
-                })
+                doPing(addressses[0]);
+                
             }
         })
     }
 
 
-    function doPing(address, cb) {
+    function doPing(address) {
         var session = ping.createSession();
-        session.pingHost(address, cb);
+        session.pingHost(address, function (err, target, sent, rcvd) {
+
+            var code = 200;
+
+            var ms = rcvd - sent;
+            if (err) {
+                console.log('error pinging', err);
+                code = 404;
+                processDown(monitor);
+            }
+            else {
+                processUp(monitor);
+            }
+            makeResponse(err, code, ms, id)
+        });
     }
 
 

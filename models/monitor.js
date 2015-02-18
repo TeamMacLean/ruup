@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var request = require('request');
-var ping = require('ping');
+var ping = require("net-ping");
 var response = require('./response');
 var util = require('../lib/util');
 var email = require('./email');
@@ -40,7 +40,7 @@ function processDown(monitor) {
         if (!monitor.downNotified) {
             monitor.downNotified = true;
             saveChanges(monitor);
-            var downEvent = new event({monitor: monitor._id, time: Date.now(), type: event.types.down });
+            var downEvent = new event({monitor: monitor._id, time: Date.now(), type: event.types.down});
             saveChanges(downEvent);
             email.notifyDown(monitor);
         }
@@ -59,7 +59,7 @@ function processUp(monitor) {
             monitor.downNotified = false;
             saveChanges(monitor);
 
-            var upEvent = new event({monitor: monitor._id, time: Date.now(), type: event.types.up });
+            var upEvent = new event({monitor: monitor._id, time: Date.now(), type: event.types.up});
             saveChanges(upEvent);
             email.notifyUp(monitor);
         }
@@ -69,25 +69,24 @@ function processUp(monitor) {
 monitorScheme.methods.ping = function () {
     var monitor = this;
     var id = monitor._id;
-    var then = new Date().getTime();
 
-
-    ping.sys.probe(this.url, function (isAlive) {
-        var now = new Date().getTime();
-        var time = now - then;
+    var session = ping.createSession();
+    session.pingHost(monitor.url, function (err, target, sent, rcvd) {
 
         var code = 200;
-        var err = null;
 
-        if (isAlive) {
-            processUp(monitor);
-        } else {
+        var ms = rcvd - sent;
+        if (err) {
             code = 404;
-            err = new Error('not alive');
             processDown(monitor);
         }
-        makeResponse(err, code, time, id)
+        else {
+            processUp(monitor);
+        }
+        makeResponse(err, code, ms, id)
     });
+
+
 };
 
 

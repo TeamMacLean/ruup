@@ -96,14 +96,14 @@ monitorScheme.methods.ping = function () {
 
 
     function doPing(address) {
-        var session = ping.createSession([{timeout:8000}]);
+        var session = ping.createSession();
         session.pingHost(address, function (err, target, sent, rcvd) {
 
             var code = 200;
 
             var ms = rcvd - sent;
             if (err) {
-                console.log('error pinging', err);
+                console.log('error pinging',address, err);
                 code = 404;
                 processDown(monitor);
             }

@@ -100,6 +100,12 @@ monitorScheme.methods.ping = function () {
                     else {
                         processUp(monitor);
                     }
+
+                    if(isNaN(ms)){
+                        console.log('its not a number');
+                        ms = 0;
+                    }
+
                     makeResponse(err, code, ms, id)
                 })
             }

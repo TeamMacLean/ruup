@@ -96,7 +96,7 @@ monitorScheme.methods.ping = function () {
 
 
     function doPing(address) {
-        var session = ping.createSession();
+        var session = ping.createSession([{timeout:8000}]);
         session.pingHost(address, function (err, target, sent, rcvd) {
 
             var code = 200;

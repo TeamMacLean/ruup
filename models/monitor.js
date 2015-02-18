@@ -111,7 +111,7 @@ monitorScheme.methods.ping = function () {
                 processUp(monitor);
             }
             if(isNaN(ms)){
-                console.log(ms);
+                console.log(sent, rcvd);
                 ms = 0;
             }
             makeResponse(err, code, ms, id)

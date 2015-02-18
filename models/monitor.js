@@ -67,23 +67,27 @@ function processUp(monitor) {
     }
 }
 
+function ValidateIPaddress(ipaddress) {
+    return !!/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress);
+
+}
+
 monitorScheme.methods.ping = function () {
     var monitor = this;
     var id = monitor._id;
 
-    var isIP = false;
-
     var url = monitor.url;
 
-    if(isIP){
-
+    if (ValidateIPaddress(monitor.url)) {
+        console.log('url is an ip');
+        doPing(monitor.url);
     } else {
-        dns.resolve4(url, function(err, addressses){
-            if(err){
-
+        dns.resolve4(url, function (err, addressses) {
+            if (err) {
+                processDown(monitor);
+                makeResponse(err, 404, 0, id)
             } else {
-                var session = ping.createSession();
-                session.pingHost(addressses[0], function (err, target, sent, rcvd) {
+                doPing(addressses[0], function (err, target, sent, rcvd) {
 
                     var code = 200;
 
@@ -97,15 +101,16 @@ monitorScheme.methods.ping = function () {
                         processUp(monitor);
                     }
                     makeResponse(err, code, ms, id)
-                });
+                })
             }
         })
     }
 
 
-
-
-
+    function doPing(address, cb) {
+        var session = ping.createSession();
+        session.pingHost(address, cb);
+    }
 
 
 };

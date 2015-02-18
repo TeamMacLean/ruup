@@ -83,7 +83,7 @@ monitorScheme.methods.ping = function () {
     if (ValidateIPaddress(monitor.url)) {
         doPing(monitor.url);
     } else {
-        dns.resolve(url, ['A'], function (err, addressses) {
+        dns.resolve4(url, function (err, addressses) {
             if (err) {
                 processDown(monitor);
                 makeResponse(err, 404, 0, id)

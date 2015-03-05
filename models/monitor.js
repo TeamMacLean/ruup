@@ -1,11 +1,12 @@
 var mongoose = require('mongoose');
 var request = require('request');
-var ping = require('ping');
+var ping = require("net-ping");
 var response = require('./response');
 var util = require('../lib/util');
 var email = require('./email');
 var path = require('path');
 var event = require('./event');
+var dns = require('dns');
 
 var monitorScheme = mongoose.Schema({
     name: {type: String, required: true},
@@ -40,7 +41,7 @@ function processDown(monitor) {
         if (!monitor.downNotified) {
             monitor.downNotified = true;
             saveChanges(monitor);
-            var downEvent = new event({monitor: monitor._id, time: Date.now(), type: event.types.down });
+            var downEvent = new event({monitor: monitor._id, time: Date.now(), type: event.types.down});
             saveChanges(downEvent);
             email.notifyDown(monitor);
         }
@@ -59,35 +60,65 @@ function processUp(monitor) {
             monitor.downNotified = false;
             saveChanges(monitor);
 
-            var upEvent = new event({monitor: monitor._id, time: Date.now(), type: event.types.up });
+            var upEvent = new event({monitor: monitor._id, time: Date.now(), type: event.types.up});
             saveChanges(upEvent);
             email.notifyUp(monitor);
         }
     }
 }
 
+function ValidateIPaddress(ipaddress) {
+    if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {
+        return (true)
+    }
+    return (false)
+}
+
 monitorScheme.methods.ping = function () {
     var monitor = this;
     var id = monitor._id;
-    var then = new Date().getTime();
+
+    var url = monitor.url;
+
+    if (ValidateIPaddress(monitor.url)) {
+        doPing(monitor.url);
+    } else {
+        dns.resolve4(url, function (err, addressses) {
+            if (err) {
+                processDown(monitor);
+                makeResponse(err, 404, 0, id)
+            } else {
+                doPing(addressses[0]);
+
+            }
+        })
+    }
 
 
-    ping.sys.probe(this.url, function (isAlive) {
-        var now = new Date().getTime();
-        var time = now - then;
+    function doPing(address) {
+        var session = ping.createSession();
+        session.pingHost(address, function (err, target, sent, rcvd) {
 
-        var code = 200;
-        var err = null;
+            var code = 200;
 
-        if (isAlive) {
-            processUp(monitor);
-        } else {
-            code = 404;
-            err = new Error('not alive');
-            processDown(monitor);
-        }
-        makeResponse(err, code, time, id)
-    });
+            var ms = rcvd - sent;
+            if (err) {
+                console.log('error pinging',address, err);
+                code = 404;
+                processDown(monitor);
+            }
+            else {
+                processUp(monitor);
+            }
+            if(isNaN(ms)){
+                console.log(sent, rcvd);
+                ms = 0;
+            }
+            makeResponse(err, code, ms, id)
+        });
+    }
+
+
 };
 
 

@@ -14,11 +14,8 @@ $(document).ready(function () {
 
 
         var thisDate = $this.text();
-
-        var newDate = moment(thisDate).format('MMMM Do YYYY, h:mm:ss a');
-
-        console.log(thisDate, newDate);
-
+        var thisDateInt = parseInt(thisDate);
+        var newDate = moment(thisDateInt).format('MMMM Do YYYY, h:mm:ss a');
         $this.text(
             newDate
         );

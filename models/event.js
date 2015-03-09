@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 
 
-
 var eventSchema = mongoose.Schema({
     monitor: {type: String, required: true},
     type: {type: Number, required: true},
@@ -17,8 +16,17 @@ eventSchema.pre('save', function (next) {
     next();
 });
 
-eventSchema.methods.getType = function(){
-return 'down';
+eventSchema.methods.getType = function () {
+
+    var event = this;
+    var types = event.types;
+
+    for (var prop in types) {
+        if (types.hasOwnProperty(prop)) {
+            if (types[prop] === event.type)
+                return prop;
+        }
+    }
 };
 
 var Event = mongoose.model('Event', eventSchema);

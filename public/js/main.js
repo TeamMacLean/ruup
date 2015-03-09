@@ -14,13 +14,13 @@ $(document).ready(function () {
         var $this = $(this);
 
 
-        var thisData = $this.val();
+        var thisData = $this.text();
 
         console.log(thisData);
 
-        $this.text(
-            moment(thisData).format('MMMM Do YYYY, h:mm:ss a')
-        );
+        //$this.text(
+        //    moment(thisData).format('MMMM Do YYYY, h:mm:ss a')
+        //);
 
     });
 

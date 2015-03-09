@@ -21,7 +21,7 @@ eventSchema.methods.getType = function(){
     var event = this;
         for( var prop in event.types ) {
             if( event.types.hasOwnProperty( prop ) ) {
-                if( this[ prop ] === event.type )
+                if( event.types[ prop ] === event.type )
                     return prop;
             }
         }

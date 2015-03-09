@@ -9,9 +9,9 @@ $(document).ready(function () {
 
 
 
-    $('.format-time').forEach(function(ft){
+    $('.format-time').each(function(){
 
-        var $this = $(ft);
+        var $this = $(this);
 
         $this.text(
             moment(ft.text()).format('MMMM Do YYYY, h:mm:ss a')

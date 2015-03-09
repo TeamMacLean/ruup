@@ -14,7 +14,7 @@ $(document).ready(function () {
         var $this = $(this);
 
 
-        var thisData = $this.text()
+        var thisData = $this.val();
 
         console.log(thisData);
 

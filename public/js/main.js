@@ -18,9 +18,9 @@ $(document).ready(function () {
 
         console.log(thisData);
 
-        //$this.text(
-        //    moment(thisData).format('MMMM Do YYYY, h:mm:ss a')
-        //);
+        $this.text(
+            moment(new Date(thisData)).format('MMMM Do YYYY, h:mm:ss a')
+        );
 
     });
 

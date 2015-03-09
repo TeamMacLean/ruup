@@ -17,6 +17,17 @@ eventSchema.pre('save', function (next) {
     next();
 });
 
+eventSchema.methods.getType = function(){
+    var event = this;
+        for( var prop in event.types ) {
+            if( event.types.hasOwnProperty( prop ) ) {
+                if( this[ prop ] === event.type )
+                    return prop;
+            }
+        }
+
+};
+
 var Event = mongoose.model('Event', eventSchema);
 
 module.exports = Event;

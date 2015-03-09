@@ -21,7 +21,7 @@ eventSchema.methods.getType = function () {
     var event = this;
 
     if(event.type == 1){
-        return "up"''
+        return "up";
     } else {
         return "down";
     }

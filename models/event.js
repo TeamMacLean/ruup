@@ -19,14 +19,13 @@ eventSchema.pre('save', function (next) {
 eventSchema.methods.getType = function () {
 
     var event = this;
-    var types = event.types;
 
-    for (var prop in types) {
-        if (types.hasOwnProperty(prop)) {
-            if (types[prop] === event.type)
-                return prop;
-        }
+    if(event.type == 1){
+        return "up"''
+    } else {
+        return "down";
     }
+
 };
 
 var Event = mongoose.model('Event', eventSchema);

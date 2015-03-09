@@ -19,7 +19,7 @@ $(document).ready(function () {
         console.log(thisData);
 
         $this.text(
-            moment(new Date(thisData)).format('MMMM Do YYYY, h:mm:ss a')
+            new Date(thisData)
         );
 
     });

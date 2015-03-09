@@ -195,6 +195,12 @@ monitorScheme.methods.typeAsString = function () {
     return type;
 };
 
+monitorScheme.methods.getEvents = function(cb){
+    var monitor = this;
+    event.find({monitor: monitor.id}).exec(cb);
+
+};
+
 monitorScheme.methods.getResponses = function (count, cb) {
     var monitor = this;
     response.find({monitor: monitor._id}).sort({createdAt: 'desc'}).limit(count).exec(cb);

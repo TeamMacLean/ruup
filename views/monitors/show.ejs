@@ -14,6 +14,20 @@
         <!--<h3 class="green"><b>UP</b></h3>-->
 
         <div class="ct-chart" data-monitor="<%- monitor._id %>" data-mcount="20"></div>
+
+
+
+
+        <% if(events && events > 0){%>
+
+        <% events.forEach(function(event) { %>
+        <h4><%- event.type %></h4>
+        <% }); %>
+        <% } %>
+
+
+
+
         <a href="/monitors/<%- monitor._id %>/delete " class="btn btn-danger">Delete</a>
     </div>
 </div>

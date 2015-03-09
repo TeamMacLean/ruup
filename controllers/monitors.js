@@ -65,7 +65,12 @@ module.exports.controller = function (app) {
             if (err) {
                 return util.renderError(err, res);
             }
-            return res.render('monitors/show', {monitor: monitor})
+
+            monitor.getEvents(function(err, events){
+                return res.render('monitors/show', {monitor: monitor, events: events});
+            });
+
+
         });
     });
 

@@ -14,7 +14,7 @@ $(document).ready(function () {
         var $this = $(this);
 
         $this.text(
-            moment(ft.text()).format('MMMM Do YYYY, h:mm:ss a')
+            moment($this.text()).format('MMMM Do YYYY, h:mm:ss a')
         );
 
     });

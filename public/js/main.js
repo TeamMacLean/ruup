@@ -8,23 +8,22 @@ var easeOutQuad = function (x, t, b, c, d) {
 $(document).ready(function () {
 
 
-
-    $('.format-time').each(function(){
+    $('.format-time').each(function () {
 
         var $this = $(this);
 
 
-        var thisData = $this.text();
+        var thisDate = $this.text();
 
-        console.log(thisData);
+        var newDate = moment(thisDate).format('MMMM Do YYYY, h:mm:ss a');
+
+        console.log(thisDate, newDate);
 
         $this.text(
-            new Date(thisData)
+            newDate
         );
 
     });
-
-
 
 
     var updateCharts = function () {

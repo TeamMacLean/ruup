@@ -13,6 +13,8 @@ $(document).ready(function () {
 
         var $this = $(this);
 
+        console.log($this.text());
+
         $this.text(
             moment($this.text()).format('MMMM Do YYYY, h:mm:ss a')
         );

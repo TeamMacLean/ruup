@@ -33,7 +33,7 @@
             <% events.forEach(function(event) { %>
             <tr>
                 <td><%- event.getType() %></td>
-                <td><%- event.time %></td>
+                <td class="format-time"><%- event.time %></td>
             </tr>
             <% }); %>
             </tbody>

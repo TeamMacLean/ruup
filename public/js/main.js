@@ -6,6 +6,22 @@ var easeOutQuad = function (x, t, b, c, d) {
 };
 
 $(document).ready(function () {
+
+
+
+    $('.format-time').forEach(function(ft){
+
+        var $this = $(ft);
+
+        $this.text(
+            moment(ft.text()).format('MMMM Do YYYY, h:mm:ss a')
+        );
+
+    });
+
+
+
+
     var updateCharts = function () {
         $('.ct-chart').each(function () {
             var el = this;

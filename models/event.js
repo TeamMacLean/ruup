@@ -25,7 +25,6 @@ eventSchema.methods.getType = function(){
                     return prop;
             }
         }
-
 };
 
 var Event = mongoose.model('Event', eventSchema);

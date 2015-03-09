@@ -20,6 +20,9 @@ eventSchema.pre('save', function (next) {
 eventSchema.methods.getType = function(){
     var event = this;
         for( var prop in event.types ) {
+
+            console.log('has own',event.types,prop, event.type);
+
             if( event.types.hasOwnProperty( prop ) ) {
                 if( event.types[ prop ] === event.type )
                     return prop;

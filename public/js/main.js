@@ -189,7 +189,7 @@ $(document).ready(function () {
     }
 
 
-    $(window).bind("load", function () {
+    $(document).ready(function () {
         updateCharts();
         scrollManager();
     });

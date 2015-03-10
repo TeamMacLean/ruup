@@ -1,4 +1,5 @@
 var MAX_RESPONSE_TIME = 2500;
+var SHOW_TIMEOUT = false;
 
 
 var easeOutQuad = function (x, t, b, c, d) {
@@ -61,10 +62,6 @@ $(document).ready(function () {
                                 fancyTime = time.format("DD/MM/YY hh:mm");
                             }
 
-
-//                            if (res.time > MAX_RESPONSE_TIME) {
-//                                res.time = 0;
-//                            }
 
                             labels.push(fancyTime);
                             series.push(res.time);
@@ -140,14 +137,16 @@ $(document).ready(function () {
 
     function setUpChartInteraction($chart) {
 
-
         {
             var points = $chart.find('.ct-point');
             points.each(function () {
                 var point = $(this);
                 var value = point.attr('ct:value');
-                if (value == 0 || value > MAX_RESPONSE_TIME) {
-                    point.css('stroke', '#E74C3C');
+
+                if (SHOW_TIMEOUT) {
+                    if (value == 0 || value > MAX_RESPONSE_TIME) {
+                        point.css('stroke', '#E74C3C');
+                    }
                 }
             });
         }

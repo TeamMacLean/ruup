@@ -8,6 +8,9 @@ module.exports.controller = function (app) {
             if (err) {
                 return util.renderError(err, res);
             }
+            monitors.sort(function (a, b) {
+                return a.createdAt - b.createdAt;
+            });
             return res.render('monitors/index', {monitors: monitors});
         });
     });
@@ -51,9 +54,9 @@ module.exports.controller = function (app) {
                 return util.renderError(err, res);
             }
 
-            monitor.getEvents(function(err, events){
+            monitor.getEvents(function (err, events) {
 
-                if(err){
+                if (err) {
                     return util.renderError(err, res);
                 }
 

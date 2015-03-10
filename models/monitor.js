@@ -12,7 +12,8 @@ var monitorScheme = mongoose.Schema({
     rate: {type: Number, required: true, min: 5, max: 1440},
     owner: {type: String, required: true},
     downNoticed: Boolean,
-    downNotified: Boolean
+    downNotified: Boolean,
+    createdAt: Date
 
 });
 

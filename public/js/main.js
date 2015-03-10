@@ -151,16 +151,16 @@ $(document).ready(function () {
         }
 
 
-        console.log('making new tool tip');
 
 
         if ($('.chartTooltip').length == 0) {
             $chart
                 .append('<div class="chartTooltip"></div>');
-
-            var $toolTip = $chart.find('.chartTooltip')
-                .hide();
         }
+
+        var $toolTip = $chart.find('.chartTooltip')
+            .hide();
+
         $chart.find('.ct-point').mouseenter(function () {
             var $point = $(this);
             var value = $point.attr('ct:value');
@@ -195,9 +195,6 @@ $(document).ready(function () {
 
 
     $(document).ready(function () {
-
-        console.log("calling ready");
-
         updateCharts();
         scrollManager();
     });

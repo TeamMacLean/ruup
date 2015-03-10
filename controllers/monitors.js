@@ -96,17 +96,24 @@ module.exports.controller = function (app) {
                 if (err) {
                     return util.renderError(err, res);
                 }
-                doc.removeResponses(function (err) {
+
+                doc.removeEvents(function (err) {
                     if (err) {
                         return util.renderError(err, res);
                     }
-                    doc.remove(function (err) {
+
+                    doc.removeResponses(function (err) {
                         if (err) {
                             return util.renderError(err, res);
                         }
-                        return res.redirect('/monitors');
+                        doc.remove(function (err) {
+                            if (err) {
+                                return util.renderError(err, res);
+                            }
+                            return res.redirect('/monitors');
+                        })
                     })
-                })
+                });
             });
         });
     function isAuthenticated(req, res, next) {

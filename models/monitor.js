@@ -63,14 +63,6 @@ function processUp(monitor) {
     }
 }
 
-function ValidateIPaddress(ipaddress) {
-    if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {
-        return (true)
-    }
-    return (false)
-}
-
-
 monitorScheme.methods.curl = function () {
     var monitor = this;
     var id = monitor._id;
@@ -122,7 +114,7 @@ monitorScheme.methods.start = function () {
 
 monitorScheme.methods.getEvents = function (cb) {
     var monitor = this;
-    event.find({monitor: monitor.id}).exec(cb);
+    event.find({monitor: monitor._id}).exec(cb);
 
 };
 
@@ -135,6 +127,11 @@ monitorScheme.methods.removeResponses = function (cb) {
     var monitor = this;
     response.remove({monitor: monitor._id}).exec(cb);
 };
+
+monitorScheme.methods.removeEvents = function(cb){
+    var monitor = this;
+    event.find({monitor: monitor._id}).remove(cb);
+}
 
 var Monitor = mongoose.model('Monitor', monitorScheme);
 

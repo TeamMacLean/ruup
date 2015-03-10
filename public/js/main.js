@@ -190,6 +190,9 @@ $(document).ready(function () {
 
 
     $(document).ready(function () {
+
+        console.log("calling ready");
+
         updateCharts();
         scrollManager();
     });

@@ -89,17 +89,7 @@ var initMonitors = function () {
             console.log(err);
         }
         monitors.forEach(function (monitor) {
-
-
-            //TODO enable if you want to test monitor manually
-            if (monitor.type == Monitor.types.ping) {
-                monitor.ping();
-            } else if (monitor.type == Monitor.types.request) {
-                monitor.curl();
-            } else {
-                util.logError('NO IDEA WHAT TYPE', monitor, 'is!');
-            }
-
+            //monitor.curl(); //test use only
             monitor.start();
         });
     })

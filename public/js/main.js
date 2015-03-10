@@ -188,31 +188,31 @@ $(document).ready(function () {
         });
     }
 
-    function newMonitorForm() {
-
-        function poly() {
-            var val = $('#newMonitorForm').find('#typeSelect').val();
-            if (val == 1) {
-                $('#urlInput').clone().attr('type', 'text').attr('placeholder', 'example.com').insertAfter('#urlInput').prev().remove();
-            } else if (val == 2) {
-                $('#urlInput').clone().attr('type', 'url').attr('placeholder', 'http://example.com').insertAfter('#urlInput').prev().remove();
-
-            }
-        }
-
-        $('#newMonitorForm').find('#typeSelect').change(function () {
-            poly();
-        });
-
-        poly();
-    }
+    //function newMonitorForm() {
+    //
+    //    function poly() {
+    //        var val = $('#newMonitorForm').find('#typeSelect').val();
+    //        if (val == 1) {
+    //            $('#urlInput').clone().attr('type', 'text').attr('placeholder', 'example.com').insertAfter('#urlInput').prev().remove();
+    //        } else if (val == 2) {
+    //            $('#urlInput').clone().attr('type', 'url').attr('placeholder', 'http://example.com').insertAfter('#urlInput').prev().remove();
+    //
+    //        }
+    //    }
+    //
+    //    $('#newMonitorForm').find('#typeSelect').change(function () {
+    //        poly();
+    //    });
+    //
+    //    poly();
+    //}
 
     $(window).bind("load", function () {
         updateCharts();
         scrollManager();
 
 
-        newMonitorForm();
+        //newMonitorForm();
     });
 
 });

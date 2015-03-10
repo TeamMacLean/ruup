@@ -21,28 +21,13 @@ module.exports.controller = function (app) {
             var urlInput = req.body.urlInput;
             var rateInput = req.body.rateInput;
 
-            var typeSelect = req.body.typeSelect;
-
             var currentUser = req.user;
-
-            var goodType = false;
-//            var goodType = Monitor.types.indexOf(typeSelect) > -1;
-
-            for (var prop in Monitor.types) {
-                if (Monitor.types.hasOwnProperty(prop)) {
-                    console.log('DEBUG', Monitor.types[prop], '== ? ', typeSelect);
-                    if (Monitor.types[prop] == typeSelect) {
-                        goodType = true; //Found myValue!
-                    }
-                }
-            }
 
 
             if (nameInput && urlInput && rateInput && currentUser && goodType) {
                 var userID = currentUser._id;
                 var monitor = new Monitor({
                     name: nameInput,
-                    type: typeSelect,
                     url: urlInput,
                     rate: rateInput,
                     owner: userID

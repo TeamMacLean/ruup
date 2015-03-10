@@ -40,27 +40,27 @@ $(document).ready(function () {
                         data.forEach(function (res) {
 
                             var time = moment(res.createdAt);
-                            var now = moment();
+                            //var now = moment();
 
-                            var fancyTime = 'unknown';
+                            //var fancyTime = 'unknown';
 
-                            if (now.year(time)) {
-                                fancyTime = time.format("DD/MM");
-                                if (now.month(time)) {
-                                    fancyTime = time.format("ddd Do");
-                                    if (now.week(time)) {
-                                        fancyTime = time.format("ddd");
-                                        if (now.day(time)) {
-                                            fancyTime = time.format("hh:mm");
-                                            if (now.hour(time)) {
-                                                fancyTime = time.fromNow();
-                                            }
-                                        }
-                                    }
-                                }
-                            } else {
-                                fancyTime = time.format("DD/MM/YY hh:mm");
-                            }
+                            //if (now.year(time)) {
+                            //    fancyTime = time.format("DD/MM");
+                            //    if (now.month(time)) {
+                            //        fancyTime = time.format("ddd Do");
+                            //        if (now.week(time)) {
+                            //            fancyTime = time.format("ddd");
+                            //            if (now.day(time)) {
+                            var fancyTime = time.format("hh:mm");
+                            //if (now.hour(time)) {
+                            //    fancyTime = time.fromNow();
+                            //}
+                            //}
+                            //}
+                            //}
+                            //} else {
+                            //    fancyTime = time.format("DD/MM/YY hh:mm");
+                            //}
 
 
                             labels.push(fancyTime);
@@ -187,31 +187,10 @@ $(document).ready(function () {
         });
     }
 
-    //function newMonitorForm() {
-    //
-    //    function poly() {
-    //        var val = $('#newMonitorForm').find('#typeSelect').val();
-    //        if (val == 1) {
-    //            $('#urlInput').clone().attr('type', 'text').attr('placeholder', 'example.com').insertAfter('#urlInput').prev().remove();
-    //        } else if (val == 2) {
-    //            $('#urlInput').clone().attr('type', 'url').attr('placeholder', 'http://example.com').insertAfter('#urlInput').prev().remove();
-    //
-    //        }
-    //    }
-    //
-    //    $('#newMonitorForm').find('#typeSelect').change(function () {
-    //        poly();
-    //    });
-    //
-    //    poly();
-    //}
 
     $(window).bind("load", function () {
         updateCharts();
         scrollManager();
-
-
-        //newMonitorForm();
     });
 
 });

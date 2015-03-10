@@ -153,8 +153,13 @@ $(document).ready(function () {
 
         console.log('making new tool tip');
 
-        $chart
-            .append('<div class="chartTooltip"></div>');
+
+        if (!$('.chartTooltip')) {
+            $chart
+                .append('<div class="chartTooltip"></div>');
+        }
+
+
         var $toolTip = $chart.find('.chartTooltip')
             .hide();
         $chart.find('.ct-point').mouseenter(function () {

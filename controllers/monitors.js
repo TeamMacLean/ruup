@@ -8,9 +8,6 @@ module.exports.controller = function (app) {
             if (err) {
                 return util.renderError(err, res);
             }
-            monitors.sort(function (a, b) {
-                return a.createdAt - b.createdAt;
-            });
             return res.render('monitors/index', {monitors: monitors});
         });
     });

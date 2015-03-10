@@ -40,10 +40,9 @@ $(document).ready(function () {
                         data.forEach(function (res) {
 
                             var time = moment(res.createdAt);
+
                             //var now = moment();
-
                             //var fancyTime = 'unknown';
-
                             //if (now.year(time)) {
                             //    fancyTime = time.format("DD/MM");
                             //    if (now.month(time)) {
@@ -151,6 +150,8 @@ $(document).ready(function () {
             });
         }
 
+
+        console.log('making new tool tip');
 
         $chart
             .append('<div class="chartTooltip"></div>');

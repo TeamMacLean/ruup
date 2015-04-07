@@ -24,7 +24,7 @@ module.exports.controller = function (app) {
             var currentUser = req.user;
 
 
-            if (nameInput && urlInput && rateInput && currentUser && goodType) {
+            if (nameInput && urlInput && rateInput && currentUser) {
                 var userID = currentUser._id;
                 var monitor = new Monitor({
                     name: nameInput,

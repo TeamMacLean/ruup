@@ -151,8 +151,6 @@ $(document).ready(function () {
         }
 
 
-
-
         if ($('.chartTooltip').length == 0) {
             $chart
                 .append('<div class="chartTooltip"></div>');

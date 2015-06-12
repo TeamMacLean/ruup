@@ -42,6 +42,14 @@
 
         <% } %>
 
+        <% if(monitor.otherObservers) { %>
+        <h2>Other event recipients</h2>
+        <% monitor.otherObservers.forEach(function(email){ %>
+
+        <%- email %>
+
+        <% })} %>
+
         <form action="/monitors/<%- monitor._id %>/addEmail" method="post">
             <div class="form-group">
                 <label for="addEmail">Add email address for notifications</label>

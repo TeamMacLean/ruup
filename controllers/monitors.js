@@ -127,6 +127,7 @@ module.exports.controller = function (app) {
           return util.renderError(err, res);
         } else {
           doc.otherObservers.push(newEmail);
+          doc.save();
           return res.redirect('/monitors/' + id);
         }
 

@@ -46,7 +46,7 @@
         <h2>Other event recipients</h2>
         <% monitor.otherObservers.forEach(function(email){ %>
 
-        <%- email %>
+        <span><%- email.split("@")[0] %>...</span>
 
         <% })} %>
 

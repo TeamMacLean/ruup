@@ -42,6 +42,11 @@
 
         <% } %>
 
+        <form action="/monitors/<%- monitor._id %>/addEmail" method="post">
+            <label for="addEmail">Add email address for notifications</label>
+            <input type="email" id="addEmail" name="addEmail">
+        </form>
+
         <a href="/monitors/<%- monitor._id %>/delete " class="btn btn-danger">Delete</a>
     </div>
 </div>

@@ -1,0 +1,16 @@
+{
+  "name": "ruup",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./server",
+    "development": "nodemon server.js",
+    "production": "pm2 start --name ruup"
+  },
+  "dependencies": {
+    "body-parser": "latest",
+    "express": "latest",
+    "less-middleware": "^2.2.0",
+    "multer": "^1.2.0"
+  }
+}

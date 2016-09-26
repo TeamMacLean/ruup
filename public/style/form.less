@@ -23,11 +23,11 @@ input[type="password"] {
   height: @input-height;
   padding: 6px 10px;
   background-color: #ffffff;
-  //border: 1px solid @grey;
+  border: 1px solid @border-color;
   border-radius: 4px;
   box-shadow: none;
   box-sizing: border-box;
-  vertical-align: middle; //TODO
+  vertical-align: middle;
 
   -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
@@ -42,8 +42,12 @@ input[type="password"] {
   }
 
   &:focus {
-    border: 1px solid @blue;
+    border: 1px solid @primary;
     outline: 0;
+  }
+
+  @media (max-width: @breakpoint) {
+    width: 100%;
   }
 
 }
@@ -59,14 +63,14 @@ input[type="password"] {
   line-height: @input-height;
   text-align: center;
   pointer-events: none;
-  //color: @grey-dark;
+  color: @font-color;
 }
 
 textarea, select {
   height: @input-height;
   padding: 6px 10px;
   background-color: #ffffff;
-  //border: 1px solid @grey;;
+  border: 1px solid @border-color;;
   border-radius: 4px;
   box-shadow: none;
   box-sizing: border-box;
@@ -89,13 +93,13 @@ textarea, select {
   padding: 10px 15px;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
-  //color: @white;
+  color: @white;
   background-color: @font-color;
   border-color: @font-color;
   text-align: center;
   font-size: 2rem;
   a {
-    //color: @white;
+    color: @white;
   }
 
   img {

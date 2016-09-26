@@ -3,7 +3,7 @@ button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"] {
-  background-color: @primary;
+  background-color: @border-color;
   height: @input-height;
   line-height: @input-height;
   outline: 0;
@@ -21,18 +21,23 @@ input[type="button"] {
   -ms-user-select: none;
   user-select: none;
   border-radius: 4px;
-  //border: 1px solid @grey;
+  border:none;
+  //border: 1px solid @primary;
 
   -webkit-transition: background-color ease-in-out .15s, border-color ease-in-out .15s, color ease-in-out .15s;
   -o-transition: background-color ease-in-out .15s, border-color ease-in-out .15s, color ease-in-out .15s;
   transition: background-color ease-in-out .15s, border-color ease-in-out .15s, color ease-in-out .15s;
 
-  &:hover {
+  @media (max-width: @breakpoint) {
+    width: 100% !important;
+  }
+
+  &:hover, &:focus {
     background-color: @white;
-    color: @primary;
+    color: @border-color;
   }
   &:focus {
-    //border: 1px solid @blue;
+    //border: 1px solid @primary;
   }
 
   &.center {

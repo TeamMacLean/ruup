@@ -1,0 +1,30 @@
+<% include ../head.ejs %>
+
+<div class="container">
+
+    <table class="responsive">
+        <thead>
+        <tr>
+            <th>Site</th>
+            <th>URL</th>
+            <th>Uptime</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% monitors.map(function(monitor){ %>
+        <tr>
+            <td><%- monitor.name %></td>
+            <td><%- monitor.url %></td>
+            <% var percent = monitor.getUpPercent() + '%' %>
+            <td><span class="graph" style="width:<%- percent %>"><%- percent %></span></td>
+        </tr>
+        <% }); %>
+        </tbody>
+    </table>
+
+    <a href="/new" class="button icon pull-right">+</a>
+
+
+</div>
+
+<% include ../foot.ejs %>

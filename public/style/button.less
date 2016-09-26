@@ -3,13 +3,11 @@ button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"] {
-  background-color: #FFFFFF;
+  background-color: @primary;
   height: @input-height;
   line-height: @input-height;
   outline: 0;
-
-  color: @font-color;
-
+  color: @white;
   display: inline-block;
   padding: 0 1rem;
   font-size: 1rem;
@@ -29,15 +27,9 @@ input[type="button"] {
   -o-transition: background-color ease-in-out .15s, border-color ease-in-out .15s, color ease-in-out .15s;
   transition: background-color ease-in-out .15s, border-color ease-in-out .15s, color ease-in-out .15s;
 
-  //margin-bottom: 4px;
-
-  //&:focus {
-  //  border: 1px solid @blue;
-  //  outline: 0;
-  //}
-
   &:hover {
-    //background-color: darken(#FFFFFF, 4%);
+    background-color: @white;
+    color: @primary;
   }
   &:focus {
     //border: 1px solid @blue;
@@ -52,9 +44,10 @@ input[type="button"] {
   }
 
   &.icon {
-    padding: 0 4px;
     width: @input-height;
-    font-size: 1.5rem;
+    line-height: 33px;
+    font-size: 2rem;
+    padding: 0;
   }
 
   &.disabled {
@@ -74,18 +67,16 @@ input[type="button"] {
       padding-bottom: 4px;
     }
   }
-  &.small{
+  &.small {
     height: 20px;
     line-height: 20px;
     padding: 0 4px;
+  }
+  &.round {
+    border-radius: 50%;
   }
 }
 
 ::-webkit-file-upload-button {
   .button;
-}
-
-.button.icon.remove-from-cart {
-  font-size: 22px;
-  vertical-align: middle;
 }

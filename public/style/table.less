@@ -36,12 +36,10 @@ table {
     @media (max-width: @breakpoint) {
 
       border: none !important;
-      //
       &, thead, tbody, th, td, tr {
         display: block;
       }
 
-      //
       thead tr {
         position: absolute;
         top: -9999px;
@@ -49,34 +47,27 @@ table {
         display: none;
       }
 
-      //
       td {
-        //border-bottom: none;
         text-align: center;
       }
 
-      //
-      //table .button {
-      //  width: 100%;
-      //}
-      //
       tr {
-        border-radius: 4px;
-        border: 1px solid @border-color;
         margin-bottom: 20px;
+        border: none;
         padding: 8px;
+
+        td {
+          &:first-of-type {
+            border-top-right-radius: 4px;
+            border-top-left-radius: 4px;
+          }
+          &:last-of-type {
+            border-bottom-right-radius: 4px;
+            border-bottom-left-radius: 4px;
+          }
+        }
+
       }
-
-      //
-      //th:first-child, td:first-child {
-      //  padding: 12px 15px;
-      //}
-      //
-      //.button.icon.remove-from-cart {
-      //  padding: 0 40px;
-      //  width: auto;
-      //}
-
     }
   }
 }

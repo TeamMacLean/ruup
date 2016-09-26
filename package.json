@@ -10,7 +10,10 @@
   "dependencies": {
     "body-parser": "latest",
     "express": "latest",
+    "express-session": "^1.14.1",
     "less-middleware": "^2.2.0",
-    "multer": "^1.2.0"
+    "multer": "^1.2.0",
+    "passport": "latest",
+    "passport-github": "latest"
   }
 }

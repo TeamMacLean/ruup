@@ -8,15 +8,18 @@ nav {
   overflow: hidden;
   line-height: @nav-height;
   font-size: 0.8rem;
+  z-index: 999;
 
   .pillow;
+
   a {
-    color: #696995;
+    //color: #696995;
+    color: @font-color;
     text-decoration: none;
     display: block; //TODO
     transition: color 0.2s ease;
 
-    &:hover{
+    &:hover {
       color: @font-color
     }
   }

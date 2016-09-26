@@ -33,39 +33,7 @@ app.get('/auth/github',
     passport.authenticate('github'));
 
 
-routes.route('/auth/github/callback')
-    .post(function (req, res, next) {
-        passport.authenticate('github', (err, user, info) => {
-            if (err) {
-                // LOG.error(err);
-                console.error(err);
-                return next(err);
-            }
-            if (!user) {
-                var message = 'No such user';
-                if (info && info.message) {
-                    message += `, ${info.message}`;
-                }
-                return res.send(message);
-                // return renderError(message, res);
-                //return res.render('error', {error: message});
-            }
-            req.logIn(user, err => {
-                if (err) {
-                    return next(err);
-                }
 
-                req.user.iconURL = gravatar.url(req.user.mail) || config.defaultUserIcon;
-
-                //take them to the page they wanted before signing in :)
-                // if (req.session.returnTo) {
-                //     return res.redirect(req.session.returnTo);
-                // } else {
-                return res.redirect('/');
-                // }
-            });
-        })(req, res, next);
-    });
 // app.get('/auth/github/callback',
 // passport.authenticate('github', {failureRedirect: '/login'}),
 // function (req, res) {

@@ -15,7 +15,7 @@ passport.use(new GitHubStrategy({
         callbackURL: CONFIG.auth.callbackURL
     },
     function (accessToken, refreshToken, profile, cb) {
-        console.log(profile);
+        // console.log(profile);
         return cb(null, profile);
     }
 ));
@@ -48,6 +48,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/', routes);
+
+app.use(function (req, res, next) {
+    console.log('signed in user', req.user);
+    next();
+});
 
 // app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({extended: true}));

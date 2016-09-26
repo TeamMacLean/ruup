@@ -8,6 +8,11 @@ router.route('/')
 router.route('/me')
     .get(Monitors.mine);
 
+router.route('/signout').get((req, res) => {
+    req.logout();
+    res.redirect('/');
+});
+
 router.route('/new')
     .get(Monitors.new)
     .post(Monitors.newPost);

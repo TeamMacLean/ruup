@@ -1,0 +1,30 @@
+@blue: #2397CA;
+@green: #52D5C4;
+
+@pink: #FC69AA;
+@orange: #FC8A68;
+
+.graph {
+  height: 24px;
+  width: 100%;
+  display: block;
+  border-radius: 4px;
+  .gradient(@blue, @green);
+
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+
+  &.red {
+    .gradient(@pink, @orange);
+  }
+
+}
+
+.gradient(@c1 , @c2) {
+  background: @c1;
+  background: -moz-linear-gradient(left, @c1 0%, @c2 100%);
+  background: -webkit-linear-gradient(keft, @c1 0%, @c2 100%);
+  background: linear-gradient(to right, @c1 0%, @c2 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=@c1, endColorstr=@c2, GradientType=1);
+}

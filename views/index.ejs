@@ -1,11 +1,44 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<% include head.ejs %>
+
+<div class="container">
+
+    <table>
+        <thead>
+        <tr>
+            <th>Site</th>
+            <th>URL</th>
+            <th>Uptime</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Google</td>
+            <td>google.com</td>
+            <td><span class="graph" style="width:80%">80%</span></td>
+        </tr>
+        <tr>
+            <td>Facebook</td>
+            <td>facebook.com</td>
+            <td><span class="graph red" style="width:29%">29%</span></td>
+        </tr>
+        <tr>
+            <td>Twitter</td>
+            <td>twitter.com</td>
+            <td><span class="graph" style="width:62%">62%</span></td>
+        </tr>
+        <tr>
+            <td>Twitter</td>
+            <td>twitter.com</td>
+            <td><span class="graph red" style="width:36%">36%</span></td>
+        </tr>
+        <tr>
+            <td>Twitter</td>
+            <td>twitter.com</td>
+            <td><span class="graph red" style="width:60%">60%</span></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<% include foot.ejs %>

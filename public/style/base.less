@@ -36,9 +36,8 @@ body {
   -webkit-font-smoothing: antialiased !important;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
   //background-color: #fff;
-  padding-top: 64px;
-  padding-bottom: 32px;
-
+  padding-top: @nav-height + 20;
+  margin-bottom: 32px;
   min-height: 100%;
 }
 
@@ -47,11 +46,11 @@ body {
 }
 
 ::selection {
-  background: @blue; /* WebKit/Blink Browsers */
+  //background: @blue; /* WebKit/Blink Browsers */
 }
 
 ::-moz-selection {
-  background: @blue; /* Gecko Browsers */
+  //background: @blue; /* Gecko Browsers */
 }
 
 img {
@@ -71,7 +70,7 @@ a {
 }
 
 .red, .danger {
-  color: @red;
+  //color: @red;
 }
 
 .clearfix:before,

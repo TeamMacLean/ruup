@@ -1,68 +1,82 @@
 table {
-  width: 100%;
 
-  &.cart {
-    margin-bottom: 20px;
+  @border-color: #3F4059;
+
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+
+  //border-collapse: collapse;
+  border-spacing: 0;
+
+  border: 1px solid #3F4059;
+  border-radius: 4px;
+
+  thead {
+    margin: 0;
+    padding: 0;
   }
 
   th,
   td {
-    padding: 8px 0;
-    text-align: left;
-    border-bottom: 1px solid @grey;
+    padding: 8px;
+    border: 1px solid @border-color;
   }
 
-  tr {
-    //border-bottom: 1px solid @grey;
+  th {
+    font-weight: 400;
   }
 
-  //th:first-child,
-  //td:first-child {
-  //  padding-left: 0;
-  //}
-  //
-  //th:last-child,
-  //td:last-child {
-  //  padding-right: 0;
-  //}
+  td {
+    color: @white;
+  }
 
-  @media (max-width: @breakpoint) {
+  &.responsive {
 
-    table, thead, tbody, th, td, tr {
-      display: block;
+    @media (max-width: @breakpoint) {
+
+      border: none !important;
+      //
+      &, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      //
+      thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+        display: none;
+      }
+
+      //
+      td {
+        //border-bottom: none;
+        text-align: center;
+      }
+
+      //
+      //table .button {
+      //  width: 100%;
+      //}
+      //
+      tr {
+        border-radius: 4px;
+        border: 1px solid @border-color;
+        margin-bottom: 20px;
+        padding: 8px;
+      }
+
+      //
+      //th:first-child, td:first-child {
+      //  padding: 12px 15px;
+      //}
+      //
+      //.button.icon.remove-from-cart {
+      //  padding: 0 40px;
+      //  width: auto;
+      //}
+
     }
-
-    thead tr {
-      position: absolute;
-      top: -9999px;
-      left: -9999px;
-      display: none;
-    }
-
-    td {
-      border-bottom: none;
-      text-align: center;
-    }
-
-    table .button {
-      width: 100%;
-    }
-
-    tr {
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      margin-bottom: 20px;
-      padding: 8px;
-    }
-
-    th:first-child, td:first-child {
-      padding: 12px 15px;
-    }
-
-    .button.icon.remove-from-cart {
-      padding: 0 40px;
-      width: auto;
-    }
-
   }
 }

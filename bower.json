@@ -1,0 +1,24 @@
+{
+  "name": "ruup",
+  "description": "uptime",
+  "main": "",
+  "authors": [
+    "Martin Page <wookoouk@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "uptime"
+  ],
+  "homepage": "https://github.com/wookoouk/ruup",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize-css": "normalize.css#^4.2.0"
+  }
+}

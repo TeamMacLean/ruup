@@ -29,6 +29,8 @@ Auth.githubCallback = (req, res)=> {
                 return next(err);
             }
 
+            console.log('user here', user);
+
             // req.user.iconURL = gravatar.url(req.user.mail) || config.defaultUserIcon;
 
             //take them to the page they wanted before signing in :)

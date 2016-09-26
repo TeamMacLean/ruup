@@ -1,16 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Monitors = require('./controllers/monitors');
-const Auth = require('./controllers/auth');
 
 router.route('/')
     .get((req, res) => res.render('index'));
-
-//AUTH
-router.route('/auth/github')
-    .get(Auth.github);
-router.route('/auth/github/callback')
-    .post(Auth.githubCallback);
 
 
 router.route('/me')
@@ -41,6 +34,5 @@ router.route('/badge/:site')
             console.log(err)
         })
     });
-
 
 module.exports = router;

@@ -9,7 +9,7 @@ router.route('/')
 router.route('/auth/github')
     .get(Auth.github);
 router.route('/auth/github/callback')
-    .post(Auth.githubCallback);
+    .get(Auth.githubCallback);
 
 router.route('/me')
     .get(Monitors.mine);

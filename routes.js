@@ -7,7 +7,7 @@ router.route('/')
     .get((req, res) => res.render('index'));
 
 router.route('/auth/github')
-    .post(Auth.github);
+    .get(Auth.github);
 router.route('/auth/github/callback')
     .post(Auth.githubCallback);
 

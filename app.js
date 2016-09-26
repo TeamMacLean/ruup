@@ -29,14 +29,14 @@ passport.deserializeUser(function (obj, cb) {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/auth/github',
-    passport.authenticate('github'));
-app.get('/auth/github/callback',
-    passport.authenticate('github', {failureRedirect: '/login'}),
-    function (req, res) {
-        // Successful authentication, redirect home.
-        res.redirect('/');
-    });
+// app.get('/auth/github',
+//     passport.authenticate('github'));
+// app.get('/auth/github/callback',
+//     passport.authenticate('github', {failureRedirect: '/login'}),
+//     function (req, res) {
+//         // Successful authentication, redirect home.
+//         res.redirect('/');
+//     });
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

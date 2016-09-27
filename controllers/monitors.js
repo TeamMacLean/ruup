@@ -44,7 +44,9 @@ Monitors.mine = (req, res)=> {
 
 Monitors.show = (req, res)=> {
     var id = req.params.id;
-    Monitor.get(id).run()
+    Monitor.get(id)
+        .getJoin({responses: true})
+        .run()
         .then((monitor)=> {
             return res.render('monitor/show', {monitor});
         })

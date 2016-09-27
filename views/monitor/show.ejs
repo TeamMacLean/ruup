@@ -9,10 +9,25 @@
     <script src="/components/chart.js/dist/Chart.min.js"></script>
     <script>
 
+        var responses = JSON.parse('<%- JSON.stringify(monitor.responses) %>');
+
+        var labels = []
+        var data = {
+            labels: labels,
+            datasets: [{
+                data: data,
+            }]
+        };
+
+        responses.map(function (r) {
+            data.datasets[0].data.push(r.time)
+            data.labels.push(r.date)
+        });
+
         var ctx = document.getElementById("myChart");
         var myLineChart = new Chart(ctx, {
             type: 'line',
-            data: [],
+            data: data,
             options: {}
         });
     </script>

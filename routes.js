@@ -30,18 +30,18 @@ router.route('/new')
     .post(Monitors.newPost);
 //show
 router.route('/site/:id')
-    .get((req, res)=>Monitors.show);
+    .get(Monitors.show);
 //badge svg
 router.route('/site/:id/badge')
     .get(Monitors.getBadge);
 //edit
 router.route('/site/:id/edit')
     .all(isAuthenticated)
-    .get((req, res)=>Monitors.edit)
+    .get(Monitors.edit)
     .all(isAuthenticated);
 //delete TODO
 router.route('/site/:id/delete')
-    .get((req, res)=>Monitors.delete);
+    .get(Monitors.delete);
 
 //catch all
 router.route('/*')

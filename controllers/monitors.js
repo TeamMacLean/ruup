@@ -71,7 +71,6 @@ Monitors.badge = (req, res)=> {
     Monitor.get(id).run()
         .then((monitor)=> {
             monitor.getBadge().then((svg)=> {
-                console.log('sending badge', svg);
                 return res.type('image/svg+xml').send(svg);
             }).catch(err=> {
                 console.log(err)

@@ -6,7 +6,8 @@ const Monitor = thinky.createModel('Monitor', {
     id: type.string(),
     name: type.string().required(),
     url: type.string().required(),
-    username: type.string().required()
+    username: type.string().required(),
+    upPercent: type.number().default(100)
 });
 
 Monitor.define('getUpPercent', function () {

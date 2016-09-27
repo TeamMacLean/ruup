@@ -22,25 +22,31 @@ router.route(['/signout', '/logout']).get((req, res) => {
     res.redirect('/');
 });
 
+////Monitors
+//new
 router.route('/new')
     .all(isAuthenticated)
     .get(Monitors.new)
     .post(Monitors.newPost);
+//show
+router.route('/site/:id')
+    .get((req, res)=>Monitors.show);
+//badge svg
 router.route('/site/:id/badge')
     .get(Monitors.getBadge);
+//edit
 router.route('/site/:id/edit')
     .all(isAuthenticated)
     .get((req, res)=>Monitors.edit)
     .all(isAuthenticated);
+//delete TODO
 router.route('/site/:id/delete')
     .get((req, res)=>Monitors.delete);
-router.route('/site/:id')
-    .get((req, res)=>Monitors.show);
 
-
+//catch all
 router.route('/*')
     .get((req, res, next)=> {
-        next('404');
+        return next();
     });
 
 

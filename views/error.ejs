@@ -1,4 +1,4 @@
-<% include head %>
+<% include ./head.ejs %>
 <div class="container">
 
     <h1 class="center big">Error</h1>
@@ -7,7 +7,7 @@
     <div class="well code error">
         <span class="center"><%- error %></span>
     </div>
-    <a href="mailto:wookoouk@gmail.com?subject=I found a bug with the RUUP site&body=<%- encodeURI(error) %>"
+    <a href="mailto:wookoouk@gmail.com?subject=I found a bug with RUUP&body=<%- encodeURI(error) %>"
        class="button primary center" target="_blank"><span data-icon="&#xe010;"></span> Report
         this
         bug</a>
@@ -17,4 +17,4 @@
 
 </div>
 
-<% include foot %>
+<% include ./foot.ejs %>

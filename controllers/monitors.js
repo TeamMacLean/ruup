@@ -44,10 +44,8 @@ Monitors.mine = (req, res)=> {
 
 Monitors.show = (req, res)=> {
     var id = req.params.id;
-    console.log('todo, show');
     Monitor.get(id).run()
         .then((monitor)=> {
-            console.log('show: show');
             return res.render('monitor/show', {monitor});
         })
         .catch((err)=> {

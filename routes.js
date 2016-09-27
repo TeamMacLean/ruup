@@ -45,8 +45,8 @@ router.route('/site/:id/delete')
 
 //catch all
 router.route('/*')
-    .get((req, res, next)=> {
-        return next();
+    .get((req, res)=> {
+        return res.render('404');
     });
 
 

@@ -5,10 +5,10 @@ const Auth = require('./controllers/auth');
 
 router.route('/')
     .get((req, res) => {
-        if (req.isAuthenticated()) {
-            res.render('monitor/mine');
+        if (req.user) {
+            return Monitors.mine(req, res)
         } else {
-            res.render('index');
+            return res.render('index');
         }
     });
 

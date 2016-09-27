@@ -13,7 +13,7 @@ Monitor.define('getUpPercent', function () {
     return 100;
 });
 
-Monitor.define('badge', function () {
+Monitor.define('getBadge', function () {
     return badge.generate(this.name, this.getUpPercent())
 });
 

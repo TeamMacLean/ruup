@@ -28,15 +28,14 @@ router.route('/new')
     .post(Monitors.newPost);
 router.route('/site/:id')
     .get((req, res)=>Monitors.show);
+router.route('/site/:id/badge')
+    .get(Monitors.getBadge);
 router.route('/site/:id/edit')
     .all(isAuthenticated)
     .get((req, res)=>Monitors.edit)
     .all(isAuthenticated);
 router.route('/site/:id/delete')
     .get((req, res)=>Monitors.delete);
-
-router.route('/badge/:site')
-    .get(Monitors.getBadge);
 
 
 function isAuthenticated(req, res, next) {

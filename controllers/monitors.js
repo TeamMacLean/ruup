@@ -43,7 +43,11 @@ Monitors.mine = (req, res)=> {
 };
 
 Monitors.show = (req, res)=> {
-
+    var id = req.params.id;
+    Monitor.get(id).run()
+        .then((monitor)=> {
+            return res.render('monitor/show', {monitor});
+        })
 };
 
 

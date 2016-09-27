@@ -27,8 +27,10 @@ table {
 
   td {
     color: @white;
-    width: 1px;
-    white-space: nowrap;
+    &:first-of-type{
+      width: 1px;
+      white-space: nowrap;
+    }
   }
 
   &.responsive {

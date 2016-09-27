@@ -21,16 +21,21 @@ Monitors.newPost = (req, res)=> {
     })
         .save()
         .then(monitor=> {
-            res.redirect('/site/' + monitor.id)
+            return res.redirect('/site/' + monitor.id);
         })
-        .catch(err=>renderError(err, res));
+        .catch(err=> {
+            return renderError(err, res)
+        });
 
 };
 
 Monitors.mine = (req, res)=> {
+
+    var currentUsername = req.user.username;
+
     Monitor
+        .filter({username: currentUsername})
         .run()
-        // .get()
         .then(monitors=> {
             res.render('monitor/mine', {monitors});
         })

@@ -42,7 +42,7 @@ passport.deserializeUser(function (obj, cb) {
 app.use(function (req, res, next) {
     if (req.user != null) {
 
-        console.log('logged in as', req.user);
+        // console.log('logged in as', req.user);
         res.locals.signedInUser = {};
         res.locals.signedInUser.username = req.user.username;
         res.locals.signedInUser.name = req.user.displayName;

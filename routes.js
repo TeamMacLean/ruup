@@ -4,16 +4,18 @@ const Monitors = require('./controllers/monitors');
 const Auth = require('./controllers/auth');
 
 router.route('/')
-    .get((req, res) => res.render('index'));
+    .get((req, res) => {
+        if (req.isAuthenticated()) {
+            res.render('monitor/mine');
+        } else {
+            res.render('index');
+        }
+    });
 
 router.route(['/auth/github', '/signin', '/login'])
     .get(Auth.github);
 router.route('/auth/github/callback')
     .get(Auth.githubCallback);
-
-router.route('/me')
-    .all(isAuthenticated)
-    .get(Monitors.mine);
 
 router.route(['/signout', '/logout']).get((req, res) => {
     req.logout();

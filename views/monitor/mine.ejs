@@ -13,10 +13,12 @@
         <tbody>
         <% monitors.map(function(monitor){ %>
         <tr>
-            <td><%- monitor.name %></td>
-            <td><%- monitor.url %></td>
-            <% var percent = monitor.getUpPercent() + '%' %>
-            <td><span class="graph" style="width:<%- percent %>"><%- percent %></span></td>
+            <a href="/">
+                <td><%- monitor.name %></td>
+                <td><%- monitor.url %></td>
+                <% var percent = monitor.getUpPercent() + '%' %>
+                <td><span class="graph" style="width:<%- percent %>"><%- percent %></span></td>
+            </a>
         </tr>
         <% }); %>
         </tbody>

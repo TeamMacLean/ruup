@@ -26,8 +26,6 @@ router.route('/new')
     .all(isAuthenticated)
     .get(Monitors.new)
     .post(Monitors.newPost);
-router.route('/site/:id')
-    .get((req, res)=>Monitors.show);
 router.route('/site/:id/badge')
     .get(Monitors.getBadge);
 router.route('/site/:id/edit')
@@ -36,6 +34,9 @@ router.route('/site/:id/edit')
     .all(isAuthenticated);
 router.route('/site/:id/delete')
     .get((req, res)=>Monitors.delete);
+router.route('/site/:id')
+    .get((req, res)=>Monitors.show);
+
 
 router.route('/*')
     .get((req, res, next)=> {

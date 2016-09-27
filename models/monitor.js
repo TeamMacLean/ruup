@@ -10,12 +10,8 @@ const Monitor = thinky.createModel('Monitor', {
     upPercent: type.number().default(100)
 });
 
-Monitor.define('getUpPercent', function () {
-    return 100;
-});
-
 Monitor.define('getBadge', function () {
-    return badge.generate(this.name, this.getUpPercent())
+    return badge.generate(this.name, this.upPercent)
 });
 
 module.exports = Monitor;

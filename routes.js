@@ -37,6 +37,11 @@ router.route('/site/:id/edit')
 router.route('/site/:id/delete')
     .get((req, res)=>Monitors.delete);
 
+router.route('/*')
+    .get((req, res, next)=> {
+        next('404');
+    });
+
 
 function isAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {

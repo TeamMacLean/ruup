@@ -33,7 +33,7 @@ router.route('/site/:id')
     .get(Monitors.show);
 //badge svg
 router.route('/site/:id/badge')
-    .get(Monitors.getBadge);
+    .get(Monitors.badge);
 //edit
 router.route('/site/:id/edit')
     .all(isAuthenticated)

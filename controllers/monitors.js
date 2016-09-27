@@ -65,13 +65,22 @@ Monitors.delete = (req, res)=> {
 
 };
 
-Monitors.getBadge = (req, res)=> {
-    var site = req.params.site;
-    badge.generate(site, Math.floor(Math.random() * 100) + 1 + '%').then(svg=> {
-        res.send(svg);
-    }).catch(err=> {
-        console.log(err)
-    })
+Monitors.badge = (req, res)=> {
+    var id = req.params.id;
+
+    Monitor.get(id).run()
+        .then((monitor)=> {
+            monitor.getBadge().then((svg)=> {
+                return res.send(svg);
+            }).catch(err=> {
+                console.log(err)
+            });
+        })
+        .catch((err)=> {
+            console.log(err)
+        })
+
+
 };
 
 module.exports = Monitors;

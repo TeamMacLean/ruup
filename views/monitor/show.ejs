@@ -3,7 +3,17 @@
 <div class="container">
 
     <h1 class="center"><%- monitor.name %></h1>
+
+
     <img src="/site/<%- monitor.id %>/badge">
+    <div>
+        <label for="md-badge">Markdown Badge</label>
+        <input type="text"
+               value="[![RUUP Badge](http://ruup.online/site/<%- monitor.id %>)](http://ruup.online/site/<%- monitor.id %>/badge)"
+               id="md-badge"
+               name="md-badge"
+               readonly>
+    </div>
 
 </div>
 

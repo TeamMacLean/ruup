@@ -27,6 +27,8 @@ table {
 
   td {
     color: @white;
+    width: 1px;
+    white-space: nowrap;
   }
 
   &.responsive {
@@ -55,6 +57,9 @@ table {
         padding: 8px;
 
         td {
+          width: auto;
+          white-space: normal;
+
           &:first-of-type {
             border-top-right-radius: 4px;
             border-top-left-radius: 4px;

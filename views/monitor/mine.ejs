@@ -15,7 +15,7 @@
         <tr>
             <td><a href="/site/<%- monitor.id %>"><%- monitor.name %></a></td>
             <td><%- monitor.url %></td>
-            <% var percent = monitor.getUpPercent() + '%' %>
+            <% var percent = monitor.upPercent() + '%' %>
             <td><span class="graph" style="width:<%- percent %>"><%- percent %></span></td>
         </tr>
         <% }); %>

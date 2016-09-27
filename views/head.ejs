@@ -13,12 +13,16 @@
             <a href="/">TODO</a>
         </div>
 
-        <% if(locals.signedInUser){ %>
-        <img src="<%- locals.signedInUser.icon %>">
-        <% } %>
 
         <div class="user">
-
+            <% if(locals.signedInUser){ %>
+            <a href="/me">
+                <img src="<%- locals.signedInUser.icon %>">
+            </a>
+            <% } else { %>
+            <a href="/signin">Sign in</a>
+            <% } %>
         </div>
+
     </div>
 </nav>

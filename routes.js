@@ -6,7 +6,7 @@ const Auth = require('./controllers/auth');
 router.route('/')
     .get((req, res) => res.render('index'));
 
-router.route('/auth/github')
+router.route(['/auth/github', '/signin', '/login'])
     .get(Auth.github);
 router.route('/auth/github/callback')
     .get(Auth.githubCallback);
@@ -15,7 +15,7 @@ router.route('/me')
     .all(isAuthenticated)
     .get(Monitors.mine);
 
-router.route('/signout').get((req, res) => {
+router.route(['/signout', '/logout']).get((req, res) => {
     req.logout();
     res.redirect('/');
 });

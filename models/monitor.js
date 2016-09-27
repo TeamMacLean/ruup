@@ -26,5 +26,5 @@ Monitor.define('badge', function () {
 });
 
 module.exports = Monitor;
-// const Cart = require('./cart');
-// CartItem.belongsTo(Cart, 'cart', 'id', 'cartID');
+const Response = require('./response');
+Monitor.hasMany(Response, 'responses', 'id', 'monitorID');

@@ -8,6 +8,7 @@ const routes = require('./routes');
 const CONFIG = require('./config.json');
 const GitHubStrategy = require('passport-github').Strategy;
 const passport = require('passport');
+const monitorCron = require('./lib/monitorCron');
 
 
 app.set('views', path.join(__dirname, 'views'));
@@ -53,5 +54,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', routes);
+
+monitorCron.startAll();
 
 module.exports = server;

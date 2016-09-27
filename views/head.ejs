@@ -8,9 +8,17 @@
 
         <div class="links">
             <a href="/me">Monitors</a>
-            <!--<a href="/">Test</a>-->
-            <!--<a href="/">Test</a>-->
-            <!--<a href="/">Test</a>-->
+            <a href="/">TODO</a>
+            <a href="/">TODO</a>
+            <a href="/">TODO</a>
+        </div>
+
+        <% if(locals.signedInUser){ %>
+        <img src="<%- locals.signedInUser.icon %>">
+        <% } %>
+
+        <div class="user">
+
         </div>
     </div>
 </nav>

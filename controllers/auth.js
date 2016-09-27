@@ -27,7 +27,7 @@ Auth.githubCallback = (req, res, next)=> {
                 return next(err);
             }
 
-            console.log('signining as',user);
+            // console.log('signining as',user);
 
             // req.user.iconURL = gravatar.url(req.user.mail) || config.defaultUserIcon;
 

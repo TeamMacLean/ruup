@@ -39,19 +39,19 @@ passport.deserializeUser(function (obj, cb) {
 });
 
 
-app.use('/', routes);
-
 app.use(function (req, res, next) {
     if (req.user != null) {
+
+        console.log('logged in as', req.user);
         res.locals.signedInUser = {};
         res.locals.signedInUser.username = req.user.username;
         res.locals.signedInUser.name = req.user.displayName;
-
         res.locals.signedInUser.mail = req.user.emails ? req.user.emails[0].value : 'UNKNOWN'; //TODO need an email address
         res.locals.signedInUser.icon = req.user.photos ? req.user.photos[0].value : 'UNKNOWN'; //TODO need a DEFAULT photo
     }
     return next();
 });
 
+app.use('/', routes);
 
 module.exports = server;

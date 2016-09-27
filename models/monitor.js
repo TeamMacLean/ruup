@@ -9,7 +9,7 @@ const Monitor = thinky.createModel('Monitor', {
     name: type.string().required(),
     // safeName: type.string().required(),
     url: type.string().required(),
-    userID: type.string().required()
+    username: type.string().required()
 });
 
 // Monitor.pre('save', function (next) {

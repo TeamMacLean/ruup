@@ -9,18 +9,15 @@ Monitors.new = (req, res)=> {
 };
 
 Monitors.newPost = (req, res)=> {
-    console.log(req.body);
-
     const name = req.body.name;
     const url = req.body.url;
-
-    const userID = '';
+    const username = req.user.username;
 
 
     new Monitor({
         name,
         url,
-        userID
+        username
     })
         .save()
         .then(monitor=> {

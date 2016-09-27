@@ -48,6 +48,9 @@ Monitors.show = (req, res)=> {
         .then((monitor)=> {
             return res.render('monitor/show', {monitor});
         })
+        .catch((err)=> {
+            return renderError(err, res);
+        })
 };
 
 

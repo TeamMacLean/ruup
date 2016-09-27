@@ -46,9 +46,11 @@ Monitors.show = (req, res)=> {
     var id = req.params.id;
     Monitor.get(id).run()
         .then((monitor)=> {
+            console.log('show: show');
             return res.render('monitor/show', {monitor});
         })
         .catch((err)=> {
+            console.log('error:', err);
             return renderError(err, res);
         })
 };

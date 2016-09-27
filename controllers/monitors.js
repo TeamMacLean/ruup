@@ -72,7 +72,7 @@ Monitors.badge = (req, res)=> {
         .then((monitor)=> {
             monitor.getBadge().then((svg)=> {
                 console.log('sending badge', svg);
-                return res.type('image/svg+xml svg').send(svg);
+                return res.type('image/svg+xml').send(svg);
             }).catch(err=> {
                 console.log(err)
             });

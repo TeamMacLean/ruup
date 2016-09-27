@@ -7,6 +7,7 @@ const Monitor = thinky.createModel('Monitor', {
     name: type.string().required(),
     url: type.string().required(),
     username: type.string().required(),
+    isUp: type.boolean().default(true),
     upPercent: type.number().default(100)
 });
 

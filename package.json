@@ -19,6 +19,7 @@
     "passport": "latest",
     "passport-github": "latest",
     "request": "^2.75.0",
-    "thinky": "^2.3.6"
+    "thinky": "^2.3.6",
+    "moment": "latest"
   }
 }

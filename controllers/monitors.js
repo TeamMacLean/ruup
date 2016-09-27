@@ -2,6 +2,7 @@ var Monitors = {};
 
 const Monitor = require('../models/monitor');
 const renderError = require('../lib/renderError');
+const badge = require('../lib/badge');
 
 Monitors.new = (req, res)=> {
     return res.render('monitor/edit')
@@ -50,6 +51,15 @@ Monitors.edit = (req, res)=> {
 
 Monitors.delete = (req, res)=> {
 
+};
+
+Monitors.getBadge = (req, res)=> {
+    var site = req.params.site;
+    badge.generate(site, Math.floor(Math.random() * 100) + 1 + '%').then(svg=> {
+        res.send(svg);
+    }).catch(err=> {
+        console.log(err)
+    })
 };
 
 module.exports = Monitors;

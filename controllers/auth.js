@@ -4,7 +4,7 @@ var passport = require('passport');
 
 Auth.github = (req, res, next)=> {
     passport.authenticate('github')(req, res, next);
-}
+};
 
 Auth.githubCallback = (req, res, next)=> {
     passport.authenticate('github', (err, user, info) => {

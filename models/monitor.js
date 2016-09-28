@@ -11,6 +11,7 @@ const Monitor = thinky.createModel('Monitor', {
     username: type.string().required(),
     up: type.boolean().default(true),
     upPercent: type.number().default(100),
+    avgResponseTime: type.number().default(null),
     emailSent: type.boolean().default(false)
 });
 
@@ -21,27 +22,7 @@ Monitor.define('getStatusBadge', function () {
     return badge.status(this.name, this.up);
 });
 Monitor.define('getAvgResponseBadge', function () { //TODO
-
-    return new Promise((good, bad)=> {
-        Response.filter({monitorID: this.id, up: this.up}).run()
-            .then((responses)=> {
-
-                var respt = 0;
-
-                responses.map((resp)=> {
-                    respt += resp.time;
-                });
-
-                respt = respt / responses.length;
-
-                badge.averageResponseTime(this.name, respt).then((svg)=> {
-                    return good(svg);
-                }).catch((err)=> {
-                    return bad(err);
-                })
-
-            });
-    })
+    return badge.averageResponseTime(this.name, this.avgResponseTime);
 });
 
 module.exports = Monitor;

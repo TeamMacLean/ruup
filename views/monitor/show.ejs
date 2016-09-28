@@ -4,9 +4,7 @@
 
     <h1 class="center"><%- monitor.name %></h1>
 
-    <div class="graph">
-        <canvas id="myChart" width="100%" height="100%"></canvas>
-    </div>
+    <div class="graph" id="graph"></div>
 
     <script src="/components/chartist/dist/chartist.min.js"></script>
     <link href="/components/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -22,7 +20,7 @@
             labels.push(r.date)
         });
 
-        new Chartist.Line('#myChart', {
+        new Chartist.Line('#graph', {
             labels: labels,
             series: [
                 series

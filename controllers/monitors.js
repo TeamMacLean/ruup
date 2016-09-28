@@ -62,6 +62,11 @@ Monitors.show = (req, res)=> {
         .run()
         .then((monitor)=> {
 
+            //SORT BY DATE
+            monitor.responses = monitor.responses.sort(function (a, b) {
+                return new Date(b.date) - new Date(a.date);
+            });
+
             var graph = {
                 labels: [],
                 data: []

@@ -16,12 +16,7 @@ Monitors.newPost = (req, res)=> {
     const username = req.user.username;
     const email = req.user.emails[0].value;
 
-
-    //add 'http://' if missing
-    var prefix = 'http://';
-    if (url.substr(0, prefix.length) !== prefix) {
-        url = prefix + url;
-    }
+    url = subject.replace(/.*?:\/\//g, "http://");
 
 
     new Monitor({

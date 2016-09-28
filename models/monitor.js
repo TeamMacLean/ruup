@@ -20,7 +20,7 @@ Monitor.define('getUpPercentBadge', function () {
 Monitor.define('getAvgResponseBadge', function () { //TODO
 
     return new Promise((good, bad)=> {
-        Response.filter({up: true}).run()
+        Response.filter({monitorID: this.id, up: true}).run()
             .then((responses)=> {
 
                 var respt = 0;

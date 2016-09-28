@@ -10,18 +10,20 @@ Monitors.new = (req, res)=> {
     return res.render('monitor/edit')
 };
 
+function addhttp(url) {
+    if (!/^(?:f|ht)tps?\:\/\//.test(url)) {
+        url = "http://" + url;
+    }
+    return url;
+}
+
 Monitors.newPost = (req, res)=> {
     const name = req.body.name;
     var url = req.body.url;
     const username = req.user.username;
     const email = req.user.emails[0].value;
 
-    if (url.indexOf('//') > -1) {
-        url = url.replace(/.*?:\/\//g, "http://");
-    } else {
-        url = 'http://' + url;
-    }
-
+    url = addhttp(url);
 
     new Monitor({
         name,

@@ -115,4 +115,20 @@ Monitors.averageResponseBadge = (req, res)=> {
         })
 };
 
+Monitors.statusBadge = (req, res)=> {
+    var id = req.params.id;
+
+    Monitor.get(id).run()
+        .then((monitor)=> {
+            monitor.getStatusBadge().then((svg)=> {
+                return res.type('image/svg+xml').send(svg);
+            }).catch(err=> {
+                console.log(err)
+            });
+        })
+        .catch((err)=> {
+            console.log(err)
+        })
+};
+
 module.exports = Monitors;

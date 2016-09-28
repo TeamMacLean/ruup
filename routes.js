@@ -34,9 +34,12 @@ router.route('/site/:id')
 //badge up percent svg
 router.route('/site/:id/badge/uppercent')
     .get(Monitors.upPercentBadge);
-//badge svg
+//badge avg response
 router.route('/site/:id/badge/avgresponse')
     .get(Monitors.averageResponseBadge);
+//badge status (up/down)
+router.route('/site/:id/badge/status')
+    .get(Monitors.statusBadge);
 //edit
 router.route('/site/:id/edit')
     .all(isAuthenticated)

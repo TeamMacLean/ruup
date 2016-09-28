@@ -13,8 +13,8 @@ const Monitor = thinky.createModel('Monitor', {
     emailSent: type.boolean().default(false)
 });
 
-Monitor.define('getBadge', function () {
-    return badge.generate(this.name, this.upPercent)
+Monitor.define('getgetUpPercentBadgeUpPercentBadge', function () {
+    return badge.upPercent(this.name, this.upPercent);
 });
 
 module.exports = Monitor;

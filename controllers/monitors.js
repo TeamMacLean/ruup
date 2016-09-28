@@ -84,12 +84,12 @@ Monitors.delete = (req, res)=> {
 
 };
 
-Monitors.badge = (req, res)=> {
+Monitors.upPercentBadge = (req, res)=> {
     var id = req.params.id;
 
     Monitor.get(id).run()
         .then((monitor)=> {
-            monitor.getBadge().then((svg)=> {
+            monitor.getUpPercentBadge().then((svg)=> {
                 return res.type('image/svg+xml').send(svg);
             }).catch(err=> {
                 console.log(err)

@@ -5,7 +5,7 @@ const r = thinky.r;
 const Response = thinky.createModel('Response', {
     id: type.string(),
     date: type.date().default(r.now()),
-    time: type.number().required(),
+    time: type.number().required(), //Milliseconds, ms
     monitorID: type.string().required(),
     statusCode: type.number().required(),
     up: type.boolean().required(),

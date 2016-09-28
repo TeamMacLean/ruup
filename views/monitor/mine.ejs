@@ -20,9 +20,9 @@
             </td>
             <% var percent = monitor.upPercent + '%' %>
             <td>
-                <span class="graph <% if(!monitor.up){ %>danger<% } %>"
+                <span class="bar <% if(!monitor.up){ %>danger<% } %>"
                       style="width:<%- percent %>"></span>
-                <span class="graph-value"><%- percent %></span>
+                <span class="bar-value"><%- percent %></span>
             </td>
         </tr>
         <% }); %>

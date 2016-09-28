@@ -1,32 +1,12 @@
-@blue: #2397CA;
-@green: #52D5C4;
-
-@pink: #FC69AA;
-@orange: #FC8A68;
+//@blue: #2397CA;
+//@green: #52D5C4;
+//
+//@pink: #FC69AA;
+//@orange: #FC8A68;
 
 .graph {
-  height: 24px;
+  height: 200px;
   width: 100%;
-  display: block;
-  border-radius: 4px;
-  float: left;
-  .gradient(@blue, @green);
-
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: 600;
-
-  &.red, &.danger {
-    .gradient(@pink, @orange);
-  }
-
-}
-
-.graph-value {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  left: 0;
 }
 
 .gradient(@c1 , @c2) {

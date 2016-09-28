@@ -16,7 +16,7 @@ Monitors.newPost = (req, res)=> {
     const username = req.user.username;
     const email = req.user.emails[0].value;
 
-    url = subject.replace(/.*?:\/\//g, "http://");
+    url = url.replace(/.*?:\/\//g, "http://");
 
 
     new Monitor({

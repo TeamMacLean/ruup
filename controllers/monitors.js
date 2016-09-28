@@ -71,7 +71,7 @@ Monitors.show = (req, res)=> {
                 graph.data.push(r.time);
                 graph.labels.push(
                     {
-                        meta: moment(r.date).fromNow(),
+                        meta: moment(r.date).fromNow(), //19 minutes ago (exmaple)
                         value: r.time //ms
                     }
                 )

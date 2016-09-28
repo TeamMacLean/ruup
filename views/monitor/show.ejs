@@ -24,17 +24,23 @@
             low: 0,
             showArea: true,
             fullWidth: true,
+            showLabel: false,
             axisX: {
                 showGrid: false,
+                showLabel: false,
                 offset: 0
             },
             axisY: {
                 showGrid: false,
+                showLabel: false,
                 offset: 0
             },
             plugins: [
                 Chartist.plugins.tooltip({
-                    appendToBody: true
+                    appendToBody: true,
+                    transformTooltipTextFnc: function (text) {
+                        return text + 'ms';
+                    }
                 })
             ]
         });

@@ -7,7 +7,9 @@
     <% if(graph && graph.data.length > 1){ %>
     <div class="graph" id="graph"></div>
     <script src="/components/chartist/dist/chartist.min.js"></script>
+    <script src="/components/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.js"></script>
     <link href="/components/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link href="/components/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.css" rel="stylesheet">
     <script>
 
         var graphData = JSON.parse('<%- JSON.stringify(graph) %>');
@@ -32,7 +34,10 @@
                 showGrid: false,
                 showLabel: false,
                 offset: 0
-            }
+            },
+            plugins: [
+                Chartist.plugins.tooltip()
+            ]
         });
 
 

@@ -61,8 +61,6 @@ Monitors.show = (req, res)=> {
         .run()
         .then((monitor)=> {
 
-            //TODO format it
-
             var graph = {
                 labels: [],
                 data: []
@@ -70,7 +68,12 @@ Monitors.show = (req, res)=> {
 
             monitor.responses.map(function (r) {
                 graph.data.push(r.time);
-                graph.labels.push(moment(r.date).fromNow())
+                graph.labels.push(
+                    {
+                        meta: moment(r.date).fromNow(),
+                        value: r.time //ms
+                    }
+                )
             });
 
             return res.render('monitor/show', {monitor, graph});

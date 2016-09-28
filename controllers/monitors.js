@@ -2,6 +2,7 @@ var Monitors = {};
 
 const Monitor = require('../models/monitor');
 const renderError = require('../lib/renderError');
+const monitorCron = require('../lib/monitorCron');
 // const badge = require('../lib/badge');
 const moment = require('moment');
 
@@ -25,6 +26,7 @@ Monitors.newPost = (req, res)=> {
     })
         .save()
         .then(monitor=> {
+            monitorCron.add(monitor);
             return res.redirect('/site/' + monitor.id);
         })
         .catch(err=> {

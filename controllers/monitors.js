@@ -12,10 +12,16 @@ Monitors.new = (req, res)=> {
 
 Monitors.newPost = (req, res)=> {
     const name = req.body.name;
-    const url = req.body.url;
+    var url = req.body.url;
     const username = req.user.username;
-
     const email = req.user.emails[0].value;
+
+
+    //add 'http://' if missing
+    var prefix = 'http://';
+    if (url.substr(0, prefix.length) !== prefix) {
+        url = prefix + url;
+    }
 
 
     new Monitor({

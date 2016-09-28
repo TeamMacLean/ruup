@@ -1,19 +1,17 @@
-var mongoose = require('mongoose');
+const thinky = require('../lib/thinky');
+const type = thinky.type;
+const r = thinky.r;
 
-var responseSchema = mongoose.Schema({
-    monitor: {type: String, required: true},
-    code: {type: String, required: true},
-    time: {type: Number, required: true},
-    createdAt: Date
-
+const Response = thinky.createModel('Response', {
+    id: type.string(),
+    date: type.date().default(r.now()),
+    time: type.number().required(),
+    monitorID: type.string().required(),
+    statusCode: type.number().required(),
+    up: type.boolean().required(),
+    error: type.string()
 });
-
-responseSchema.pre('save', function (next) {
-    this.createdAt = Date.now();
-    next();
-});
-
-var Response = mongoose.model('Response', responseSchema);
 
 module.exports = Response;
-
+const Monitor = require('./monitor');
+Response.belongsTo(Monitor, 'monitor', 'id', 'monitorID');

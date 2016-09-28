@@ -1,0 +1,55 @@
+nav {
+  background-color: #3D3C5B;
+  height: @nav-height;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  line-height: @nav-height;
+  font-size: 0.8rem;
+  z-index: 999;
+
+  .pillow;
+
+  a {
+    //color: #696995;
+    color: @font-color;
+    text-decoration: none;
+    display: block; //TODO
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: @link-color
+    }
+  }
+
+  .brand {
+    img {
+      height: 30px;
+      width: auto;
+      margin-bottom: 2px;
+    }
+
+    float: left;
+    margin-right: 20px;
+  }
+
+  .links {
+    float: left;
+    a {
+      float: left;
+      margin-left: 20px;
+      text-transform: uppercase;
+    }
+  }
+
+  .user {
+    float: right;
+    img {
+      height: @nav-height - 2;
+      margin-top: 1px;
+      margin-bottom: 1px;
+    }
+  }
+}

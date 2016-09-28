@@ -1,162 +1,103 @@
-var Monitor = require('../models/monitor');
-var util = require('../lib/util');
+var Monitors = {};
 
-module.exports.controller = function (app) {
+const Monitor = require('../models/monitor');
+const renderError = require('../lib/renderError');
+// const badge = require('../lib/badge');
+const moment = require('moment');
 
-  app.get('/monitors', function (req, res) {
-    Monitor.find({}, function (err, monitors) {
-      if (err) {
-        return util.renderError(err, res);
-      }
-      return res.render('monitors/index', {monitors: monitors});
-    });
-  });
+Monitors.new = (req, res)=> {
+    return res.render('monitor/edit')
+};
 
-  app.route('/monitors/add')
-    .get(isAuthenticated, function (req, res) {
-      return res.render('monitors/add');
+Monitors.newPost = (req, res)=> {
+    const name = req.body.name;
+    const url = req.body.url;
+    const username = req.user.username;
+
+    const email = req.user.emails[0].value;
+
+
+    new Monitor({
+        name,
+        url,
+        username,
+        email
     })
-    .post(isAuthenticated, function (req, res) {
-      var nameInput = req.body.nameInput;
-      var urlInput = req.body.urlInput;
-      var rateInput = req.body.rateInput;
-
-      var currentUser = req.user;
-
-
-      if (nameInput && urlInput && rateInput && currentUser) {
-        var userID = currentUser._id;
-        var monitor = new Monitor({
-          name: nameInput,
-          url: urlInput,
-          rate: rateInput,
-          owner: userID
+        .save()
+        .then(monitor=> {
+            return res.redirect('/site/' + monitor.id);
+        })
+        .catch(err=> {
+            return renderError(err, res)
         });
-        monitor.save(function (err, gen) {
-          if (err) {
-            return util.renderError(err, res);
-          } else {
-            gen.start();
-            return res.redirect('/monitors');
-          }
-        });
-      } else {
-        return util.renderError('bad input', res);
-      }
-    });
-
-  app.get('/monitors/:id', function (req, res) {
-    Monitor.findOne({_id: req.param('id')}, function (err, monitor) {
-      if (err) {
-        return util.renderError(err, res);
-      }
-
-      monitor.getEvents(function (err, events) {
-
-        if (err) {
-          return util.renderError(err, res);
-        }
-
-        return res.render('monitors/show', {monitor: monitor, events: events});
-      });
-
-
-    });
-  });
-
-  app.get('/monitors/:id/status/:count', function (req, res) {
-    Monitor.findOne({_id: req.param('id')}, function (err, monitor) {
-      if (err) {
-        return util.renderError(err, res);
-      }
-      var count = req.param('count');
-      monitor.getResponses(count, function (err, responses) {
-        if (err) {
-          return util.renderError(err, res);
-        }
-        return res.send(responses.reverse());
-      });
-
-    });
-  });
-
-  app.route('/monitors/:id/delete')
-    .get([isAuthenticated, isOwner], function (req, res) {
-      var id = req.param('id');
-      Monitor.findOne({_id: id}).exec(function (err, doc) {
-        if (err) {
-          return util.renderError(err, res);
-        }
-        return res.render('monitors/confirmDelete', {monitor: doc});
-      });
-    })
-    .post([isAuthenticated, isOwner], function (req, res) {
-      var id = req.param('id');
-      Monitor.findOne({_id: id}).exec(function (err, doc) {
-        if (err) {
-          return util.renderError(err, res);
-        }
-
-        doc.removeEvents(function (err) {
-          if (err) {
-            return util.renderError(err, res);
-          }
-
-          doc.removeResponses(function (err) {
-            if (err) {
-              return util.renderError(err, res);
-            }
-            doc.remove(function (err) {
-              if (err) {
-                return util.renderError(err, res);
-              }
-              return res.redirect('/monitors');
-            })
-          })
-        });
-      });
-    });
-
-  app.route('/monitors/:id/addEmail')
-    .post([isAuthenticated, isOwner], function (req, res) {
-      var id = req.param('id');
-      var newEmail = req.body.addEmail;
-
-      Monitor.findOne({_id: id}).exec(function (err, doc) {
-        if (err) {
-          return util.renderError(err, res);
-        } else {
-          doc.otherObservers.push(newEmail);
-          doc.save();
-          return res.redirect('/monitors/' + id);
-        }
-
-      })
-    });
-
-  function isAuthenticated(req, res, next) {
-    if (req.isUnauthenticated()) {
-      return res.redirect('/signin');
-    }
-    return next();
-  }
-
-  function isOwner(req, res, next) {
-    var id = req.param('id');
-    if (id) {
-      Monitor.findOne({_id: id}, function (err, doc) {
-        if (err) {
-          return util.renderError(err, res);
-        }
-        if (req.isAuthenticated() && req.user._id == doc.owner) {
-          return next();
-        } else {
-          return util.renderError('you do not own that monitor', res);
-        }
-      });
-    } else {
-      return res.redirect('/monitors');
-    }
-  }
 
 };
+
+Monitors.mine = (req, res)=> {
+
+    var currentUsername = req.user.username;
+
+    Monitor
+        .filter({username: currentUsername})
+        .run()
+        .then(monitors=> {
+            res.render('monitor/mine', {monitors});
+        })
+        .catch(err => renderError(err, res));
+};
+
+Monitors.show = (req, res)=> {
+    var id = req.params.id;
+    Monitor.get(id)
+        .getJoin({responses: true})
+        .run()
+        .then((monitor)=> {
+
+            //TODO format it
+
+            var graph = {
+                labels: [],
+                data: []
+            };
+
+            monitor.responses.map(function (r) {
+                graph.data.push(r.time);
+                graph.labels.push(moment(r.date).fromNow())
+            });
+
+            return res.render('monitor/show', {monitor, graph});
+        })
+        .catch((err)=> {
+            console.log('error:', err);
+            return renderError(err, res);
+        })
+};
+
+
+Monitors.edit = (req, res)=> {
+
+};
+
+Monitors.delete = (req, res)=> {
+
+};
+
+Monitors.badge = (req, res)=> {
+    var id = req.params.id;
+
+    Monitor.get(id).run()
+        .then((monitor)=> {
+            monitor.getBadge().then((svg)=> {
+                return res.type('image/svg+xml').send(svg);
+            }).catch(err=> {
+                console.log(err)
+            });
+        })
+        .catch((err)=> {
+            console.log(err)
+        })
+
+
+};
+
+module.exports = Monitors;

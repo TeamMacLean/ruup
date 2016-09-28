@@ -1,67 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="/favicon.ico?v=2">
-    
-    <meta name="theme-color" content="#1ABC9C">
-    <link rel="icon" sizes="256x256" href="/public/img/logo.png">
+<% include ./head-no-nav.ejs %>
 
-    <title>Are you up?</title>
-
-    <link href="/components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/components/chartist/dist/chartist.min.css" rel="stylesheet">
-    <link href="/css/main.css" rel="stylesheet">
-
-    <!--[if lt IE 9]>
-    <script src="/components/html5shiv/dist/html5shiv.min.js"></script>
-    <script src="/components/respond/dest/respond.min.js"></script>
-    <![endif]-->
-</head>
-
-<body>
-
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav>
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">
-                <img alt="Are you up?" src="/img/logo-30x30.png">
+        <a href="/" class="brand">
+            <img src="/logo.svg">
+        </a>
+
+        <!--<div class="links">-->
+        <!--<a href="/me">Monitors</a>-->
+        <!--<a href="/"></a>-->
+        <!--<a href="/"></a>-->
+        <!--<a href="/"></a>-->
+        <!--</div>-->
+
+
+        <div class="user">
+            <% if(locals.signedInUser){ %>
+            <a href="#TODO">
+                <img src="<%- locals.signedInUser.icon %>">
             </a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="/monitors">Monitors</a></li>
-            </ul>
-            <% if(locals.email){ %>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-expanded="false"><%- locals.email %>
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="/account">Account</a></li>
-                        <li class="divider"></li>
-                        <li><a href="/signout">Sign out</a></li>
-                    </ul>
-                </li>
-            </ul>
             <% } else { %>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/signin">Sign in</a></li>
-            </ul>
+            <a href="/signin">Sign in</a>
             <% } %>
         </div>
-        <!--/.nav-collapse -->
+
     </div>
 </nav>

@@ -1,106 +1,61 @@
-var fs = require('fs');
-var express = require('express');
-var session = require('express-session');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var Monitor = require('./models/monitor');
-var passport = require('passport');
-var util = require('./lib/util');
-var app = express();
+const path = require('path');
+const multer = require('multer');
+const bodyParser = require('body-parser');
+const express = require('express');
+const app = express();
+const server = require('http').createServer(app);
+const routes = require('./routes');
+const CONFIG = require('./config.json');
+const GitHubStrategy = require('passport-github').Strategy;
+const passport = require('passport');
+const monitorCron = require('./lib/monitorCron');
+var compression = require('compression')
 
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.use(require('less-middleware')(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(require('body-parser').urlencoded({extended: true}));
+app.use(require('express-session')({secret: 'keyboard cat', resave: true, saveUninitialized: true}));
 
-var routes = function () {
-    app.use(express.static(__dirname + '/public'));
-    fs.readdirSync('./controllers').forEach(function (file) {
-        if (file.substr(-3) == '.js') {
-            route = require('./controllers/' + file);
-            route.controller(app);
-        }
-    });
-};
-
-var genSecret = function () {
-    var secret = "", rand;
-    for (var i = 0; i < 36; i++) {
-        rand = Math.floor(Math.random() * 15);
-        if (rand < 10) {
-            // for 0-9
-            secret += String.fromCharCode(48 + rand);
-        } else {
-            // for a-f
-            secret += String.fromCharCode(97 + (rand - 10));
-        }
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new GitHubStrategy({
+        clientID: CONFIG.auth.clientID,
+        clientSecret: CONFIG.auth.clientSecret,
+        callbackURL: CONFIG.auth.callbackURL
+    },
+    function (accessToken, refreshToken, profile, cb) {
+        // console.log(profile);
+        return cb(null, profile);
     }
-    return secret;
-};
-
-var middleware = function () {
-    app.use(session({
-        secret: genSecret(),
-        cookie: {
-            expires: false
-        },
-        //avoid nagging (these are the new values of express-session)
-        resave: false,
-        saveUninitialized: false
-    }));
-
-    app.use(passport.initialize());
-    app.use(passport.session());
-
-    app.use(function (req, res, next) {
-        if (req.user != null && req.user.email != null) {
-            res.locals.email = req.user.email;
-        }
-        next(null, req, res);
-    });
-};
-
-//DB
-var mongo = function () {
-    var db = mongoose.connection;
-    var dbURI = 'mongodb://localhost/ruup';
-    db.on('error', function (error) {
-        util.logError('mongoose error', error);
-        mongoose.disconnect();
-    });
-    db.on('disconnected', function () {
-        mongoose.connect(dbURI, {server: {auto_reconnect: true}});
-    });
-    mongoose.connect(dbURI, {server: {auto_reconnect: true}});
-};
-
-var views = function () {
-    app.set('view engine', 'ejs');
-    app.set('views', __dirname + '/views');
-};
-
-var start = function () {
-    var PORT = process.env.PORT || 8080;
-    app.listen(PORT);
-    util.logInfo('started server on port', PORT);
-};
-
-var initMonitors = function () {
-    Monitor.find({}, function (err, monitors) {
-        if (err) {
-            console.log(err);
-        }
-        monitors.forEach(function (monitor) {
-            //monitor.curl(); //test use only
-            monitor.start();
-        });
-    })
-};
-
-middleware();
-mongo();
-routes();
-views();
-start();
-initMonitors();
+));
+passport.serializeUser(function (user, cb) {
+    cb(null, user);
+});
+passport.deserializeUser(function (obj, cb) {
+    cb(null, obj);
+});
 
 
-module.exports = app;
+app.use(function (req, res, next) {
+    if (req.user != null) {
+
+        // console.log('logged in as', req.user);
+        res.locals.signedInUser = {};
+        res.locals.signedInUser.username = req.user.username;
+        res.locals.signedInUser.name = req.user.displayName;
+        res.locals.signedInUser.mail = req.user.emails ? req.user.emails[0].value : 'UNKNOWN'; //TODO need an email address
+        res.locals.signedInUser.icon = req.user.photos ? req.user.photos[0].value : 'UNKNOWN'; //TODO need a DEFAULT photo
+    }
+    return next();
+});
+
+app.use('/', routes);
+
+monitorCron.startAll();
+
+module.exports = server;

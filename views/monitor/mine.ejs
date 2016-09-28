@@ -1,0 +1,37 @@
+<% include ../head.ejs %>
+
+<div class="container">
+
+    <table class="responsive">
+        <thead>
+        <tr>
+            <th>Site</th>
+            <th>Uptime</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% monitors.map(function(monitor){ %>
+        <tr>
+            <td><a href="/site/<%- monitor.id %>"><%- monitor.name %></a>
+                <% if(!monitor.up){ %>
+                <span class="badge danger">down</span>
+                <% } %>
+
+            </td>
+            <% var percent = monitor.upPercent + '%' %>
+            <td>
+                <span class="bar <% if(!monitor.up){ %>danger<% } %>"
+                      style="width:<%- percent %>"></span>
+                <span class="bar-value"><%- percent %></span>
+            </td>
+        </tr>
+        <% }); %>
+        </tbody>
+    </table>
+
+    <a href="/new" class="button icon pull-right">+</a>
+
+
+</div>
+
+<% include ../foot.ejs %>

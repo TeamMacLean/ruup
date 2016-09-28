@@ -1,21 +1,20 @@
-<% include head %>
+<% include ./head.ejs %>
+<div class="container">
 
+    <h1 class="center big">Error</h1>
 
-<div class="block blue">
-    <div class="container">
-        <div class="row centered">
-            <div class="col-lg-12">
-                <img class="img-responsive center-block" src="/img/icons/packman.png">
-
-                <h1>Something went wrong <b>:(</b></h1>
-
-                <% if (typeof message !== 'undefined') { %>
-                <h2><b>"<%- message %>"</b></h2>
-                <% } %>
-
-            </div>
-        </div>
+    <% if(typeof error != 'undefined'){ %>
+    <div class="well code error">
+        <span class="center"><%- error %></span>
     </div>
+    <a href="mailto:wookoouk@gmail.com?subject=I found a bug with RUUP&body=<%- encodeURI(error) %>"
+       class="button primary center" target="_blank"><span data-icon="&#xe010;"></span> Report
+        this
+        bug</a>
+    <% } else { %>
+    <p class="center">Something happened... Something bad...</p>
+    <% } %>
+
 </div>
 
-<% include foot %>
+<% include ./foot.ejs %>

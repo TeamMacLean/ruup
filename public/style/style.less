@@ -1,0 +1,36 @@
+@import "../components/normalize-css/normalize.css";
+
+@background: #2B2B42;
+@primary: #9E9EDA;
+@primary-dark: darken(@primary, 15%);
+@secondary: #3F4059;
+
+@font-color: @primary;
+
+@white: #E8E8EC;
+@link-color: #7379BA;
+@border-color: @secondary;
+
+@nav-height: 40px;
+@container-width: 980px;
+@breakpoint: 750px;
+@input-height: 38px;
+
+@base-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+
+.pillow {
+  -webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+@import "base";
+@import "grid";
+@import "type";
+@import "form";
+@import "nav";
+@import "button";
+@import "table";
+
+@import "bar";
+@import "graph";

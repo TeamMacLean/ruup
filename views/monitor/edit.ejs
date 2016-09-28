@@ -1,0 +1,21 @@
+<% include ../head.ejs %>
+
+<div class="container">
+
+    <form method="post" action="/new">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text">
+        </div>
+        <div class="form-group">
+            <label for="url">Address to test</label>
+            <input id="url" name="url" type="text">
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Add">
+        </div>
+    </form>
+
+</div>
+
+<% include ../foot.ejs %>

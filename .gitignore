@@ -1,4 +1,5 @@
 .idea
 node_modules
 public/components
+public/style/style.min.css
 config.json

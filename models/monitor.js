@@ -2,6 +2,7 @@ const thinky = require('../lib/thinky');
 const type = thinky.type;
 const badge = require('../lib/badge');
 
+
 const Monitor = thinky.createModel('Monitor', {
     id: type.string(),
     name: type.string().required(),
@@ -15,6 +16,29 @@ const Monitor = thinky.createModel('Monitor', {
 
 Monitor.define('getUpPercentBadge', function () {
     return badge.upPercent(this.name, this.upPercent);
+});
+Monitor.define('getAvgResponseBadge', function () { //TODO
+
+    return new Promise((good, bad)=> {
+        Response.filter({up: true}).run()
+            .then((responses)=> {
+
+                var respt = 0;
+
+                responses.map((resp)=> {
+                    respt += resp.time;
+                });
+
+                respt = respt / responses.length;
+
+                badge.averageResponseTime(this.name, respt).then((svg)=> {
+                    return good(svg);
+                }).catch((err)=> {
+                    return bad(err);
+                })
+
+            });
+    })
 });
 
 module.exports = Monitor;

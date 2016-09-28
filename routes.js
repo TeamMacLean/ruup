@@ -31,9 +31,12 @@ router.route('/new')
 //show
 router.route('/site/:id')
     .get(Monitors.show);
-//badge svg
+//badge up percent svg
 router.route('/site/:id/badge/uppercent')
     .get(Monitors.upPercentBadge);
+//badge svg
+router.route('/site/:id/badge/avgresponse')
+    .get(Monitors.averageResponseBadge);
 //edit
 router.route('/site/:id/edit')
     .all(isAuthenticated)

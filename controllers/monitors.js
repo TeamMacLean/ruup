@@ -98,8 +98,21 @@ Monitors.upPercentBadge = (req, res)=> {
         .catch((err)=> {
             console.log(err)
         })
+};
+Monitors.averageResponseBadge = (req, res)=> {
+    var id = req.params.id;
 
-
+    Monitor.get(id).run()
+        .then((monitor)=> {
+            monitor.getAvgResponseBadge().then((svg)=> {
+                return res.type('image/svg+xml').send(svg);
+            }).catch(err=> {
+                console.log(err)
+            });
+        })
+        .catch((err)=> {
+            console.log(err)
+        })
 };
 
 module.exports = Monitors;

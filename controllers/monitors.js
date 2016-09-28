@@ -2,7 +2,8 @@ var Monitors = {};
 
 const Monitor = require('../models/monitor');
 const renderError = require('../lib/renderError');
-const badge = require('../lib/badge');
+// const badge = require('../lib/badge');
+const moment = require('moment');
 
 Monitors.new = (req, res)=> {
     return res.render('monitor/edit')
@@ -48,7 +49,20 @@ Monitors.show = (req, res)=> {
         .getJoin({responses: true})
         .run()
         .then((monitor)=> {
-            return res.render('monitor/show', {monitor});
+
+            //TODO format it
+
+            var graph = {
+                labels: [],
+                data: []
+            };
+
+            monitor.responses.map(function (r) {
+                graph.data.push(r.time);
+                graph.labels.push(moment(r.date).fromNow())
+            });
+
+            return res.render('monitor/show', {monitor, graph});
         })
         .catch((err)=> {
             console.log('error:', err);

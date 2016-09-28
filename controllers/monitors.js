@@ -14,11 +14,14 @@ Monitors.newPost = (req, res)=> {
     const url = req.body.url;
     const username = req.user.username;
 
+    const email = req.user.emails[0].value;
+
 
     new Monitor({
         name,
         url,
-        username
+        username,
+        email
     })
         .save()
         .then(monitor=> {

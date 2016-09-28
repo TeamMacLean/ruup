@@ -18,6 +18,7 @@
     "less-middleware": "^2.2.0",
     "moment": "latest",
     "multer": "^1.2.0",
+    "nodemailer": "^2.6.4",
     "passport": "latest",
     "passport-github": "latest",
     "request": "^2.75.0",

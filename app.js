@@ -9,12 +9,11 @@ const CONFIG = require('./config.json');
 const GitHubStrategy = require('passport-github').Strategy;
 const passport = require('passport');
 const monitorCron = require('./lib/monitorCron');
-const compression = require('compression');
+var compression = require('compression')
 
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.use(compression());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());

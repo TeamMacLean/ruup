@@ -6,9 +6,11 @@ const Monitor = thinky.createModel('Monitor', {
     id: type.string(),
     name: type.string().required(),
     url: type.string().required(),
+    email: type.string().require(),
     username: type.string().required(),
     up: type.boolean().default(true),
-    upPercent: type.number().default(100)
+    upPercent: type.number().default(100),
+    emailSent: type.boolean().default(false)
 });
 
 Monitor.define('getBadge', function () {

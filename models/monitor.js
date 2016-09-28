@@ -17,7 +17,7 @@ const Monitor = thinky.createModel('Monitor', {
 Monitor.define('getUpPercentBadge', function () {
     return badge.upPercent(this.name, this.upPercent);
 });
-Monitor.define('setStatusBadge', function () {
+Monitor.define('getStatusBadge', function () {
     return badge.status(this.name, this.up);
 });
 Monitor.define('getAvgResponseBadge', function () { //TODO

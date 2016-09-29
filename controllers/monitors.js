@@ -77,7 +77,7 @@ Monitors.show = (req, res)=> {
                     meta: moment(r.date).fromNow(), //19 minutes ago (exmaple)
                     value: r.time //ms
                 });
-                graph.labels.push(r.time)
+                // graph.labels.push(r.time)
             });
 
             return res.render('monitor/show', {monitor, graph});

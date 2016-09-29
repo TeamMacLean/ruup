@@ -7,6 +7,7 @@
         <tr>
             <th>Site</th>
             <th>Uptime</th>
+            <th>Avg. Response Time</th>
         </tr>
         </thead>
         <tbody>
@@ -23,6 +24,9 @@
                 <span class="bar <% if(!monitor.up){ %>danger<% } %>"
                       style="width:<%- percent %>"></span>
                 <span class="bar-value"><%- percent %></span>
+            </td>
+            <td>
+                <%- monitor.avgResponseTime + 'ms' %>
             </td>
         </tr>
         <% }); %>

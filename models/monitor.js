@@ -21,7 +21,7 @@ Monitor.define('getUpPercentBadge', function () {
 Monitor.define('getStatusBadge', function () {
     return badge.status(this.name, this.up);
 });
-Monitor.define('getAvgResponseBadge', function () { //TODO
+Monitor.define('getAvgResponseBadge', function () {
     return badge.averageResponseTime(this.name, this.avgResponseTime);
 });
 

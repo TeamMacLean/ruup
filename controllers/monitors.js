@@ -63,7 +63,7 @@ Monitors.show = (req, res)=> {
         .then((monitor)=> {
 
             //SORT BY DATE
-            monitor.responses = monitor.responses.sort(function (a, b) {
+            monitor.responses = monitor.responses.slice(0, 50).sort(function (a, b) {
                 return new Date(b.date) - new Date(a.date);
             });
 

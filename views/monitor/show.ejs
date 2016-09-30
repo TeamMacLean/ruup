@@ -20,31 +20,17 @@
             }
             return value;
         }
-        var colors = [];
         var graphData = JSON.parse('<%- JSON.stringify(graph) %>', dateTimeReviver);
 
         graphData = graphData.map(function (gd) {
-            colors.push('#' + Math.floor(Math.random() * 16777215).toString(16));
             return [new Date(gd[0]), gd[1]];
         })
-
-
-        //        var testDate = [[new Date("2009/07/12"), 100],
-        //            [new Date("2009/07/19"), 150]]
-
-
         new Dygraph(
                 document.getElementById("graph"),
                 graphData,
                 {
-
-//                    customBars: true,
-//                    title: 'Daily Temperatures in New York vs. San Francisco',
-//                    ylabel: 'Temperature (F)',
-//                    labelsDivStyles: {'textAlign': 'right'},
                     showRangeSelector: true,
                     labels: ["Date", "ms"],
-//                    customBars: true,
 //                    title: 'Response Time',
 //                    ylabel: 'Response Time (milliseconds)',
 //                    xlabel: 'Date',
@@ -52,15 +38,7 @@
                     axisLabelColor: '#FFFFFF',
                     axisLineColor: '#FFFFFF',
                     strokeBorderColor: '#FFFFFF',
-                    colors: ['#1ABC9C', '#1ABC9C'],
                     fillGraph: true,
-//                    series: {
-//                        'Fill': {
-//                            fillGraph: true,
-//                            strokeWidth: 0,
-//                            highlightCircleSize: 0
-//                        }
-//                    }
                 }
         );
 

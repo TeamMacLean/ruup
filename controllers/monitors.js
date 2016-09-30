@@ -64,7 +64,7 @@ Monitors.show = (req, res)=> {
 
 
             var graph = monitor.responses.sort(function (a, b) {
-                return new Date(b.date) - new Date(a.date);
+                return new Date(a.date) - new Date(b.date);
             })
                 .map((val)=> {
                     return [val.date, val.time];

@@ -57,12 +57,13 @@ Monitors.mine = (req, res)=> {
 
 function formatGraphData(responses) {
 
-    var string = "";
 
-    string += "Date,Response Time\n";
-
+    // var string = "";
+    // string += "Date,Response Time\n";
     return responses.map((val)=> {
-        return string += `${val.date},${val.time}\n`
+        // return string += `${val.date},${val.time}\n`
+
+        return [new Date(val.date), val.time];
     });
 
     // return "" +

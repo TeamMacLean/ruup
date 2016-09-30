@@ -13,7 +13,7 @@
         var dateTimeReviver = function (key, value) {
             var a;
             if (typeof value === 'string') {
-                a = /\/Date\((-?\d*)\)\//.exec(value);
+                a = /\/Date\((\d*)\)\//.exec(value);
                 if (a) {
                     return new Date(+a[1]);
                 }

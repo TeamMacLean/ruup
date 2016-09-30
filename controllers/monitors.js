@@ -55,13 +55,13 @@ Monitors.mine = (req, res)=> {
         .catch(err => renderError(err, res));
 };
 
-function formatGraphData(response) {
+function formatGraphData(responses) {
 
     var string = "";
 
     string += "Date,Response Time\n";
 
-    return data.map((val)=> {
+    return responses.map((val)=> {
         return string += `${val.date},${val.time}\n`
     });
 

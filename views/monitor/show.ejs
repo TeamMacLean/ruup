@@ -6,44 +6,55 @@
 
     <% if(graph && graph.data.length > 1){ %>
     <div class="graph" id="graph"></div>
-    <script src="/components/chartist/dist/chartist.min.js"></script>
-    <script src="/components/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.js"></script>
-    <link href="/components/chartist/dist/chartist.min.css" rel="stylesheet">
-    <link href="/components/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <script src="public/components/dygraphs/dygraph-combined.js"></script>
+
+
     <script>
 
         var graphData = JSON.parse('<%- JSON.stringify(graph) %>');
 
+        new Dygraph(
+                document.getElementById("graph"),
+                graphData,
+                {
+                    customBars: true,
+                    title: 'Response Time',
+                    ylabel: 'Response Time (milliseconds)',
+                    legend: 'always',
+                    labelsDivStyles: {'textAlign': 'right'},
+                    showRangeSelector: true
+                }
+        );
 
-        new Chartist.Line('#graph', {
-            labels: graphData.labels,
-            series: [
-                graphData.data
-            ]
-        }, {
-            low: 0,
-            showArea: true,
-            fullWidth: true,
-            showLabel: false,
-            axisX: {
-                showGrid: false,
-                showLabel: false,
-                offset: 0
-            },
-            axisY: {
-                showGrid: false,
-                showLabel: false,
-                offset: 0
-            },
-            plugins: [
-                Chartist.plugins.tooltip({
-                    appendToBody: true,
-                    transformTooltipTextFnc: function (text) {
-                        return text + 'ms';
-                    }
-                })
-            ]
-        });
+        //        new Chartist.Line('#graph', {
+        //            labels: graphData.labels,
+        //            series: [
+        //                graphData.data
+        //            ]
+        //        }, {
+        //            low: 0,
+        //            showArea: true,
+        //            fullWidth: true,
+        //            showLabel: false,
+        //            axisX: {
+        //                showGrid: false,
+        //                showLabel: false,
+        //                offset: 0
+        //            },
+        //            axisY: {
+        //                showGrid: false,
+        //                showLabel: false,
+        //                offset: 0
+        //            },
+        //            plugins: [
+        //                Chartist.plugins.tooltip({
+        //                    appendToBody: true,
+        //                    transformTooltipTextFnc: function (text) {
+        //                        return text + 'ms';
+        //                    }
+        //                })
+        //            ]
+        //        });
 
 
     </script>

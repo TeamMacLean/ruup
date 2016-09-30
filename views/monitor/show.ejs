@@ -24,7 +24,7 @@
         var graphData = JSON.parse('<%- JSON.stringify(graph) %>', dateTimeReviver);
 
         graphData = graphData.map(function (gd) {
-            return [gd[1], new Date(gd[0])];
+            return [new Date(gd[0]), gd[1]];
         })
 
 

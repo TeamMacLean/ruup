@@ -63,7 +63,7 @@ Monitors.show = (req, res)=> {
         .then((monitor)=> {
 
 
-            var graph = monitors.responses.sort(function (a, b) {
+            var graph = monitor.responses.sort(function (a, b) {
                 return new Date(b.date) - new Date(a.date);
             })
                 .map((val)=> {

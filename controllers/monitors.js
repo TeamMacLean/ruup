@@ -63,7 +63,7 @@ function formatGraphData(responses) {
     return responses.map((val)=> {
         // return string += `${val.date},${val.time}\n`
 
-        return [new Date(val.date), val.time];
+        return [val.date, val.time];
     });
 
     // return "" +

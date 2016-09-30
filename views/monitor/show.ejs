@@ -23,6 +23,10 @@
 
         var graphData = JSON.parse('<%- JSON.stringify(graph) %>', dateTimeReviver);
 
+        graphData = graphData.map(function (gd) {
+            return [new Date(gd[0]), gd[1]];
+        })
+
 
         new Dygraph(
                 document.getElementById("graph"),

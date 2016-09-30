@@ -11,7 +11,7 @@
 
     <script>
 
-        var graphData = '<%- JSON.stringify(graph.toString()) %>';
+        var graphData = JSON.parse('<%- JSON.stringify(graph) %>');
 
         new Dygraph(
                 document.getElementById("graph"),

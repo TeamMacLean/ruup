@@ -9,7 +9,7 @@ const CONFIG = require('./config.json');
 const GitHubStrategy = require('passport-github').Strategy;
 const passport = require('passport');
 const monitorCron = require('./lib/monitorCron');
-var compression = require('compression')
+var compression = require('compression');
 
 
 app.set('views', path.join(__dirname, 'views'));
@@ -20,6 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(require('body-parser').urlencoded({extended: true}));
 app.use(require('express-session')({secret: 'keyboard cat', resave: true, saveUninitialized: true}));
+app.use(compression());
 
 app.use(passport.initialize());
 app.use(passport.session());

@@ -7,7 +7,6 @@
     "callbackURL": "http://SITE-URL/auth/github/callback"
   },
   "email": {
-    "protocol": "smtps",
     "server": "smtp.gmail.com",
     "username": "",
     "password": ""

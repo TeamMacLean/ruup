@@ -5,6 +5,12 @@
     <h1 class="center"><%- monitor.name %></h1>
     <h4 class="center"><a href="<%- monitor.url %>" target="_blank"><%- monitor.url %></a></h4>
 
+    <div class="form-group">
+        <img src="/site/<%- monitor.id %>/badge/uppercent">
+        <img src="/site/<%- monitor.id %>/badge/avgresponse">
+        <img src="/site/<%- monitor.id %>/badge/status">
+    </div>
+
     <% if(graph && graph.length > 1){ %>
     <div class="graph" id="graph"></div>
     <script src="/components/dygraphs/dygraph-combined.js"></script>
@@ -53,13 +59,7 @@
         <p>Alert emails will go to <%- monitor.email %></p>
     </div>
 
-    <div class="form-group">
-        <img src="/site/<%- monitor.id %>/badge/uppercent">
-        <img src="/site/<%- monitor.id %>/badge/avgresponse">
-        <img src="/site/<%- monitor.id %>/badge/status">
-    </div>
-
-    <div class="form-group">
+    <div class="form-group pull-right">
         <button class="md-trigger" data-modal="modal-5">Delete</button>
     </div>
 

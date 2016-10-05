@@ -78,6 +78,4 @@
     }
 
 })(window);
-/**
- * Created by pagem on 05/10/2016.
- */
+

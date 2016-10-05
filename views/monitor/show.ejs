@@ -69,6 +69,7 @@
                     <button class="md-close">I am sure, Delete it!</button>
                 </form>
             </div>
+            <div class="md-close icon icon-close"></div>
         </div>
     </div>
     <div class="md-overlay"></div>
@@ -84,12 +85,15 @@
                 overlay.toggleClass('md-show');
             });
 
-            overlay.on('click', function () {
+            function closeModal() {
                 if (overlay.hasClass('md-show')) {
                     modal.removeClass('md-show');
                     overlay.removeClass('md-show');
                 }
-            });
+            }
+
+            $('.md-close').on('click', closeModal);
+            overlay.on('click', closeModal);
 
         });
     </script>

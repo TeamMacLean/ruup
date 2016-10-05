@@ -8,8 +8,6 @@
     <% if(graph && graph.length > 1){ %>
     <div class="graph" id="graph"></div>
     <script src="/components/dygraphs/dygraph-combined.js"></script>
-
-
     <script>
         var dateTimeReviver = function (key, value) {
             var a;
@@ -60,6 +58,12 @@
         <img src="/site/<%- monitor.id %>/badge/avgresponse">
         <img src="/site/<%- monitor.id %>/badge/status">
     </div>
+
+    <div class="form-group">
+        <button class="md-trigger" data-modal="modal-5">Delete</button>
+    </div>
+
+    <% include delete-modal.ejs %>
 
 </div>
 

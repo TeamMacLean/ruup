@@ -102,6 +102,14 @@ Monitors.edit = (req, res)=> {
 };
 
 Monitors.delete = (req, res)=> {
+    var id = req.params.id;
+    Monitor.get(id).delete()
+        .then(()=> {
+            return res.redirect('/');
+        })
+        .catch((err)=> {
+            return renderError(err);
+        });
 
 };
 

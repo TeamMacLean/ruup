@@ -6,6 +6,7 @@
     "clientSecret": "",
     "callbackURL": "http://SITE-URL/auth/github/callback"
   },
+  "baseURL":"http://ruup.online",
   "email": {
     "server": "smtp.gmail.com",
     "username": "",

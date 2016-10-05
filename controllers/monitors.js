@@ -70,24 +70,6 @@ Monitors.show = (req, res)=> {
                     return [val.date, val.time];
                 });
 
-
-            //SORT BY DATE
-            // monitor.responses = monitor.responses.sort(function (a, b) {
-            //     return new Date(b.date) - new Date(a.date);
-            // }).slice(0, 50).reverse();
-            //
-            // var graph = {
-            //     labels: [],
-            //     data: []
-            // };
-            // monitor.responses.map(function (r) {
-            //     graph.data.push({
-            //         meta: moment(r.date).fromNow(), //19 minutes ago (exmaple)
-            //         value: r.time //ms
-            //     });
-            //     // graph.labels.push(r.time)
-            // });
-
             return res.render('monitor/show', {monitor, graph});
         })
         .catch((err)=> {

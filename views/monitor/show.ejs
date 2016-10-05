@@ -55,10 +55,6 @@
     <p>Not enough data has been collected to display a graph, please check back in 5 minutes.</p>
     <% } %>
 
-    <div class="form-group">
-        <p>Alert emails will go to <%- monitor.email %></p>
-    </div>
-
     <% if(locals.signedInUser && locals.signedInUser.username == monitor.username){ %>
     <div class="form-group pull-right">
         <button class="md-trigger" data-modal="modal-1">Delete</button>

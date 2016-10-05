@@ -18,6 +18,10 @@ perspective effects (not including the modals and the overlay).
   perspective: 600px;
 }
 
+.container {
+  background: #e74c3c;
+  min-height: 100%;
+}
 
 .md-modal {
   position: fixed;
@@ -723,4 +727,8 @@ perspective effects (not including the modals and the overlay).
   -webkit-transition: all 0.5s 0.1s;
   -moz-transition: all 0.5s 0.1s;
   transition: all 0.5s 0.1s;
+}
+
+@media screen and (max-width: 32em) {
+  body { font-size: 75%; }
 }

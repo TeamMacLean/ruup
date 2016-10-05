@@ -103,14 +103,18 @@ Monitors.edit = (req, res)=> {
 
 Monitors.delete = (req, res)=> {
     var id = req.params.id;
-    Monitor.get(id).delete()
-        .then(()=> {
-            return res.redirect('/');
+    Monitor.get(id)
+        .then((monitor)=> {
+            monitor.deleteAll({responses: true})
+                .then(function (result) {
+                    return res.redirect('/');
+                }).catch((err)=> {
+                return renderError(err);
+            });
         })
         .catch((err)=> {
             return renderError(err);
         });
-
 };
 
 Monitors.upPercentBadge = (req, res)=> {

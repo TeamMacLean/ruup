@@ -1,6 +1,5 @@
 $(function () {
     var overlay = $('.md-overlay');
-
     var modal = $('.md-modal');
 
     $('.md-trigger').on('click', function () {

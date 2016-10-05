@@ -3,8 +3,7 @@ var Monitors = {};
 const Monitor = require('../models/monitor');
 const renderError = require('../lib/renderError');
 const monitorCron = require('../lib/monitorCron');
-// const badge = require('../lib/badge');
-const moment = require('moment');
+const LOG = require('../lib/log');
 
 Monitors.new = (req, res)=> {
     return res.render('monitor/edit')
@@ -72,7 +71,7 @@ Monitors.show = (req, res)=> {
             return res.render('monitor/show', {monitor, graph});
         })
         .catch((err)=> {
-            console.log('error:', err);
+            LOG.error('error:', err);
             return renderError(err, res);
         })
 };
@@ -106,11 +105,11 @@ Monitors.upPercentBadge = (req, res)=> {
             monitor.getUpPercentBadge().then((svg)=> {
                 return res.type('image/svg+xml').send(svg);
             }).catch(err=> {
-                console.log(err)
+                LOG.error(err)
             });
         })
         .catch((err)=> {
-            console.log(err)
+            LOG.error(err)
         })
 };
 Monitors.averageResponseBadge = (req, res)=> {
@@ -121,11 +120,11 @@ Monitors.averageResponseBadge = (req, res)=> {
             monitor.getAvgResponseBadge().then((svg)=> {
                 return res.type('image/svg+xml').send(svg);
             }).catch(err=> {
-                console.log(err)
+                LOG.error(err)
             });
         })
         .catch((err)=> {
-            console.log(err)
+            LOG.error(err)
         })
 };
 
@@ -137,11 +136,11 @@ Monitors.statusBadge = (req, res)=> {
             monitor.getStatusBadge().then((svg)=> {
                 return res.type('image/svg+xml').send(svg);
             }).catch(err=> {
-                console.log(err)
+                LOG.error(err)
             });
         })
         .catch((err)=> {
-            console.log(err)
+            LOG.error(err)
         })
 };
 

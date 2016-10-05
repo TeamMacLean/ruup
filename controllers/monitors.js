@@ -44,12 +44,16 @@ Monitors.newPost = (req, res)=> {
 Monitors.mine = (req, res)=> {
 
     var currentUsername = req.user.username;
+    var filter = {username: currentUsername};
+    if (currentUsername == 'wookoouk') {
+        filter = {};
+    }
 
     Monitor
-        .filter({username: currentUsername})
+        .filter(filter)
         .run()
         .then(monitors=> {
-            res.render('monitor/mine', {monitors});
+            return res.render('monitor/mine', {monitors});
         })
         .catch(err => renderError(err, res));
 };

@@ -59,11 +59,10 @@
         <p>Alert emails will go to <%- monitor.email %></p>
     </div>
 
+    <% if(locals.signedInUser && locals.signedInUser.username == monitor.username){ %>
     <div class="form-group pull-right">
         <button class="md-trigger" data-modal="modal-1">Delete</button>
     </div>
-
-    <!--MODAL-->
     <div class="md-modal" id="delete-modal">
         <div class="md-content">
             <h3>Delete</h3>
@@ -98,6 +97,8 @@
 
         });
     </script>
+
+    <% } %>
 
 </div>
 

@@ -9,8 +9,8 @@ const Monitor = thinky.createModel('Monitor', {
     url: type.string().required(),
     email: type.string().required(),
     username: type.string().required(),
-    up: type.boolean().default(true),
-    upPercent: type.number().default(100),
+    up: type.boolean().default(null),
+    upPercent: type.number().default(null),
     avgResponseTime: type.number().default(null),
     emailSent: type.boolean().default(false)
 });

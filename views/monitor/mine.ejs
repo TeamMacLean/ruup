@@ -19,14 +19,15 @@
                 <% } %>
 
             </td>
-            <% var percent = monitor.upPercent + '%' %>
+            <% var percent = monitor.upPercent != null ? monitor.upPercent + '%' : 'unknown' %>
             <td>
                 <span class="bar <% if(!monitor.up){ %>danger<% } %>"
                       style="width:<%- percent %>"></span>
                 <span class="bar-value"><%- percent %></span>
             </td>
             <td>
-                <%- monitor.avgResponseTime + 'ms' %>
+                <% var art = monitor.avgResponseTime != null ? monitor.avgResponseTime + 'ms' : 'unknown' %>
+                <%- art %>
             </td>
         </tr>
         <% }); %>

@@ -30,13 +30,26 @@
   left: 0;
   z-index: 1000;
   opacity: 0;
-  background: rgba(143, 27, 15, 0.8);
+  background: rgba(255, 255, 255, 0.4);
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
   &.md-show {
     opacity: 1;
     visibility: visible;
+  }
+}
+
+.md-content {
+  padding: 20px;
+  background-color: @background;
+  .md-close {
+    display: block;
+    margin: 0 auto;
+    padding: 0 180px;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    text-align: center;
   }
 }
 

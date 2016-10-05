@@ -40,14 +40,14 @@ router.route('/site/:id/badge/avgresponse')
 //badge status (up/down)
 router.route('/site/:id/badge/status')
     .get(Monitors.statusBadge);
-//edit
+//edit //TODO
 router.route('/site/:id/edit')
     .all(isAuthenticated)
-    .get(Monitors.edit)
-    .all(isAuthenticated);
-//delete TODO
+    .get(Monitors.edit);
+
 router.route('/site/:id/delete')
-    .get(Monitors.delete);
+    .all(isAuthenticated)
+    .post(Monitors.delete);
 
 //catch all
 router.route('/*')
